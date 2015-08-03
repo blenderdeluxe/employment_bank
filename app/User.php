@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace employment_bank;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;

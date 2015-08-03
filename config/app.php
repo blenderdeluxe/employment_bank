@@ -39,7 +39,8 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    //'timezone' => 'UTC',
+    'timezone' => 'Asia/Kolkata',
 
     /*
     |--------------------------------------------------------------------------
@@ -143,9 +144,9 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        employment_bank\Providers\AppServiceProvider::class,
+        employment_bank\Providers\EventServiceProvider::class,
+        employment_bank\Providers\RouteServiceProvider::class,
 
     ],
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Jobs;
+namespace employment_bank\Jobs;
 
 use Illuminate\Bus\Queueable;
 

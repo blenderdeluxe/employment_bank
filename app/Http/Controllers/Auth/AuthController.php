@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace employment_bank\Http\Controllers\Auth;
 
-use App\User;
+use employment_bank\User;
 use Validator;
-use App\Http\Controllers\Controller;
+use employment_bank\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 

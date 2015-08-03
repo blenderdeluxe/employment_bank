@@ -13,5 +13,6 @@
 
 Route::get('/', function () {
     //return view('welcome');
-    return view('errors.503');
+    return view('admin.layouts.master');
+    //return view('errors.503');
 });
