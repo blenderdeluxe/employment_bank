@@ -6,18 +6,18 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.4 -->
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- Font Awesome Icons -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
     <!-- Ionicons -->
     <link href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css" rel="stylesheet" type="text/css" />
     <!-- jvectormap -->
-    <link href="plugins/jvectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('plugins/jvectormap/jquery-jvectormap-1.2.2.css') }}" rel="stylesheet" type="text/css" />
     <!-- Theme style -->
-    <link href="admin/css/AdminLTE.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin/css/AdminLTE.min.css') }}" rel="stylesheet" type="text/css" />
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
-    <link href="admin/css/skins/_all-skins.min.css" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin/css/skins/_all-skins.min.css') }}" rel="stylesheet" type="text/css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -273,7 +273,7 @@
                   </li>
                 </ul>
               </li>
-              
+
             </ul>
           </div>
 
@@ -316,21 +316,21 @@
     </div><!-- ./wrapper -->
 
     <!-- jQuery 2.1.4 -->
-    <script src="plugins/jQuery/jQuery-2.1.4.min.js" type="text/javascript"></script>
+    <script src="{{ asset('plugins/jQuery/jQuery-2.1.4.min.js')}}" type="text/javascript"></script>
     <!-- Bootstrap 3.3.2 JS -->
-    <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="{{ asset('bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
     <!-- FastClick -->
-    <script src="plugins/fastclick/fastclick.min.js" type="text/javascript"></script>
+    <script src="{{ asset('plugins/fastclick/fastclick.min.js')}}" type="text/javascript"></script>
     <!-- AdminLTE App -->
-    <script src="admin/js/app.min.js" type="text/javascript"></script>
+    <script src="{{ asset('admin/js/app.min.js')}}" type="text/javascript"></script>
     <!-- Sparkline -->
-    <script src="plugins/sparkline/jquery.sparkline.min.js" type="text/javascript"></script>
+    <script src="{{ asset('plugins/sparkline/jquery.sparkline.min.js')}}" type="text/javascript"></script>
     <!-- jvectormap -->
-    <script src="plugins/jvectormap/jquery-jvectormap-1.2.2.min.js" type="text/javascript"></script>
-    <script src="plugins/jvectormap/jquery-jvectormap-world-mill-en.js" type="text/javascript"></script>
+    <script src="{{ asset('plugins/jvectormap/jquery-jvectormap-1.2.2.min.js')}}" type="text/javascript"></script>
+    <script src="{{ asset('plugins/jvectormap/jquery-jvectormap-world-mill-en.js')}}" type="text/javascript"></script>
     <!-- SlimScroll 1.3.0 -->
-    <script src="plugins/slimScroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="{{ asset('plugins/slimScroll/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
     <!-- ChartJS 1.0.1 -->
-    <script src="plugins/chartjs/Chart.min.js" type="text/javascript"></script>
+    <script src="{{ asset('plugins/chartjs/Chart.min.js')}}" type="text/javascript"></script>
   </body>
 </html>

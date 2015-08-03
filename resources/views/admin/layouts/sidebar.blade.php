@@ -11,6 +11,24 @@
 <!-- sidebar menu: : style can be found in sidebar.less -->
 <ul class="sidebar-menu">
   <li class="header">MASTER MODULE</li>
+  <!-- <li><a href="{{ URL::route('master.industrytypes.index')}}"><i class="fa fa-book"></i> <span>Industry Types</span></a></li> -->
+
+  <li class="treeview">
+    <a href="#">
+      <i class="fa fa-share"></i> <span>Master</span>
+      <i class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="treeview-menu">
+      <li>
+        <a href="#"><i class="fa fa-circle-o"></i> Industry Types <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+          <li><a href="{{ URL::route('master.industrytypes.index')}}"><i class="fa fa-circle-o"></i> List </a></li>
+          <li><a href="{{ URL::route('master.industrytypes.create')}}"><i class="fa fa-circle-o"></i> Add New </a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+
   <li class="treeview">
     <a href="#">
       <i class="fa fa-share"></i> <span>Multilevel</span>
@@ -32,5 +50,4 @@
       </li>
     </ul>
   </li>
-  <li><a href="documentation/index.html"><i class="fa fa-book"></i> <span>Documentation</span></a></li>
 </ul>

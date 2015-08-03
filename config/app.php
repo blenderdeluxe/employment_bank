@@ -26,7 +26,7 @@ return [
     |
     */
 
-    'url' => 'http://localhost',
+    'url' => 'http://localhost/employment_bank',
 
     /*
     |--------------------------------------------------------------------------
@@ -115,9 +115,8 @@ return [
          * Laravel Framework Service Providers...
          */
         Illuminate\Foundation\Providers\ArtisanServiceProvider::class,
-        Ollieread\Multiauth\MultiauthServiceProvider::class,
         //Illuminate\Auth\AuthServiceProvider::class,
-        //'Ollieread\Multiauth\MultiauthServiceProvider',
+        Ollieread\Multiauth\MultiauthServiceProvider::class,
         Illuminate\Broadcasting\BroadcastServiceProvider::class,
         Illuminate\Bus\BusServiceProvider::class,
         Illuminate\Cache\CacheServiceProvider::class,
