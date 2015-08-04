@@ -10,8 +10,11 @@ Route::get('/', ['as'=>'home', function () {
 Route::group(['middleware'=>[]], function() {
 	//Masterentries
 	 Route::group(['prefix'=>'master', 'namespace'=>'Master'], function() {
-		   Route::resource('/industrytypes', 'IndustryTypeController');
-       Route::resource('/departmenttypes', 'DepartmentTypeController');
+
+		   Route::resource('/industrytypes', 'IndustryTypeController', ['except' => ['show']]);
+       Route::resource('/departmenttypes', 'DepartmentTypeController', ['except' => ['show']]);
+       Route::resource('/exams', 'ExamController', ['except' => ['show']]);
+       
 	 });
 
 });

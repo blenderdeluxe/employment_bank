@@ -8,15 +8,15 @@ use employment_bank\Http\Requests;
 use employment_bank\Http\Controllers\Controller;
 
 use Validator;
-use employment_bank\Models\IndustryType;
+use employment_bank\Models\Exam;
 use Illuminate\Database\QueryException;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Redirect;
 
 class IndustryTypeController extends Controller{
 
-  private $content  = 'admin.master.industrytypes.';
-  private $route    = 'master.industrytypes.';
+  private $content  = 'admin.master.exams.';
+  private $route    = 'master.exams.';
 
   public function index(){
 

@@ -84,7 +84,7 @@ class DepartmentTypeController extends Controller{
        * @return Response
        */
       public function update(Request $request, $id){
-        
+
         $model = DepartmentType::findOrFail($id);
         $rules = str_replace(':id', $id, DepartmentType::$rules);
         $validator = Validator::make($data = $request->all(), $rules);

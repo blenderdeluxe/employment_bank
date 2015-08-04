@@ -33,6 +33,15 @@
           <li id="departmenttypes_create"><a href="{{ URL::route('master.departmenttypes.create')}}"><i class="fa fa-plus"></i> Add New </a></li>
         </ul>
       </li>
+
+      <li id="exams">
+        <a href="#"><i class="fa fa-circle-o"></i> Exams <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+          <li id="exams_index"><a href="{{ URL::route('master.exams.index')}}"><i class="fa fa-list-ul"></i> List </a></li>
+          <li id="exams_create"><a href="{{ URL::route('master.exams.create')}}"><i class="fa fa-plus"></i> Add New </a></li>
+        </ul>
+      </li>
+
     </ul>
   </li>
 
