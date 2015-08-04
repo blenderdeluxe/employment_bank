@@ -11,27 +11,28 @@ use Validator;
 use employment_bank\Models\IndustryType;
 use Illuminate\Database\QueryException;
 use Kris\LaravelFormBuilder\FormBuilder;
+use Redirect;
 
-class IndustryTypeController extends Controller
-{
+class IndustryTypeController extends Controller{
+
   private $content  = 'admin.master.industrytypes.';
   private $route    = 'master.industrytypes.';
 
-    public function index(){
+  public function index(){
 
       $results = IndustryType::paginate(20);
       return view($this->content.'index', compact('results'));
-    }
+  }
 
-     public function create(FormBuilder $formBuilder){
+  public function create(FormBuilder $formBuilder){
 
- 		    $form = $formBuilder->create('App\Forms\IndustryTypeForm', [
+ 		    $form = $formBuilder->create('employment_bank\Forms\IndustryTypeForm', [
              'method' => 'POST',
              'url' => route($this->route.'store')
         ])->remove('update');
 
         return view($this->content.'create', compact('form'));
- 	  }
+ 	}
     /**
      * Store a newly created resource in storage.
      *
@@ -40,7 +41,7 @@ class IndustryTypeController extends Controller
      */
     public function store(Request $request){
 
-      $validator = Validator::make($data = Input::all(), IndustryType::$rules);
+      $validator = Validator::make($data = $request->all(), IndustryType::$rules);
 		  if ($validator->fails())
         return Redirect::back()->withErrors($validator)->withInput();
 
@@ -73,7 +74,7 @@ class IndustryTypeController extends Controller
      public function edit($id, FormBuilder $formBuilder){
 
  		    $result  = IndustryType::findOrFail($id);
- 		    $form    = $formBuilder->create('App\Forms\ClientForm', [
+ 		    $form    = $formBuilder->create('employment_bank\Forms\IndustryTypeForm', [
  			       'method' => 'PUT',
              'model' => $result,
              'url' => route($this->route.'update', $id)
@@ -92,13 +93,14 @@ class IndustryTypeController extends Controller
     public function update(Request $request, $id)
     {
       $model = IndustryType::findOrFail($id);
-      $validator = Validator::make($data = Input::all(), IndustryType::$rules);
+      $rules = str_replace(':id', $id, IndustryType::$rules);
+      $validator = Validator::make($data = $request->all(), $rules);
       if ($validator->fails())
         return Redirect::back()->withErrors($validator)->withInput();
 
       $model->update($data);
 
-      return Redirect::route($this->route.'index');
+      return Redirect::route($this->route.'index')->with('alert-success', 'Data has been Updated!');
     }
 
     /**
@@ -112,7 +114,7 @@ class IndustryTypeController extends Controller
       try{
         IndustryType::destroy($id);
       }catch(QueryException $ex){
-        return Redirect::back()->with('alert-error', 'IndustryType is in Use!');
+        return Redirect::back()->with('alert-warning', 'IndustryType is in Use!');
       }
 
       return Redirect::route($this->route.'index')->with('alert-success', 'Successfully Deleted!');

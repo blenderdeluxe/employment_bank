@@ -147,6 +147,10 @@ return [
         employment_bank\Providers\EventServiceProvider::class,
         employment_bank\Providers\RouteServiceProvider::class,
 
+        Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
+
+        Collective\Html\HtmlServiceProvider::class,
+
     ],
 
     /*
@@ -195,6 +199,9 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
 
+        'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
     ],
 
 ];

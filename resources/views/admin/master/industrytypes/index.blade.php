@@ -1,4 +1,4 @@
-@extends('admin.layouts.master')
+@extends('admin.layouts.default')
 
 @section('content-header')
   Industry Types <small> Master</small>
@@ -34,12 +34,12 @@
 							<td>{{ $result->description }}</td>
 							<td>{{ $result->status }}</td>
 							<td>
-                <a href="{!!URL::route('master.industrytypes.edit', $result->id)!!}" class="btn btn-info" style="float:left;">
-                    <i class="icon-edit"></i>
+                <a href="{!!URL::route('master.industrytypes.edit', $result->id)!!}" class="btn btn-info btn-xs pull-left aug-margin">
+                    <i class="fa fa-edit"></i>
                 </a>
                 {!! Form::open(array('method'=>'DELETE', 'route'=>array('master.industrytypes.destroy', $result->id))) !!}
-                  <button type="submit" class="btn btn-danger show_confirm" style="float:left;">
-                      <i class="icon-trash"></i>
+                  <button type="submit" class="btn btn-danger btn-xs pull-left show_confirm">
+                      <i class="fa fa-trash"></i>
                   </button>
                 {!! Form::close() !!}
 							</td>

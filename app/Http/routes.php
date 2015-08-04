@@ -1,10 +1,10 @@
 <?php
 
-Route::get('/', function () {
+Route::get('/', ['as'=>'home', function () {
     //return view('welcome');
-    return view('admin.layouts.master');
+    return view('admin.layouts.default');
     //return view('errors.503');
-});
+}]);
 
 //Route::group(['middleware'=>['auth']], function() {
 Route::group(['middleware'=>[]], function() {

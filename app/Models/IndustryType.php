@@ -9,7 +9,7 @@ class IndustryType extends Model{
     protected $table  =   'master_industry_types';
 
     public static $rules = [
-      'name' => 'required|unique:master_industry_types',
+      'name' => 'required|min:2|max:255|unique:master_industry_types,name,:id',
     ];
 
     protected $guarded = ['id', '_token'];

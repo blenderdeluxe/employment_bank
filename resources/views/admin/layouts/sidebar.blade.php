@@ -9,21 +9,21 @@
   </div>
 </div>
 <!-- sidebar menu: : style can be found in sidebar.less -->
-<ul class="sidebar-menu">
+<ul id="sidebar" class="sidebar-menu">
   <li class="header">MASTER MODULE</li>
   <!-- <li><a href="{{ URL::route('master.industrytypes.index')}}"><i class="fa fa-book"></i> <span>Industry Types</span></a></li> -->
 
-  <li class="treeview">
+  <li class="treeview" id="master">
     <a href="#">
       <i class="fa fa-share"></i> <span>Master</span>
       <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-      <li>
+      <li id="industrytypes">
         <a href="#"><i class="fa fa-circle-o"></i> Industry Types <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
-          <li><a href="{{ URL::route('master.industrytypes.index')}}"><i class="fa fa-circle-o"></i> List </a></li>
-          <li><a href="{{ URL::route('master.industrytypes.create')}}"><i class="fa fa-circle-o"></i> Add New </a></li>
+          <li id="industrytypes_index"><a href="{{ URL::route('master.industrytypes.index')}}"><i class="fa fa-list-ul"></i> List </a></li>
+          <li id="industrytypes_create"><a href="{{ URL::route('master.industrytypes.create')}}"><i class="fa fa-plus"></i> Add New </a></li>
         </ul>
       </li>
     </ul>
