@@ -6,7 +6,7 @@
   <div class="col-md-8">
     <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">Edit Industry Type / Sector</h3>
+        <h3 class="box-title">Edit Department Type</h3>
       </div>
 
         {!! form_start($form) !!}

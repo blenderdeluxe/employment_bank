@@ -26,6 +26,13 @@
           <li id="industrytypes_create"><a href="{{ URL::route('master.industrytypes.create')}}"><i class="fa fa-plus"></i> Add New </a></li>
         </ul>
       </li>
+      <li id="departmenttypes">
+        <a href="#"><i class="fa fa-circle-o"></i> Department Types <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+          <li id="departmenttypes_index"><a href="{{ URL::route('master.departmenttypes.index')}}"><i class="fa fa-list-ul"></i> List </a></li>
+          <li id="departmenttypes_create"><a href="{{ URL::route('master.departmenttypes.create')}}"><i class="fa fa-plus"></i> Add New </a></li>
+        </ul>
+      </li>
     </ul>
   </li>
 

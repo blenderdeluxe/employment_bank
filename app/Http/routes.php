@@ -11,6 +11,7 @@ Route::group(['middleware'=>[]], function() {
 	//Masterentries
 	 Route::group(['prefix'=>'master', 'namespace'=>'Master'], function() {
 		   Route::resource('/industrytypes', 'IndustryTypeController');
+       Route::resource('/departmenttypes', 'DepartmentTypeController');
 	 });
 
 });
