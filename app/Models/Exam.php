@@ -8,8 +8,9 @@ class Exam extends Model{
 
       protected $table  =   'master_exams';
       public static $rules = [
-        'name' => 'required|min:2|max:255|unique:master_department_types,name,:id',
+        'name' => 'required|min:2|max:255|unique:master_exams,name,:id',
         'exam_category' =>  'required|in:x1,x2,x3,other',
+        'description'   =>  'max:255',
       ];
 
       protected $guarded = ['id', '_token', '_method'];
