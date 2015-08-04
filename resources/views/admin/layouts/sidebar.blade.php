@@ -42,10 +42,18 @@
         </ul>
       </li>
       <li id="boards">
-        <a href="#"><i class="fa fa-circle-o"></i> Boards <i class="fa fa-angle-left pull-right"></i></a>
+        <a href="#"><i class="fa fa-circle-o"></i> University/Boards <i class="fa fa-angle-left pull-right"></i></a>
         <ul class="treeview-menu">
           <li id="boards_index"><a href="{{ URL::route('master.boards.index')}}"><i class="fa fa-list-ul"></i> List </a></li>
           <li id="boards_create"><a href="{{ URL::route('master.boards.create')}}"><i class="fa fa-plus"></i> Add New </a></li>
+        </ul>
+      </li>
+
+      <li id="subjects">
+        <a href="#"><i class="fa fa-circle-o"></i> Subjects <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+          <li id="subjects_index"><a href="{{ URL::route('master.subjects.index')}}"><i class="fa fa-list-ul"></i> List </a></li>
+          <li id="subjects_create"><a href="{{ URL::route('master.subjects.create')}}"><i class="fa fa-plus"></i> Add New </a></li>
         </ul>
       </li>
 
