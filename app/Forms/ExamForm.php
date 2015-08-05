@@ -7,7 +7,7 @@ class ExamForm extends Form{
     public function buildForm(){
 
       $this->add('name', 'text', [
-          'attr' => ['required', 'maxlength' => '255', 'placeholder'=> 'name of the IndustryType or Sector'],
+          'attr' => ['required', 'maxlength' => '255', 'placeholder'=> 'name of the Exam'],
           'wrapper' => ['class' => 'form-group col-md-6'] // Shows the wrapper for each e
       ]);
 
@@ -20,7 +20,7 @@ class ExamForm extends Form{
       ]);
 
       $this->add('description', 'textarea', [
-          'attr' => ['maxlength' => '255', 'rows' => '5', 'placeholder'=> 'additional note/details of the Industry Type or Sector'],
+          'attr' => ['maxlength' => '255', 'rows' => '5', 'placeholder'=> 'additional note/details of the Exam'],
           'wrapper' => ['class' => 'form-group col-md-12'] // Shows the wrapper for each e
       ]);
 

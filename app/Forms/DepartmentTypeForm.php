@@ -7,11 +7,11 @@ class DepartmentTypeForm extends Form{
     public function buildForm(){
 
       $this->add('name', 'text', [
-          'attr' => ['required', 'maxlength' => '255', 'placeholder'=> 'name of the IndustryType or Sector'],
+          'attr' => ['required', 'maxlength' => '255', 'placeholder'=> 'name of the Department'],
           'wrapper' => ['class' => 'form-group'] // Shows the wrapper for each e
       ]);
       $this->add('description', 'textarea', [
-          'attr' => ['maxlength' => '255', 'rows' => '5', 'placeholder'=> 'additional note/details of the Industry Type or Sector'],
+          'attr' => ['maxlength' => '255', 'rows' => '5', 'placeholder'=> 'additional note/details of the Department'],
           'wrapper' => ['class' => 'form-group'] // Shows the wrapper for each e
       ]);
 
