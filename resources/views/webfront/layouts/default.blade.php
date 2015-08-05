@@ -42,7 +42,7 @@
 
 		<div class="main-page-title"><!-- start main page title -->
 			<div class="container">
-          @yield('main_page_title')
+          @yield('main_page_container')
 			</div>
 		</div><!-- end main page title -->
 

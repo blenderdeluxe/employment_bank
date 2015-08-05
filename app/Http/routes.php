@@ -7,11 +7,11 @@ Route::get('/', ['as'=>'home', function () {
 }]);
 
 Route::get('test', ['as'=>'test', function () {
-    return view('webfront.layouts.default');
+    return view('webfront.register');
 }]);
 
 //Route::group(['middleware'=>['auth']], function() {
-Route::group(['middleware'=>[]], function() {
+Route::group(['middleware'=>['auth.candidate']], function() {
 	//Masterentries
 	 Route::group(['prefix'=>'master', 'namespace'=>'Master'], function() {
 
@@ -23,5 +23,15 @@ Route::group(['middleware'=>[]], function() {
        Route::resource('/languages', 'LanguagesController', ['except' => ['show']]);
 
 	 });
-
 });
+
+//Public webfront routes
+Route::get('/register', ['as' => 'webfront.register', 'uses' => 'WebfrontController@showRegister']);
+Route::post('/register', ['as' => 'webfront.register', 'uses' => 'WebfrontController@doRegister']);
+Route::get('/login', ['as' => 'webfront.login', 'uses' => 'WebfrontController@showlogin']);
+Route::post('/login', ['as' => 'webfront.login', 'uses' => 'WebfrontController@dologin']);
+
+Route::controllers([
+  //Public webfront routes
+	//'ww' => 'WebfrontController'
+]);
