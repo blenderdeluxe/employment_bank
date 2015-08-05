@@ -16,6 +16,7 @@ Route::group(['middleware'=>[]], function() {
        Route::resource('/exams', 'ExamController', ['except' => ['show']]);
        Route::resource('/boards', 'BoardController', ['except' => ['show']]);
        Route::resource('/subjects', 'SubjectsController', ['except' => ['show']]);
+       Route::resource('/languages', 'LanguagesController', ['except' => ['show']]);
 
 	 });
 

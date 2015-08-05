@@ -57,6 +57,14 @@
         </ul>
       </li>
 
+      <li id="languages">
+        <a href="#"><i class="fa fa-circle-o"></i> Languages <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+          <li id="languages_index"><a href="{{ URL::route('master.languages.index')}}"><i class="fa fa-list-ul"></i> List </a></li>
+          <li id="languages_create"><a href="{{ URL::route('master.languages.create')}}"><i class="fa fa-plus"></i> Add New </a></li>
+        </ul>
+      </li>
+
 
 
     </ul>
