@@ -6,6 +6,10 @@ Route::get('/', ['as'=>'home', function () {
     //return view('errors.503');
 }]);
 
+Route::get('test', ['as'=>'test', function () {
+    return view('webfront.layouts.default');
+}]);
+
 //Route::group(['middleware'=>['auth']], function() {
 Route::group(['middleware'=>[]], function() {
 	//Masterentries
