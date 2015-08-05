@@ -44,7 +44,6 @@ class CandidateAuthController extends Controller{
         $auth = Auth::candidate()->attempt(array('email' => $request->get('email'),'password' => $request->get('password'), 'status' => 1));
 
         if(!$auth){
-
             return back();
         }
 

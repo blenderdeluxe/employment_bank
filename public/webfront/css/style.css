@@ -204,7 +204,7 @@ nav{
 
 .menu li:first-child{
 	padding-left:30px;
-	
+
 }
 .menu li:last-child{
 	padding-right:0;
@@ -272,7 +272,7 @@ nav{
 	color:#1abc9c;
 }
 
-.menu li:hover > ul{ 
+.menu li:hover > ul{
 	display: block;
 }
 .menu ul ul {
@@ -726,7 +726,7 @@ nav{
 .commentlist>.media {
 	border-bottom: 1px solid #e2e6e6;
 	padding:10px 0;
-	
+
 }
 .commentlist>.media img{
 	max-width:100px;
@@ -751,7 +751,7 @@ nav{
 .media ul li:first-child{
 	border-top: 1px solid #e2e6e6;
 	padding:15px 0 5px 0;
-	
+
 }
 .media ul li:last-child{
 	border-bottom:none;
@@ -762,7 +762,7 @@ nav{
 }
 .comment-content p span{
 	color:#1abc9c;
-	
+
 }
 .reply{
 	margin:0 0 0 15px;
@@ -837,19 +837,19 @@ nav{
 .shortcodes .job-btn{
 	font-weight:300;
 }
-.dropcap-1:first-child:first-letter { 
-	float: left; 
-	color: #1abc9c; 
-	font-size: 85px; 
-	line-height: 50px; 
-	padding:5px 10px; 
-	margin:0 10px 0 0;  
+.dropcap-1:first-child:first-letter {
+	float: left;
+	color: #1abc9c;
+	font-size: 85px;
+	line-height: 50px;
+	padding:5px 10px;
+	margin:0 10px 0 0;
 }
-.dropcap-2:first-child:first-letter { 
-	float: left; 
-	color: #ffffff; 
-	font-size: 75px; 
-	padding:11px 15px; 
+.dropcap-2:first-child:first-letter {
+	float: left;
+	color: #ffffff;
+	font-size: 75px;
+	padding:11px 15px;
 	margin:0 10px 0 0;
 	background:#1abc9c;
 	border-radius:8px;
@@ -892,7 +892,7 @@ nav{
 }
 
 .job-accordion{
-	
+
 }
 .job-accordion .panel{
 	border:1px solid #d1d1d1;
@@ -903,7 +903,7 @@ nav{
 	background:#d1d1d1;
 	padding:10px 10px;
 	color:#ffffff;
-	
+
 }
 .job-accordion .panel-heading h4{
 	float:left;
@@ -964,12 +964,13 @@ nav{
 	margin:55px 0 65px 0;
 }
 .form-regist-container{
-	max-width:430px;
+	/*max-width:430px;*/
+	/*min-width:430px;*/
 	background:#2980b9;
 	padding:50px 32px 14px 32px;
 	border-radius:10px;
 	margin:0 0 45px 0;
-	
+
 }
 .register-aksen{
 	height:10px;
@@ -977,7 +978,7 @@ nav{
 	border-right:1px solid #b3e0f3;
 	border-bottom:1px solid #b3e0f3;
 	margin:-1px 0 55px 0;
-	
+
 }
 .form-regist-container .input-form{
 	padding:0;
@@ -1042,7 +1043,7 @@ nav{
 	border-right:1px solid #b3f3e5;
 	border-bottom:1px solid #b3f3e5;
 	margin:-1px 0 55px 0;
-	
+
 }
 
 .form-singin-container .btn-green{
@@ -1194,7 +1195,7 @@ nav{
 	margin:30px 0 10px 0;
 	width:195px;
 	padding:10px 0;
-	
+
 }
 .job-side-wrap .btn-black{
 	margin:30px 0 10px 0;
@@ -1294,11 +1295,11 @@ nav{
 	font-size:22px;
 	margin:0;
 	padding:0;
-	color:#565656;	
+	color:#565656;
 	font-family:'Raleway', myriad pro, tahoma, sans-serif;
 }
 .job-detail-desc p{
-	color:#565656;	
+	color:#565656;
 	font-size:14px;
 	padding:0;
 }
@@ -1323,16 +1324,16 @@ nav{
 	font-size:16px;
 	margin:0;
 	padding:0;
-	color:#565656;	
+	color:#565656;
 	font-family: 'Raleway', myriad pro, tahoma, sans-serif;
 }
 .job-detail-location h6 i{
-	color: #27a2f8;	
+	color: #27a2f8;
 	margin:0 10px 0 0;
 
 }
 .job-detail-type h6 i{
-	color: #ff9494;	
+	color: #ff9494;
 	margin:0 10px 0 0;
 
 }
@@ -1377,7 +1378,7 @@ nav{
 	font-weight:400;
 	padding:12px 55px;
 	margin:25px 0;
-	
+
 }
 
 div.location {
@@ -1386,20 +1387,20 @@ div.location {
 	font-family: 'Nunito', myriad pro, tahoma, sans-serif;
 	font-weight:300;
 }
-		
+
 div.map-popup {
-	position: relative;	
-	
-}	
+	position: relative;
+
+}
 div.map-popup > div {
-	display: inline-block;		
+	display: inline-block;
 }
 div.map-popup > h6 {
 	font-size:13px;
 	color:#1abc9c;
 	font-family: 'Nunito', myriad pro, tahoma, sans-serif;
 	margin:20px 0;
-	
+
 }
 
 #cs{
@@ -1437,53 +1438,53 @@ div.map-popup > h6 {
 
 /* ---------- Tabs -------------- */
 .etabs {
-	margin:0; 
-	padding:0; 
+	margin:0;
+	padding:0;
 }
 
-.tab { 
+.tab {
 	display:inline-block;
 	zoom:1;
 	*display:inline;
 	border-left:1px solid #e3e3e3;
 	border-top:1px solid #e3e3e3;
-	
+
 	margin:0;
 	cursor: pointer;
     float: left;
 }
-.tab:nth-child(4) { 
+.tab:nth-child(4) {
 	border-right:1px solid #e3e3e3;
 }
 
 
-.tab a { 
-	font-size: 16px; 
+.tab a {
+	font-size: 16px;
 	font-weight:400;
-	display: block; 
-	padding:5px 24px; 
+	display: block;
+	padding:5px 24px;
 	outline: none;
-	color:#565656;	
+	color:#565656;
 }
 .tab a:hover,.tab a:focus {
 	text-decoration: none;
 	color: #27a2f8;
 }
-.tab.active { 
-	background: #fff; 
-	position: relative; 
+.tab.active {
+	background: #fff;
+	position: relative;
 	top: 1px;
 }
-.tab a.active { 
+.tab a.active {
 	color: #27a2f8;
 }
 .tab-container .panel-container {
 	background: #fff;
 	border-top:1px solid #e3e3e3;
 	padding:15px 0;
-	font-size: 14px; 
+	font-size: 14px;
 	font-weight:400;
-	color:#565656;	
+	color:#565656;
 }
 
 .panel-container {
@@ -1516,7 +1517,7 @@ div.map-popup > h6 {
 	font-size:14px;
 	margin:0;
 	padding:0;
-	color:#565656;	
+	color:#565656;
 }
 .job-list-desc p{
 	color:#929292;
@@ -1540,14 +1541,14 @@ div.map-popup > h6 {
 	font-size:14px;
 	margin:0;
 	padding:0;
-	color:#565656;	
+	color:#565656;
 }
 .job-list-location h6 i{
-	color: #27a2f8;	
+	color: #27a2f8;
 	margin:0 10px 0 25px;
 }
 .job-list-type h6 i{
-	color: #ff9494;	
+	color: #ff9494;
 	margin:0 10px 0 25px;
 }
 .job-list-logo,.job-list-desc,.job-list-location,.job-list-type{
@@ -1585,7 +1586,7 @@ div.map-popup > h6 {
 .job-opening-top{
 	position: relative;
 	margin:50px 0 18px 0;
-	
+
 }
 
 .job-opening{
@@ -1602,7 +1603,7 @@ div.map-popup > h6 {
 
 .job-opening-nav{
 	float:right;
-	
+
 }
 .prev, .next{
 	width:33px;
@@ -1610,7 +1611,7 @@ div.map-popup > h6 {
 	border:1px solid #e3e3e3;
 	border-radius:0;
 	float:left;
-	
+
 }
 .prev{
 	background: url(images/job-opening-nav-prev.png)no-repeat;
@@ -1629,7 +1630,7 @@ div.map-popup > h6 {
 }
 .job-opening-content p{
 	color:#929191;
-	
+
 }
 .job-opening-meta {
 	border-top: 1px solid #e3e3e3;
@@ -1638,7 +1639,7 @@ div.map-popup > h6 {
 	color: #bebebe;
 	font-size:14px;
 	text-align:center;
-	
+
 }
 .meta-block{
 	width:50%;
@@ -1799,7 +1800,7 @@ div.map-popup > h6 {
 .step-by-container{
 	width:100%;
 	margin-top: -110px;
-	
+
 }
 .step-by{
 	width:215px;
@@ -1808,7 +1809,7 @@ div.map-popup > h6 {
 	text-align:center;
 	float:left;
 	margin-right:102px;
-	
+
 }
 .step-by:first-child{
 	margin-left:0;
@@ -1959,7 +1960,7 @@ div.map-popup > h6 {
 	list-style:none;
 	margin:0;
 	padding:0;
-	
+
 }
 .footer-widget-nav li{
 	margin-bottom:22px;
@@ -2197,7 +2198,7 @@ div.map-popup > h6 {
 	.menu ul li a {
 		font-size:12px;
 	}
-	
+
 	.headline{
 		margin-top:0px;
 		height:auto !important;
@@ -2209,7 +2210,7 @@ div.map-popup > h6 {
 	.align-right h4, .align-left h4{
 		font-size:22px;
 	}
-	
+
 	#step-image{
 		margin-bottom:0px;
 		margin-top:0px;
@@ -2234,7 +2235,7 @@ div.map-popup > h6 {
 	.step-by h5{
 		font-size:18px;
 	}
-	
+
 }
 @media (max-width: 1040px ) {
 	.author-post{
@@ -2270,7 +2271,7 @@ div.map-popup > h6 {
 		margin-bottom:10px;
 		clear:both;
 	}
-	
+
 	.recent-job-detail .job-detail-desc p{
 		margin:5px 0;
 		font-size:13px;
@@ -2336,7 +2337,7 @@ div.map-popup > h6 {
 	}
 	.contact .btn-green{
 		margin:15px 0;
-		
+
 	}
 	.spacer-1{
 		width:100%;
@@ -2380,7 +2381,7 @@ div.map-popup > h6 {
 	nav{
 		margin:0;
 		background:none;
-		
+
 	}
 
 	.menu li{
@@ -2415,13 +2416,13 @@ div.map-popup > h6 {
 		width:100%;
 		border-top:none;
 		border-bottom:none;
-		
+
 	}
-	
+
 	.menu ul  li a{
 		padding:15px 35px;
 		background:#f6f6f6;
-		
+
 	}
 	.menu ul ul {
 		left:0;
@@ -2430,7 +2431,7 @@ div.map-popup > h6 {
 	.slider-nav{
 		display:none;
 	}
-	
+
 	.commentlist>.media .pull-left{
 		float:none !important;
 	}
@@ -2441,7 +2442,7 @@ div.map-popup > h6 {
 		padding-left:0;
 		margin:10px 0;
 	}
-	
+
 	.job-detail-logo{
 		float:none;
 	}
@@ -2467,9 +2468,9 @@ div.map-popup > h6 {
 		border:1px solid #e3e3e3;
 		margin:2px 0;
 	}
-	.tab.active { 
-		background: #f6f6f6; 
-		top: 0px; 
+	.tab.active {
+		background: #f6f6f6;
+		top: 0px;
 	}
 	.counter{
 		width:100%;
@@ -2484,7 +2485,7 @@ div.map-popup > h6 {
 		font-weight:700;
 		font-size:30px;
 		padding:15px 0;
-		
+
 	}
 	.step-by{
 		margin:10px auto;
@@ -2529,7 +2530,7 @@ div.map-popup > h6 {
 	.job-side-wrap .btn-green{
 		width:100%;
 		padding:10px 0;
-		
+
 	}
 	.job-side-wrap .btn-black{
 		width:100%;
@@ -2573,7 +2574,7 @@ div.map-popup > h6 {
 		font-weight:700;
 		font-size:36px;
 		padding:36px 0;
-		
+
 	}
 	.counter-container p{
 		font-size:14px;
@@ -2589,7 +2590,7 @@ div.map-popup > h6 {
 		color:#343434 !important;
 		margin:30px 0 !important;
 	}
-	
+
 
 }
 @media (max-width:300px){
@@ -2614,5 +2615,5 @@ div.map-popup > h6 {
 	.about-post-resume .btn-black i{
 		display:none;
 	}
-	
+
 }

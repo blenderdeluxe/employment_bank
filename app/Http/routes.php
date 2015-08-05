@@ -26,8 +26,8 @@ Route::group(['middleware'=>['auth.candidate']], function() {
 });
 
 //Public webfront routes
-Route::get('/register', ['as' => 'webfront.register', 'uses' => 'WebfrontController@showRegister']);
-Route::post('/register', ['as' => 'webfront.register', 'uses' => 'WebfrontController@doRegister']);
+Route::get('/register', ['as' => 'candidate.register', 'uses' => 'CandidateHomeController@showRegister']);
+Route::post('/register', ['as' => 'candidate.store', 'uses' => 'CandidateHomeController@doRegister']);
 Route::get('/login', ['as' => 'webfront.login', 'uses' => 'WebfrontController@showlogin']);
 Route::post('/login', ['as' => 'webfront.login', 'uses' => 'WebfrontController@dologin']);
 

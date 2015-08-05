@@ -11,15 +11,6 @@ class WebfrontController extends Controller{
 
     private $content  = 'webfront.';
     //private $route    = 'master.boards.';
-    public function showRegister(){
-
-      return view($this->content.'register');
-    }
-
-    public function doRegister(){
-
-      //return view($this->content.'register');
-    }
 
     /**
      * Show the form for creating a new resource.
