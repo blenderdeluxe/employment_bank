@@ -146,7 +146,7 @@ return [
         employment_bank\Providers\AppServiceProvider::class,
         employment_bank\Providers\EventServiceProvider::class,
         employment_bank\Providers\RouteServiceProvider::class,
-        employment_bank\Providers\ValidatorServiceProvider::class, 
+        employment_bank\Providers\ValidatorServiceProvider::class,
 
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
 
@@ -201,8 +201,10 @@ return [
         'View'      => Illuminate\Support\Facades\View::class,
 
         'FormBuilder' => Kris\LaravelFormBuilder\Facades\FormBuilder::class,
-        'Form' => Collective\Html\FormFacade::class,
-        'Html' => Collective\Html\HtmlFacade::class,
+        'Form'      => Collective\Html\FormFacade::class,
+        'Html'      => Collective\Html\HtmlFacade::class,
+
+        'Basehelper'=> employment_bank\Helpers\Basehelper::class,
     ],
 
 ];

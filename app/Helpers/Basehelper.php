@@ -3,6 +3,10 @@
 
 class Basehelper {
 
+    public static function getAppName(){
+        //return 'Employment Bank -Arunachal Pradesh';
+        return '<b>Employment Bank </b>Arunachal Pradesh';
+    }
 
     public static function sendSMS($number, $message){
 

@@ -10,8 +10,24 @@ Route::get('test', ['as'=>'test', function () {
     return view('webfront.register');
 }]);
 
-//Route::group(['middleware'=>['auth']], function() {
-Route::group(['middleware'=>['auth.candidate']], function() {
+//Admin Section
+Route::get('admin/login', ['as' => 'admin.login', 'uses' => 'Auth\AdminAuthController@getLogin']);
+Route::post('admin/login', ['as' => 'admin.login', 'uses' => 'Auth\AdminAuthController@postLogin']);
+Route::get('admin/register', ['as' => 'admin.register', 'uses' => 'AdminHomeController@showRegister']);
+Route::post('admin/register', ['as' => 'admin.register', 'uses' => 'AdminHomeController@doRegister']);
+
+Route::group(['prefix'=>'admin'], function() {
+
+    Route::get('/logout', array('as' => 'admin.logout', 'uses' => 'Auth\AdminAuthController@getLogout'));
+
+    Route::group(['middleware'=>['auth.admin']], function() {
+
+    });
+
+});
+
+
+Route::group(['middleware'=>['auth.admin']], function() {
 	//Masterentries
 	 Route::group(['prefix'=>'master', 'namespace'=>'Master'], function() {
 
