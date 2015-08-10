@@ -13,14 +13,14 @@ use Illuminate\Support\Facades\Session;
  */
 class CandidateAuthController extends Controller{
 
+    private $content  = 'webfront.candidate.';
     /**
      * Create a new User authentication controller instance.
      */
     public function __construct(){
 
-        $this->middleware('guest.user', ['except' => 'getLogout']);
+        $this->middleware('guest.candidate', ['except' => 'getLogout']);
     }
-
     /**
      * Return the Admin login view
      *
@@ -28,9 +28,8 @@ class CandidateAuthController extends Controller{
      */
     public function getLogin(){
 
-        return view('webfront.candidate.login');
+        return view($this->content.'login');
     }
-
     /**
      * Attempt login as user with given credentials
      *
@@ -39,19 +38,20 @@ class CandidateAuthController extends Controller{
      */
     public function postLogin(Request $request){
 
-        $this->validate($request, array('email' => 'required|email', 'password' => 'required'));
+        $this->validate($request, ['username' => 'required|min:3|exists:candidates,username', 'password' => 'required'], ['username.exists'=>'Username does not exists in our system']);
 
-        $auth = Auth::candidate()->attempt(array('email' => $request->get('email'),'password' => $request->get('password'), 'status' => 1));
+        $auth = Auth::candidate()->attempt(['username' => $request->get('username'),'password' => $request->get('password'), 'status' => 1]);
 
         if(!$auth){
-            return back();
+            return back()->withInput()
+            ->with(['error'=> 'Either Username or Password is Incorrect! or Acount is Not Yet Activated']);
         }
 
-        $candidatefullname = Auth::candidate()->get()->firstname.' '.Auth::candidate()->get()->lastname;
+        $candidatefullname = Auth::candidate()->get()->fullname;
 
-        Session::put('userfullname', $userfullname);
+        Session::put('userfullname', $candidatefullname);
 
-        return redirect('candidate.home');
+        return redirect()->route('candidate.home');
     }
 
     /**
@@ -62,6 +62,6 @@ class CandidateAuthController extends Controller{
     public function getLogout()
     {
         Auth::candidate()->logout();
-        return redirect('webfront.login');
+        return redirect()->route('candidate.login');
     }
 }

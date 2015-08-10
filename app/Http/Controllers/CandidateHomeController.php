@@ -57,24 +57,21 @@ class CandidateHomeController extends Controller{
         	if(!$candidate->save())
   	  		return Redirect::back()->with('message', 'Error while creating your account!<br> Please contact Technical Support');
 
-  	  	return Redirect::route('webfront.login')->with('message', 'Account has been created!<br>Now Check your email address to verify your account by checking your spam folder or inboxes for verification link after that you can login');
+  	  	  return Redirect::route('candidate.login')->with('message', 'Account has been created!<br>Now Check your email address to verify your account by checking your spam folder or inboxes for verification link after that you can login');
       	  	//sendConfirmation() Will go the email and sms as needed
 
-            }else{
+        }else{
+
       		return Redirect::back()->withInput()
                 	->withErrors($validation);
                 // ->with('message', 'There were validation errors.');
-            }
+        }
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index()
-    {
-        //
+    public function showHome(){
+
+        return 'Dashboard';
+        //return view($this->content.'dashboard');
     }
 
     /**

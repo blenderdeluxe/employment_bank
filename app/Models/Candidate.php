@@ -1,14 +1,18 @@
 <?php
-
 namespace employment_bank\Models;
-
+use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class Candidate extends Model{
+class Candidate extends Model implements AuthenticatableContract, CanResetPasswordContract
+{
 
+    use Authenticatable, CanResetPassword;
     protected $table = 'candidates';
     protected $guarded = ['_token', 'name'];
-    protected $hidden = ['password'];
+    protected $hidden = ['password', 'remember_token'];
 
     public static $rules = [
         //'fullname' => 'required|between:3,55',

@@ -99,8 +99,11 @@
 
   <script type="text/javascript">
   $(document).ready(function () {
+    @if (Session::has('error'))
+        notify('{!! Session::get('error')!!}','error', 'topCenter');
+    @endif
     @if (Session::has('message') && !$errors->any())
-        notify('{{ Session::get('message')}}','success', 'topCenter');                                     
+        notify('{!! Session::get('message')!!}','success', 'topCenter');
     @endif
     @if ($errors->any())
           {!! implode('', $errors->all('notify(\':message\', \'warning\'); ')) !!}

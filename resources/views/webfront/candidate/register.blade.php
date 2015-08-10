@@ -38,7 +38,7 @@
 
     <div class="col-md-5 register">
       <h5>Already A Member? Log in Here.</h5>
-      <a class="btn btn-default btn-green" href="{{URL::route('webfront.login')}}">LOG IN</a>
+      <a class="btn btn-default btn-green" href="{{URL::route('candidate.login')}}">LOG IN</a>
       <div class="row">
         <div class="col-md-12">
           <ul class="style-list-2">

@@ -28,8 +28,16 @@ Route::group(['middleware'=>['auth.candidate']], function() {
 //Public webfront routes
 Route::get('/register', ['as' => 'candidate.register', 'uses' => 'CandidateHomeController@showRegister']);
 Route::post('/register', ['as' => 'candidate.store', 'uses' => 'CandidateHomeController@doRegister']);
-Route::get('/login', ['as' => 'webfront.login', 'uses' => 'WebfrontController@showlogin']);
-Route::post('/login', ['as' => 'webfront.login', 'uses' => 'WebfrontController@dologin']);
+
+//Candidate Section
+Route::get('/login', ['as' => 'candidate.login', 'uses' => 'Auth\CandidateAuthController@getLogin']);
+Route::post('/login', ['as' => 'candidate.login', 'uses' => 'Auth\CandidateAuthController@postLogin']);
+
+Route::group(['middleware'=>['auth.candidate'],'prefix'=>'candidate'], function() {
+
+    Route::get('/logout', array('as' => 'candidate.logout', 'uses' => 'Auth\CandidateAuthController@getLogout'));
+    Route::get('/home', ['as' => 'candidate.home', 'uses' => 'CandidateHomeController@showHome']);
+});
 
 Route::controllers([
   //Public webfront routes
