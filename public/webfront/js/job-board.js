@@ -4,9 +4,9 @@ jQuery(document).ready(function($) {
 	$(function(){
 		$('#tab-container').easytabs();
 	});
-	
+
 	////////////////////////////////////mainnav
-	$(function(){ 
+	$(function(){
 		var touch 	= $('#touch-menu');
 		var menu 	= $('.menu');
 
@@ -14,7 +14,7 @@ jQuery(document).ready(function($) {
 			e.preventDefault();
 			menu.slideToggle();
 		});
-		
+
 		$(window).resize(function(){
 			var w = $(window).width();
 			if(w > 767 && menu.is(':hidden')) {
@@ -22,7 +22,7 @@ jQuery(document).ready(function($) {
 			}
 		});
 	});
-	
+
 	////////////////////////////////////Home Slider
 	$(function() {
 		var owl = $("#home-slider");
@@ -43,7 +43,7 @@ jQuery(document).ready(function($) {
 			owl.trigger('owl.prev');
 		  })
     });
-	
+
 	////////////////////////////////////Home Sidebar Carousel
 	$(function() {
       var owl = $("#job-opening-carousel");
@@ -51,7 +51,7 @@ jQuery(document).ready(function($) {
       owl.owlCarousel({
 	  autoPlay: 5000,
       singleItem : true
-      
+
       });
 
       // Custom Navigation Events
@@ -62,7 +62,7 @@ jQuery(document).ready(function($) {
         owl.trigger('owl.prev');
       })
 	});
-	
+
 	////////////////////////////////////Home Company Carousel
 	$(function() {
       var owl = $("#company-post-list");
@@ -70,16 +70,16 @@ jQuery(document).ready(function($) {
 
       items : 6, //10 items above 1000px browser width
 	  autoPlay: 3000
-	  
+
       });
     });
-	
+
 	////////////////////////////////////Testimony Home Carousel
 	$(function() {
-     
+
 		var sync1 = $("#sync1");
 		var sync2 = $("#sync2");
-		 
+
 		sync1.owlCarousel({
 			singleItem : true,
 			slideSpeed : 1000,
@@ -91,7 +91,7 @@ jQuery(document).ready(function($) {
 			responsiveRefreshRate : 200,
 			transitionStyle : "goDown"
 		});
-     
+
 		sync2.owlCarousel({
 			items : 9,
 			itemsDesktop : [1000,5], //5 items between 1000px and 901px
@@ -99,12 +99,12 @@ jQuery(document).ready(function($) {
 			itemsTablet: [600,2], //2 items between 600 and 0
 			itemsMobile : false, // itemsMobile disabled - inherit from itemsTablet option
 			pagination:false,
-			
+
 			afterInit : function(el){
 			el.find(".owl-item").eq(0).addClass("synced");
 			}
 		});
-     
+
 		function syncPosition(el){
 			var current = this.currentItem;
 			$("#sync2")
@@ -116,13 +116,13 @@ jQuery(document).ready(function($) {
 			center(current)
 			}
 		}
-		 
+
 		$("#sync2").on("click", ".owl-item", function(e){
 			e.preventDefault();
 			var number = $(this).data("owlItem");
 			sync1.trigger("owl.goTo",number);
 		});
-		 
+
 		function center(number){
 			var sync2visible = sync2.data("owlCarousel").owl.visibleItems;
 			var num = number;
@@ -132,7 +132,7 @@ jQuery(document).ready(function($) {
 				var found = true;
 			}
 			}
-			 
+
 			if(found===false){
 			if(num>sync2visible[sync2visible.length-1]){
 			sync2.trigger("owl.goTo", num - sync2visible.length+2)
@@ -149,7 +149,7 @@ jQuery(document).ready(function($) {
 			}
 		}
     });
-	
+
 	////////////////////////////////////Page Slider
 	$(function() {
 		var owl = $("#page-slider");
@@ -158,7 +158,7 @@ jQuery(document).ready(function($) {
 
 		});
 	});
-	
+
 	////////////////////////////////////Page Joblisting Carousel
 	$(function(){
       var owl = $("#job-listing-carousel");
@@ -166,7 +166,7 @@ jQuery(document).ready(function($) {
       owl.owlCarousel({
 	  autoPlay: 5000,
       items : 3 //10 items above 1000px browser width
-      
+
       });
 
       // Custom Navigation Events
@@ -177,29 +177,29 @@ jQuery(document).ready(function($) {
         owl.trigger('owl.prev');
       })
 	});
-	
+
 	////////////////////////////////////Form Value Slider
 	$(function() {
-		$("#experiences").slider({ 
-			from: 1, 
-			to: 10,  
-			scale: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10], 
-			limits: false, 
-			step: 1, 
-			dimension: '', 
-			skin: "round",  
+		$("#experiences").slider({
+			from: 1,
+			to: 10,
+			scale: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
+			limits: false,
+			step: 1,
+			dimension: '',
+			skin: "round",
 			callback: function( value ){ console.dir( this ); }
 		});
 	});
 	$(function() {
-		$("#salary").slider({ 
-			from: 0, to: 500, 
-			step: 1, 
-			scale: [0, '|', 50, '|' , '100', '|', 250, '|', 500], 
-			heterogeneity: ['50/100', '75/250'], 
-			limits: false, 
-			dimension: 'K', 
-			skin: "round", 
+		$("#salary").slider({
+			from: 0, to: 500,
+			step: 1,
+			scale: [0, '|', 50, '|' , '100', '|', 250, '|', 500],
+			heterogeneity: ['50/100', '75/250'],
+			limits: false,
+			dimension: 'K',
+			skin: "round",
 			callback: function( value ){ console.dir( this ); }
 		});
 	});
@@ -209,13 +209,13 @@ jQuery(document).ready(function($) {
 				var settings = $.extend({
 					home: { latitude: 40.7737704, longitude: -73.9660893 },
 					text: '<div class="map-popup"><h6><div class="glyphicon glyphicon-map-marker">&nbsp;</div>5th Avenue Street, 103 Floor, Trump Tower Crosss Road, LA 450001 </h6><h6><div class="glyphicon glyphicon-earphone">&nbsp;</div>+1 81000 0001</h6><h6><div class="glyphicon glyphicon-envelope">&nbsp;</div>hello@jobboard.com</h6></div>',
-					icon_url: 'images/pin.png',	
+					icon_url: 'images/pin.png',
 					zoom: 15
 				}, options );
 				var coords = new google.maps.LatLng(settings.home.latitude, settings.home.longitude);
-				return this.each(function() {	
+				return this.each(function() {
 					var element = $(this);
-					
+
 					var options = {
 						zoom: settings.zoom,
 						center: coords,
@@ -225,13 +225,13 @@ jQuery(document).ready(function($) {
 						zoomControlOptions: {
 							style: google.maps.ZoomControlStyle.DEFAULT
 						},
-						overviewMapControl: true,	
+						overviewMapControl: true,
 					};
-					
+
 					var map = new google.maps.Map(element[0], options);
-					
-					var icon = { 
-						url: settings.icon_url, 
+
+					var icon = {
+						url: settings.icon_url,
 						origin: new google.maps.Point(0, 0)
 					};
 
@@ -241,12 +241,12 @@ jQuery(document).ready(function($) {
 						icon: icon,
 						draggable: false
 					});
-					
+
 					var info = new google.maps.InfoWindow({
 						content: settings.text
 					});
 
-					google.maps.event.addListener(marker, 'click', function() { 
+					google.maps.event.addListener(marker, 'click', function() {
 						info.open(map, marker);
 					});
 
@@ -298,11 +298,12 @@ jQuery(document).ready(function($) {
 
 					map.setOptions({styles: styles});
 				});
-		 
+
 			};
 		});
 
 		$(function() {
 			jQuery('div.location').CustomMap();
 		});
+
 });

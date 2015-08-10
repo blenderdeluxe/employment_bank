@@ -9,6 +9,8 @@
 	<!-- Main Style -->
   <link href="{{ asset('webfront/css/style.css') }}" rel="stylesheet" type="text/css" />
 	<!-- Main Style -->
+  <!-- noty cross briser animate css -->
+  <link href="{{ asset('plugins/noty/animate.css') }}" rel="stylesheet" type="text/css" />
 	<!-- fonts -->
   <link href="{{ asset('font-awesome/4.4.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
   <link href='http://fonts.googleapis.com/css?family=Nunito:300,400,700' rel='stylesheet' type='text/css'>
@@ -42,6 +44,13 @@
 
 		<div class="main-page-title"><!-- start main page title -->
 			<div class="container">
+        @if (Session::has('alert'))
+        <div class="alert alert-warning alert-dismissable job-alert alert-red">
+          <button type="button" class="close" data-dismiss="alert" aria-hidden="true"><i class="fa fa-times-circle"></i></button>
+          {!!Session::get('alert')!!}
+        </div>
+        @endif
+
           @yield('main_page_container')
 			</div>
 		</div><!-- end main page title -->
@@ -61,6 +70,9 @@
   <script src="{{ asset('plugins/jQuery/jQuery-2.1.4.min.js')}}" type="text/javascript"></script>
   <!-- Bootstrap 3.3.2 JS -->
   <script src="{{ asset('bootstrap/js/bootstrap.min.js')}}" type="text/javascript"></script>
+  <!-- noty -->
+  <script type="text/javascript" src="{{ asset('plugins/noty/packaged/jquery.noty.packaged.min.js')}}"></script>
+  <script type="text/javascript" src="{{ asset('plugins/noty/themes/bootstrap.js')}}"></script>
 	<!-- Tabs -->
   <script src="{{ asset('plugins/easytabs/jquery.easytabs.min.js')}}" type="text/javascript"></script>
   <script src="{{ asset('plugins/easytabs/modernizr.custom.49511.js')}}" type="text/javascript"></script>
@@ -82,6 +94,19 @@
 	<script src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
 	<!-- Map -->
   <script src="{{ asset('webfront/js/job-board.js')}}" type="text/javascript"></script>
+
+  <script src="{{ asset('webfront/js/main.js')}}" type="text/javascript"></script>
+
+  <script type="text/javascript">
+  $(document).ready(function () {
+    @if (Session::has('message') && !$errors->any())
+        notify('{{ Session::get('message')}}','success', 'topCenter');                                     
+    @endif
+    @if ($errors->any())
+          {!! implode('', $errors->all('notify(\':message\', \'warning\'); ')) !!}
+    @endif
+  });
+  </script>
 
   </body>
 </html>
