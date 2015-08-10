@@ -28,7 +28,7 @@
             <div class="register-aksen"></div>
           </div>
           <div class="form-group col-md-6">
-            {!! Form::password('password_confirmed', ['class' => 'form-control input-form', 'placeholder' => 'Confirm Password', 'required', 'autocomplete'=>'off']) !!}
+            {!! Form::password('password_confirmation', ['class' => 'form-control input-form', 'placeholder' => 'Confirm Password', 'required', 'autocomplete'=>'off']) !!}
             <div class="register-aksen"></div>
           </div>
           {!! Form::submit('REGISTER', ['class' => 'btn btn-default btn-green']) !!}

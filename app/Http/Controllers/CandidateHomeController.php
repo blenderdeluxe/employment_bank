@@ -11,6 +11,8 @@ use employment_bank\Models\Candidate;
 use Illuminate\Database\QueryException;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Redirect;
+use Illuminate\Support\Str;
+use employment_bank\Helpers\Basehelper;
 
 class CandidateHomeController extends Controller{
 
@@ -23,42 +25,39 @@ class CandidateHomeController extends Controller{
 
     public function doRegister(Request $request){
 
-        $validator = Validator::make($data = $request->all(), Candidate::$rules);
+        $validator = Validator::make($data = $request->all(), Candidate::$rules, Candidate::$messages);
         if ($validator->fails())
           return Redirect::back()->withErrors($validator)->withInput();
 
-        $input = Input::all();
-        $validation = Validator::make($input, Candidate::$rules, Candidate::$messages);
-
-        if ($validation->passes()){
+        if ($validator->passes()){
 
           $confirmation_code = Str::quickRandom(30);
-      		$student = new Candidate;
-      		$student->name = ucwords($request->fullname);
-        	$student->username = Input::get('username');
-        	$student->mobile_no = Input::get('mobile_no');
-        	$student->email = Input::get('email');
-        	$student->password = Hash::make(Input::get('password'));
-        	$student->confirmation_code = $confirmation_code;
+      		$candidate = new Candidate;
+      		//$candidate->name = ucwords($request->fullname);
+        	$candidate->username = $request->username;
+        	$candidate->mobile_no = $request->mobile_no;
+        	$candidate->email = $request->email;
+        	$candidate->password = bcrypt($request->password);
+        	$candidate->confirmation_code = $confirmation_code;
 
         	$data = ['confirmation_code' => $confirmation_code,
-        			 'username' => Input::get('username'),
-        			 'password' => Input::get('password'),
-        			 'mobile_no' => Input::get('mobile_no')
+        			 'username' => $request->username,
+        			 'password' => $request->password,
+        			 'mobile_no' => $request->mobile_no
         	];
 
-      		Basehelper::sendSMS(Input::get('mobile_no'), 'Hello '.Input::get('username').', you have successfully registere. Your username is '.Input::get('username').' and password is '.Input::get('password'));
+      		Basehelper::sendSMS($request->mobile_no, 'Hello '.$request->username.', you have successfully registere. Your username is '.$request->username.' and password is '.$request->password);
 
-      	  	Mail::send('emails.verify', $data, function($message) use ($student, $data){
-      	  		$message->from('no-reply@employment_bank', 'Employment Bank');
-                	$message->to(Input::get('email'), $student->name)
-                    	->subject('Verify your email address');
-            });
+    	  	// Mail::send('emails.verify', $data, function($message) use ($candidate, $data){
+    	  	// 	$message->from('no-reply@employment_bank', 'Employment Bank');
+          //     	$message->to(Input::get('email'), $candidate->name)
+          //         	->subject('Verify your email address');
+          // });
 
-            	if(!$student->save())
-      	  		return Redirect::back()->with('message', 'Error while creating your account!<br> Please contact Technical Support');
+        	if(!$candidate->save())
+  	  		return Redirect::back()->with('message', 'Error while creating your account!<br> Please contact Technical Support');
 
-      	  	return Redirect::route('students.login')->with('message', 'Account has been created!<br>Now Check your email address to verify your account by checking your spam folder or inboxes for verification link after that you can login');
+  	  	return Redirect::route('webfront.login')->with('message', 'Account has been created!<br>Now Check your email address to verify your account by checking your spam folder or inboxes for verification link after that you can login');
       	  	//sendConfirmation() Will go the email and sms as needed
 
             }else{

@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Candidate extends Model{
 
-    protected $table = 'students';
-    protected $guarded = ['_token'];
+    protected $table = 'candidates';
+    protected $guarded = ['_token', 'name'];
     protected $hidden = ['password'];
 
     public static $rules = [
-        'fullname' => 'required|between:3,55',
-        'username'=> 'required|min:3|regex:/^[\pL\s]+$/u|unique:candidates,username',
+        //'fullname' => 'required|between:3,55',
+        //'username'=> 'required|min:3|regex:/^[\pL\s]+$/u|unique:candidates,username',
+        'username'=> 'required|min:3|alpha_spaces|unique:candidates,username',
         'mobile_no'=> 'required|digits:10|numeric|unique:candidates,mobile_no',
         'email'=> 'email|required|max:100|unique:candidates,email',
         'password'=> 'confirmed|required',
@@ -24,6 +25,6 @@ class Candidate extends Model{
         'password.confirmed' => 'Password and Confirm Password does not match',
     ];
 
-    protected $fillable = ['username', 'fname', 'mname', 'lname', 'mobile_no', 'email', 'password', 'reset_key', 'active', 'remember_token'];
+    protected $fillable = ['username', 'fullname', 'mobile_no', 'email', 'password', 'reset_key', 'status', 'confirmation_code'];
     //
 }
