@@ -65,7 +65,13 @@
         </ul>
       </li>
 
-
+      <li id="casts">
+        <a href="#"><i class="fa fa-circle-o"></i> Casts <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+          <li id="casts_index"><a href="{{ URL::route('master.casts.index')}}"><i class="fa fa-list-ul"></i> List </a></li>
+          <li id="casts_create"><a href="{{ URL::route('master.casts.create')}}"><i class="fa fa-plus"></i> Add New </a></li>
+        </ul>
+      </li>
 
     </ul>
   </li>

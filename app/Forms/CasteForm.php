@@ -2,12 +2,12 @@
 
 use Kris\LaravelFormBuilder\Form;
 
-class StateForm extends Form{
+class CasteForm extends Form{
 
     public function buildForm(){
 
       $this->add('name', 'text', [
-          'attr' => ['required', 'maxlength' => '100', 'placeholder'=> 'name of the State'],
+          'attr' => ['required', 'maxlength' => '50', 'placeholder'=> 'name of the Caste'],
           'wrapper' => ['class' => 'form-group']
       ]);
 
