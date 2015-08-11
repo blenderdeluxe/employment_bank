@@ -22,6 +22,9 @@ Route::group(['prefix'=>'admin'], function() {
 
     Route::group(['middleware'=>['auth.admin']], function() {
 
+      Route::get('/dashboard', ['as'=>'admin.home', function () {
+          return view('admin.layouts.default');
+      }]);
     });
 
 });
