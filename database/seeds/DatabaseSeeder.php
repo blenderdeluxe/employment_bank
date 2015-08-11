@@ -15,7 +15,8 @@ class DatabaseSeeder extends Seeder
         Model::unguard();
 
         $this->call(IndustryTypesTable::class);
-
+        $this->call(StateTable::class);
+        $this->call(DistrictTable::class);
         Model::reguard();
     }
 }
