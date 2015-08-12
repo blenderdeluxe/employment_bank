@@ -11,7 +11,7 @@ class CreateCandidateInfos extends Migration{
                 $table->increments('id');
                 $table->integer('candidate_id', false, true);
                 $table->string('fullname', 50);
-                $table->string('guar_name', 50);
+                $table->string('guar_name', 50)->nullable();
                 $table->string('spouse_name', 50)->nullable();
                 $table->string('index_card_no', 100)->unique();
 

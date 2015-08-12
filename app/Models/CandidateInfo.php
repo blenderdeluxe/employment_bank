@@ -39,7 +39,15 @@ class CandidateInfo extends Model{
   protected $guarded = ['id', '_token'];
   protected $fillable = ['fullname', 'guar_name','spouse_name','sex','caste_id','religion','marital_status','dob',
   'physical_challenge', 'ex_service', 'address', 'state_id', 'district_id', 'pincode', 'physical_height', 'physical_weight',
-  'physical_chest', 'photo_url','cv_url', 'proof_details_id', 'proof_no', 'relocated', 'bpl', 'adhaar_no', 'additional_info'];
+  'physical_chest', 'photo_url','cv_url', 'proof_details_id', 'proof_no', 'relocated', 'bpl', 'adhaar_no', 'additional_info'
+  ];
+
+  public static $sex_options = ['MALE'=>'MALE', 'FEMALE'=>'FEMALE', 'OTHERS'=>'OTHERS'];
+
+  public static $religion_options = ['BUDDISM'=>'BUDDISM', 'CHRISTIANITY'=>'CHRISTIANITY','HINDUISM'=>'HINDUISM',
+    'ISLAM'=>'ISLAM','JAINISM'=>'JAINISM','PARSI'=>'PARSI','SIKHISM'=>'SIKHISM', 'OTHERS'=>'OTHERS'];
+
+  public static $marital_status_options = ['UNMARRIED'=>'UNMARRIED', 'MARRIED'=>'MARRIED', 'DIVORCEE'=>'DIVORCEE','WIDOW'=>'WIDOW'];
 
   protected function setFullnameAttribute($value){
       $this->attributes['fullname'] = Str::upper($value);

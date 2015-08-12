@@ -56,10 +56,12 @@ Route::post('/register', ['as' => 'candidate.store', 'uses' => 'CandidateHomeCon
 Route::get('/login', ['as' => 'candidate.login', 'uses' => 'Auth\CandidateAuthController@getLogin']);
 Route::post('/login', ['as' => 'candidate.login', 'uses' => 'Auth\CandidateAuthController@postLogin']);
 
-Route::group(['middleware'=>['auth.candidate'],'prefix'=>'candidate'], function() {
+Route::group(['middleware'=>['auth.candidate'], 'prefix'=>'candidate'], function() {
 
     Route::get('/logout', array('as' => 'candidate.logout', 'uses' => 'Auth\CandidateAuthController@getLogout'));
     Route::get('/home', ['as' => 'candidate.home', 'uses' => 'CandidateHomeController@showHome']);
+    Route::get('/post_resume', ['as' => 'candidate.post.resume', 'uses' => 'CandidateHomeController@showResume']);
+    Route::post('/post_resume', ['as' => 'candidate.post.resume', 'uses' => 'CandidateHomeController@postResume']);
 });
 
 Route::controllers([
