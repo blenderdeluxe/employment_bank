@@ -3,13 +3,8 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMasterDistrictsTable extends Migration
-{
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+class CreateMasterDistrictsTable extends Migration{
+
     public function up()
     {
         Schema::create('master_districts', function(Blueprint $table){
@@ -19,13 +14,8 @@ class CreateMasterDistrictsTable extends Migration
             $table->foreign('state_id')->references('id')->on('master_states');
         });
     }
-
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
-    public function down()
+    
+  public function down()
     {
         Schema::dropIfExists('master_districts');
     }

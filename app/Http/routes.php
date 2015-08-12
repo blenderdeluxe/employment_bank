@@ -41,6 +41,8 @@ Route::group(['middleware'=>['auth.admin']], function() {
        Route::resource('/subjects', 'SubjectsController', ['except' => ['show']]);
        Route::resource('/languages', 'LanguagesController', ['except' => ['show']]);
        Route::resource('/casts', 'CasteController', ['except' => ['show']]);
+       Route::resource('/states', 'StateController', ['except' => ['show']]);
+       Route::resource('/districts', 'DistrictController', ['except' => ['show']]);
        Route::resource('/proof_details', 'ProofDetailsController', ['except' => ['show']]);
 
 	 });

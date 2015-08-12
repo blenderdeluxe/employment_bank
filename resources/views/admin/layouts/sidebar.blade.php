@@ -80,7 +80,20 @@
         </ul>
       </li>
 
-
+      <li id="states">
+        <a href="#"><i class="fa fa-circle-o"></i> States <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+          <li id="states_index"><a href="{{ URL::route('master.states.index')}}"><i class="fa fa-list-ul"></i> List </a></li>
+          <li id="states_create"><a href="{{ URL::route('master.states.create')}}"><i class="fa fa-plus"></i> Add New </a></li>
+        </ul>
+      </li>
+      <li id="districts">
+        <a href="#"><i class="fa fa-circle-o"></i> Districts <i class="fa fa-angle-left pull-right"></i></a>
+        <ul class="treeview-menu">
+          <li id="districts_index"><a href="{{ URL::route('master.districts.index')}}"><i class="fa fa-list-ul"></i> List </a></li>
+          <li id="districts_create"><a href="{{ URL::route('master.districts.create')}}"><i class="fa fa-plus"></i> Add New </a></li>
+        </ul>
+      </li>
 
     </ul>
   </li>
