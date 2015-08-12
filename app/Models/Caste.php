@@ -8,7 +8,7 @@ class Caste extends Model{
 
     protected $table = "master_casts";
     public static $rules = [
-      'name' => 'required|unique:master_casts',
+      'name' => 'required|unique:master_casts,name,:id',
     ];
 
     protected $guarded = ['id', '_token'];

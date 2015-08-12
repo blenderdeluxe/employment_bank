@@ -1,7 +1,7 @@
 @extends('admin.layouts.default')
 
 @section('content-header')
-  Proof of Residense<small> Master</small>
+  Proof of Residense <small> Master</small>
 @endsection
 
 @section('content')
