@@ -27,6 +27,10 @@ class CandidateInfo extends Model{
       'physical_height'     =>  'numeric',
       'physical_weight'     =>  'numeric',
       'physical_chest'      =>  'numeric',
+
+      'photo_url'           => 'mimes:jpeg,png|max:512',
+      'cv_url'              => 'mimes:pdf,doc,docx|max:102400',
+
       'proof_details_id'    =>  'required|exists:master_proof_details,id',
       'proof_no'            =>  'max:100',
       'relocated'           =>'required|in:No,Within State,Within Country,Outside Country',
@@ -36,8 +40,15 @@ class CandidateInfo extends Model{
 
   ];
 
+  public static $messages = ['dob.before'=> 'Date of Birth must be minimum 15 year old',
+      'photo_url.mimes' =>  'The Profile Photo Must be a valid JPG',
+      'photo_url.max'   =>  'The Photo size should be maximum of 512KB',
+      'cv_url.mimes'    =>  'The CV/Resume must be in any one of the formats as specified (PDF/DOC/DOCX)',
+      'cv_url.max'      =>  'The CV/Resume size should be maximum of 1MB or 1024KB',
+  ];
+
   protected $guarded = ['id', '_token'];
-  protected $fillable = ['fullname', 'guar_name','spouse_name','sex','caste_id','religion','marital_status','dob',
+  protected $fillable = [ 'candidate_id', 'fullname', 'guar_name','spouse_name','sex','caste_id','religion','marital_status','dob',
   'physical_challenge', 'ex_service', 'address', 'state_id', 'district_id', 'pincode', 'physical_height', 'physical_weight',
   'physical_chest', 'photo_url','cv_url', 'proof_details_id', 'proof_no', 'relocated', 'bpl', 'adhaar_no', 'additional_info'
   ];
@@ -48,6 +59,8 @@ class CandidateInfo extends Model{
     'ISLAM'=>'ISLAM','JAINISM'=>'JAINISM','PARSI'=>'PARSI','SIKHISM'=>'SIKHISM', 'OTHERS'=>'OTHERS'];
 
   public static $marital_status_options = ['UNMARRIED'=>'UNMARRIED', 'MARRIED'=>'MARRIED', 'DIVORCEE'=>'DIVORCEE','WIDOW'=>'WIDOW'];
+
+  public static $relocated_options = ['No'=>'No', 'Within State'=>'Within State', 'Within Country'=>'Within Country', 'Outside Country'=>'Outside Country'];
 
   protected function setFullnameAttribute($value){
       $this->attributes['fullname'] = Str::upper($value);

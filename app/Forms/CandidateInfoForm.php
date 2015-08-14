@@ -4,6 +4,7 @@ use Kris\LaravelFormBuilder\Form;
 use employment_bank\Models\Caste;
 use employment_bank\Models\State;
 use employment_bank\Models\District;
+use employment_bank\Models\MasterProof;
 use employment_bank\Models\CandidateInfo;
 
 class CandidateInfoForm extends Form{
@@ -50,7 +51,7 @@ class CandidateInfoForm extends Form{
              'attr' => ['required'],
       ]);
       $this->add('dob', 'text', [
-          'attr' => ['required', 'maxlength' => '50', 'placeholder'=> 'DD-MM-YYYY Name'],
+          'attr' => ['required', 'maxlength' => '50', 'placeholder'=> 'DD-MM-YYYY'],
           'label' =>  'Date of birth:'
       ]);
       $this->add('physical_challenge', 'select', [
@@ -65,8 +66,8 @@ class CandidateInfoForm extends Form{
              'label' => 'Whether Ex-serviceman',
              'attr' => ['required'],
       ]);
-      $this->add('address', 'text', [
-          'attr' => ['maxlength' => '255', 'placeholder'=> 'Address details'],
+      $this->add('address', 'textarea', [
+          'attr' => ['maxlength' => '255', 'rows' => '5', 'placeholder'=> 'Address details'],
           'label' =>  'Address'
       ]);
       //$states = State::lists('name', 'id')->all();
@@ -92,19 +93,61 @@ class CandidateInfoForm extends Form{
           'label' =>  'Physical height'
       ]);
       $this->add('physical_weight', 'text', [
-          'attr' => ['maxlength' => '5', 'placeholder'=> 'height in k.g.'],
+          'attr' => ['maxlength' => '5', 'placeholder'=> 'weight in k.g.'],
           'label' =>  'Physical weight'
       ]);
       $this->add('physical_chest', 'text', [
-          'attr' => ['maxlength' => '5', 'placeholder'=> 'Measurement in cm'],
+          'attr' => ['maxlength' => '5', 'placeholder'=> ' in cm'],
           'label' =>  'Physical Chest'
       ]);
 
+      $this->add('photo_url', 'file', [
+          'attr'  =>  ['accept'=>'.jpg'],
+          'label' =>  'Passport Photo'
+      ]);
+      $this->add('cv_url', 'file', [
+          'attr'  =>  ['accept'=>'.doc, .docx, .pdf'],
+          'label' =>  'CV :'
+      ]);
+
+      $proof_details = MasterProof::lists('name', 'id')->all();
+      $this->add('proof_details_id', 'select', [
+             'choices' => $proof_details,
+             'empty_value' => '--- Select ---',
+             'label' => 'Proof of Residence :',
+             'attr' => ['required'],
+      ]);
+      $this->add('proof_no', 'text', [
+          'attr' => ['maxlength' => '100', 'placeholder'=> 'Proof/Id No ','required'],
+          'label' =>  'Proof/Id No: '
+      ]);
+
+      $this->add('relocated', 'select', [
+             'choices' => CandidateInfo::$relocated_options, //currentl only arunachal districts are fetched
+             'empty_value' => '--- Select ---',
+             'label' => 'Willing to Relocate :',
+             'attr' => ['required'],
+      ]);
+      $this->add('bpl', 'select', [
+             'choices' => ['YES'=>'YES', 'NO'=>'NO'],
+             'empty_value' => '--- Select ---',
+             'label' => 'Whether BPL :',
+             'attr' => ['required'],
+      ]);
+      $this->add('adhaar_no', 'text', [
+          'attr' => ['maxlength' => '100', 'placeholder'=> 'Aadhaar No '],
+          'label' =>  'Aadhaar No: '
+      ]);
+      $this->add('additional_info', 'textarea', [
+          'attr' => ['maxlength' => '255', 'rows' => '5', 'placeholder'=> ''],
+          'label' =>  'Additional Information :'
+      ]);
+      // $table->string('additional_info
       // $table->string('photo_url', 200)->nullable()->comment('Photo URL');
       // $table->string('cv_url', 200)->nullable()->comment('CV URL');
 
       $this->add('save', 'submit', [
-          'attr' => ['class'=>'btn btn-lg btn-primary col-md-12']
+          'attr' => ['class'=>'btn btn-default btn-blue btn-lg']
       ]);
 
       $this->add('update', 'submit', [
