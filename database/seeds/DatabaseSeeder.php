@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder
         $this->call(IndustryTypesTable::class);
         $this->call(StateTable::class);
         $this->call(DistrictTable::class);
+        $this->call(CastTable::class);
+        $this->call(MasterProofTable::class);
         Model::reguard();
     }
 }

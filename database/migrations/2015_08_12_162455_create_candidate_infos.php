@@ -40,7 +40,7 @@ class CreateCandidateInfos extends Migration{
                 $table->string('adhaar_no', 100)->nullable()->comment('Aadhaar No');
                 $table->string('additional_info')->nullable()->comment('Additional Information');
                 $table->timestamps();
-                $table->foreign('candidate_id')->references('id')->on('candidates'););
+                $table->foreign('candidate_id')->references('id')->on('candidates');
                 $table->foreign('caste_id')->references('id')->on('master_casts');
                 $table->foreign('state_id')->references('id')->on('master_states');
                 $table->foreign('district_id')->references('id')->on('master_districts');

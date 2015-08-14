@@ -7,7 +7,8 @@ use Illuminate\Http\Request;
 use employment_bank\Http\Requests;
 use employment_bank\Http\Controllers\Controller;
 use Validator;
-use employment_bank\Models\Candidate;
+use Illuminate\Support\Facades\Auth;
+use employment_bank\Models\CandidateInfo;
 use Illuminate\Database\QueryException;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Redirect;
@@ -75,14 +76,66 @@ class CandidateHomeController extends Controller{
         //return view($this->content.'dashboard');
     }
 
-    public function showResume(FormBuilder $formBuilder){
+    public function createResume(FormBuilder $formBuilder){
 
         $form = $formBuilder->create('employment_bank\Forms\CandidateInfoForm', [
              'method' => 'POST',
-             'url' => route($this->route.'store')
-        ])->remove('update');
+             'url' => route($this->route.'store.resume')
+        ])->remove('save')->remove('update');
 
         return view($this->content.'resume', compact('form'));
     }
+
+    public function storeResume(Request $request){
+
+        $validator = Validator::make($data = $request->all(), CandidateInfo::$rules, CandidateInfo::$messages);
+        if ($validator->fails())
+          return Redirect::back()->withErrors($validator)->withInput();
+
+        $data['candidate_id'] = Auth::candidate()->get()->id;
+  			$info = CandidateInfo::create($data);
+        $files = [];
+        //return $data;
+        //return $serverFileName = "photo.".$request->photo_url->getClientOriginalExtension();
+        $serverFileName = "cv.".$request->cv_url->getClientOriginalExtension();
+
+        $request->cv_url->move(storage_path('candidates/'.$form_no), $serverFileName);
+
+  			// foreach($_FILES as $field => $file){
+        //
+        //     echo $field;
+        //     print_r($file);
+    		//     $array = array(' ', '/', '-', '\'', '@');
+        //     $fileName = str_replace($array, "_", $fileDesc);
+			  //   	$serverFileName = $fileName.".".Input::file($field)->getClientOriginalExtension();
+        //
+			  //   	Input::file($field)->move(storage_path('students/'.$form_no), $serverFileName);
+    		// 		//array_push($files, $fileName);
+        // }
+        return "E";
+
+        return Redirect::route($this->route.'index')->with('message', 'Basic Personal/Contact Info  has been Added!');
+    }
+
+    // public function createEdu_details(FormBuilder $formBuilder){
+    //
+    //     $form = $formBuilder->create('employment_bank\Forms\CandidateEdu_detailsForm', [
+    //          'method' => 'POST',
+    //          'url' => route($this->route.'store.edu_details')
+    //     ])->remove('save')->remove('update');
+    //
+    //     return view($this->content.'resume', compact('form'));
+    // }
+    //
+    // public function storeEdu_details(Request $request){
+    //
+    //     $validator = Validator::make($data = $request->all(), CandidateInfo::$rules, CandidateInfo::$messages);
+    //     if ($validator->fails())
+    //       return Redirect::back()->withErrors($validator)->withInput();
+    //
+    //     CandidateInfo::create($data);
+    //     return Redirect::route($this->route.'index')->with('message', 'Basic Personal/Contact Info  has been Added!');
+    // }
+
 
 }
