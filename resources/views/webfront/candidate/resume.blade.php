@@ -1,5 +1,32 @@
 @extends('webfront.layouts.default')
 
+@section('page_specific_styles')
+<style>
+.aug_group{
+  background-color: #ECF0F1;
+}
+.aug_legend{
+  /*width: 100%;*/
+  font-family: Verdana, Geneva, Tahoma, Arial, Helvetica, sans-serif;
+  display: inline-block;
+  color: #FFFFFF;
+  /*background-color: #8AC007;*/
+  background-color: #1abc9c;
+  font-size: 15px;
+  text-align: center;
+  padding: 5px 16px;
+  text-decoration: none;
+  /*margin-left: -15px;
+  margin-right: 15px;*/
+  margin-top: 0px;
+  margin-bottom: 10px;
+  /*border: 1px solid #8AC007;*/
+  white-space: nowrap;
+}
+</style>
+@stop
+
+
 @section('content-header')
 
 @stop
@@ -14,29 +41,69 @@
 <div class="spacer-1">&nbsp;</div>
 {!! form_start($form, $formOptions = ['class'=>'form-horizontal','role'=>'form']) !!}
   <div class="row">
-
-    <div class="col-md-6">
-          <div class="form-group form-group-sm">
-              <label for="fullname" class="col-sm-2 control-label">Sasdasd</label>
-              <!-- TODO all the form element s fileds should be rendered and validated -->
-              <div class="col-sm-10">
+    <div class="col-md-6 aug_group">
+      <div class="form-group aug_legend">
+          Personal Details
+      </div>
+          <div class="form-group aug-form-group-sm">
+              <label for="fullname" class="col-sm-4 control-label">Full Name</label>
+              <div class="col-sm-8">
                   {!! form_widget($form->fullname) !!}
               </div>
           </div>
 
-          <div class="form-group form-group-sm">
-              <label for="inputCisty" class="col-sm-2 control-label">Sasdasd</label>
-              <div class="col-sm-10">
-                  <input type="text" class="form-control" id="inputCisty" placeholder="Input text">
+          <div class="form-group aug-form-group-sm">
+              <label for="guar_name" class="col-sm-4 control-label">Guardian Name</label>
+              <div class="col-sm-8">
+                  {!! form_widget($form->guar_name) !!}
               </div>
           </div>
+
+          <div class="form-group aug-form-group-sm">
+              <label for="spouse_name" class="col-sm-4 control-label">Spouse Name</label>
+              <div class="col-sm-8">
+                  {!! form_widget($form->spouse_name) !!}
+              </div>
+          </div>
+          <div class="form-group aug-form-group-sm">
+              <label for="sex" class="col-sm-4 control-label">Gender</label>
+              <div class="col-sm-8">
+                  {!! form_widget($form->sex) !!}
+              </div>
+          </div>
+          <div class="form-group aug-form-group-sm">
+              <label for="caste_id" class="col-sm-4 control-label">Caste</label>
+              <div class="col-sm-8">
+                  {!! form_widget($form->caste_id) !!}
+              </div>
+          </div>
+          <div class="form-group aug-form-group-sm">
+              <label for="religion" class="col-sm-4 control-label">Religion</label>
+              <div class="col-sm-8">
+                  {!! form_widget($form->religion) !!}
+              </div>
+          </div>
+          <div class="form-group aug-form-group-sm">
+              <label for="marital_status" class="col-sm-4 control-label">Marital Status</label>
+              <div class="col-sm-8">
+                  {!! form_widget($form->marital_status) !!}
+              </div>
+          </div>
+          <div class="form-group aug-form-group-sm">
+              <label for="physical_challenge" class="col-sm-4 control-label">Physically challenged</label>
+              <div class="col-sm-8">
+                  {!! form_widget($form->physical_challenge) !!}
+              </div>
+          </div>
+
+
+
       </form>
 
     </div>
 
       <div class="col-md-6">
 
-        <form class="form-horizontal" role="form">
             <div class="form-group form-group-sm">
                 <label for="inputCity" class="col-sm-2 control-label">Label</label>
                 <div class="col-sm-10">
@@ -48,7 +115,6 @@
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="inputCisty" placeholder="Input text">
                 </div>
-            </div>
         </form>
     </div>
 

@@ -3,6 +3,7 @@
 use Kris\LaravelFormBuilder\Form;
 use employment_bank\Models\Caste;
 use employment_bank\Models\State;
+use employment_bank\Models\District;
 use employment_bank\Models\CandidateInfo;
 
 class CandidateInfoForm extends Form{
@@ -14,12 +15,12 @@ class CandidateInfoForm extends Form{
           'label' =>  'Full Name :'
       ]);
       $this->add('guar_name', 'text', [
-          'attr' => ['required', 'maxlength' => '50', 'placeholder'=> 'Full Name'],
+          'attr' => ['required', 'maxlength' => '50', 'placeholder'=> 'Guardian Name'],
           'label' =>  'Father’s / Mother’s Name :'
       ]);
 
       $this->add('spouse_name', 'text', [
-          'attr' => ['required', 'maxlength' => '50', 'placeholder'=> 'Spouse Name'],
+          'attr' => ['maxlength' => '50', 'placeholder'=> 'Spouse Name'],
           'label' =>  'Spouse Name :'
       ]);
 
@@ -48,8 +49,59 @@ class CandidateInfoForm extends Form{
              'label' => 'Marital Status :',
              'attr' => ['required'],
       ]);
+      $this->add('dob', 'text', [
+          'attr' => ['required', 'maxlength' => '50', 'placeholder'=> 'DD-MM-YYYY Name'],
+          'label' =>  'Date of birth:'
+      ]);
+      $this->add('physical_challenge', 'select', [
+             'choices' => ['YES'=>'YES', 'NO'=>'NO'],
+             'empty_value' => '--- Select ---',
+             'label' => 'Physically Challenged',
+             'attr' => ['required'],
+      ]);
+      $this->add('ex_service', 'select', [
+             'choices' => ['YES'=>'YES', 'NO'=>'NO'],
+             'empty_value' => '--- Select ---',
+             'label' => 'Whether Ex-serviceman',
+             'attr' => ['required'],
+      ]);
+      $this->add('address', 'text', [
+          'attr' => ['maxlength' => '255', 'placeholder'=> 'Address details'],
+          'label' =>  'Address'
+      ]);
+      //$states = State::lists('name', 'id')->all();
+      $this->add('state_id', 'select', [
+             'choices' => ['3'=>'Arunachal Pradesh (AR)'], //currentl only arunachal
+             //'empty_value' => '--- Select ---',
+             'label' => 'State',
+             'attr' => ['required'],
+      ]);
+      $districts = District::lists('name', 'id')->all();
+      $this->add('district_id', 'select', [
+             'choices' => $districts, //currentl only arunachal districts are fetched
+             'empty_value' => '--- Select ---',
+             'label' => 'District',
+             'attr' => ['required'],
+      ]);
+      $this->add('pincode', 'text', [
+          'attr' => ['required', 'maxlength' => '6', 'placeholder'=> 'Pincode'],
+          'label' =>  'Pincode'
+      ]);
+      $this->add('physical_height', 'text', [
+          'attr' => ['maxlength' => '5', 'placeholder'=> 'height in cm'],
+          'label' =>  'Physical height'
+      ]);
+      $this->add('physical_weight', 'text', [
+          'attr' => ['maxlength' => '5', 'placeholder'=> 'height in k.g.'],
+          'label' =>  'Physical weight'
+      ]);
+      $this->add('physical_chest', 'text', [
+          'attr' => ['maxlength' => '5', 'placeholder'=> 'Measurement in cm'],
+          'label' =>  'Physical Chest'
+      ]);
 
-      $states = State::lists('name', 'id')->all();
+      // $table->string('photo_url', 200)->nullable()->comment('Photo URL');
+      // $table->string('cv_url', 200)->nullable()->comment('CV URL');
 
       $this->add('save', 'submit', [
           'attr' => ['class'=>'btn btn-lg btn-primary col-md-12']
