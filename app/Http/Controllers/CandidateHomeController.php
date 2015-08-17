@@ -8,6 +8,7 @@ use employment_bank\Http\Requests;
 use employment_bank\Http\Controllers\Controller;
 use Validator;
 use Illuminate\Support\Facades\Auth;
+use employment_bank\Models\Candidate;
 use employment_bank\Models\CandidateInfo;
 use Illuminate\Database\QueryException;
 use Kris\LaravelFormBuilder\FormBuilder;
@@ -94,25 +95,30 @@ class CandidateHomeController extends Controller{
 
         $data['candidate_id'] = Auth::candidate()->get()->id;
   			$info = CandidateInfo::create($data);
+
         $files = [];
         //return $data;
         //return $serverFileName = "photo.".$request->photo_url->getClientOriginalExtension();
-        $serverFileName = "cv.".$request->cv_url->getClientOriginalExtension();
+        //$file = $request->file('cv_url');
+        $destination_path = storage_path('candidates/'.$info->id);
+        //Verifying File Presence
 
-        $request->cv_url->move(storage_path('candidates/'.$form_no), $serverFileName);
+        if ($request->hasFile('cv_url')) {
 
-  			// foreach($_FILES as $field => $file){
-        //
-        //     echo $field;
-        //     print_r($file);
-    		//     $array = array(' ', '/', '-', '\'', '@');
-        //     $fileName = str_replace($array, "_", $fileDesc);
-			  //   	$serverFileName = $fileName.".".Input::file($field)->getClientOriginalExtension();
-        //
-			  //   	Input::file($field)->move(storage_path('students/'.$form_no), $serverFileName);
-    		// 		//array_push($files, $fileName);
-        // }
-        return "E";
+            if ($request->file('cv_url')->isValid()){
+                $fileName = 'cv.'.$request->file('cv_url')->getClientOriginalExtension();
+                $request->file('cv_url')->move($destination_path, $fileName);
+            }
+        }
+
+        if ($request->hasFile('photo_url')) {
+
+            if ($request->file('photo_url')->isValid()){
+                $fileName = 'photo.'.$request->file('photo_url')->getClientOriginalExtension();
+                $request->file('photo_url')->move($destination_path, $fileName);
+            }
+        }
+
 
         return Redirect::route($this->route.'index')->with('message', 'Basic Personal/Contact Info  has been Added!');
     }

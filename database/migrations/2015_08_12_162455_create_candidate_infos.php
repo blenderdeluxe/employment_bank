@@ -13,8 +13,8 @@ class CreateCandidateInfos extends Migration{
                 $table->string('fullname', 50);
                 $table->string('guar_name', 50)->nullable();
                 $table->string('spouse_name', 50)->nullable();
-                $table->string('index_card_no', 100)->unique();
-
+                //$table->string('index_card_no', 100)->unique();
+                $table->string('index_card_no', 100)->nullable()->comment('This will be the index no that will be generated as soon as he enters his education details');
                 $table->enum('sex', ['MALE', 'FEMALE','OTHERS'])->comment('gender');
                 $table->integer('caste_id', false, true)->comment('Candidate caste/obc etc');
                 $table->enum('religion', ['BUDDISM', 'CHRISTIANITY','HINDUISM','ISLAM','JAINISM','PARSI','SIKHISM', 'OTHERS']);

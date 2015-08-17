@@ -51,7 +51,7 @@ class CandidateInfoForm extends Form{
              'attr' => ['required'],
       ]);
       $this->add('dob', 'text', [
-          'attr' => ['required', 'maxlength' => '50', 'placeholder'=> 'DD-MM-YYYY'],
+          'attr' => ['required', 'maxlength' => '50', 'placeholder'=> 'DD-MM-YYYY', 'class'=>'form-control _date', 'readonly'],
           'label' =>  'Date of birth:'
       ]);
       $this->add('physical_challenge', 'select', [
