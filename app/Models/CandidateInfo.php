@@ -84,4 +84,17 @@ class CandidateInfo extends Model{
   protected function getPincodeAttribute($value) {
       return $this->attributes['pincode'] = ($value=='0')? '': $value;
   }
+  protected function getPhysicalHeightAttribute($value) {
+      return $this->attributes['physical_height'] = ($value=='0.00')? '': $value;
+  }
+  protected function getPhysicalWeightAttribute($value) {
+      return $this->attributes['physical_weight'] = ($value=='0.00')? '': $value;
+  }
+
+
+  protected function getPhysicalChestAttribute($value) {
+      return $this->attributes['physical_chest'] = ($value=='0.00')? '': $value;
+  }
+
+
 }
