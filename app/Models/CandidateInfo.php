@@ -28,8 +28,8 @@ class CandidateInfo extends Model{
       'physical_weight'     =>  'numeric',
       'physical_chest'      =>  'numeric',
 
-      'photo_url'           => 'mimes:jpeg,png|max:512',
-      'cv_url'              => 'mimes:pdf,doc,docx|max:102400',
+      'photo_url'           => 'required|mimes:jpeg,png|max:512',
+      'cv_url'              => 'required|mimes:pdf,doc,docx|max:102400',
 
       'proof_details_id'    =>  'required|exists:master_proof_details,id',
       'proof_no'            =>  'max:100',
@@ -41,8 +41,10 @@ class CandidateInfo extends Model{
   ];
 
   public static $messages = ['dob.before'=> 'Date of Birth must be minimum 15 year old',
+      'photo_url.required' =>  'You must upload your Photo',
       'photo_url.mimes' =>  'The Profile Photo Must be a valid JPG',
       'photo_url.max'   =>  'The Photo size should be maximum of 512KB',
+      'cv_url.required' =>  'You must upload your CV/Resume',
       'cv_url.mimes'    =>  'The CV/Resume must be in any one of the formats as specified (PDF/DOC/DOCX)',
       'cv_url.max'      =>  'The CV/Resume size should be maximum of 1MB or 1024KB',
   ];

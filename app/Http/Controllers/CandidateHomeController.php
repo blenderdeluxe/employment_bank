@@ -16,9 +16,12 @@ use employment_bank\Helpers\Basehelper;
 use employment_bank\Models\Exam;
 use employment_bank\Models\Board;
 use employment_bank\Models\Subject;
+use employment_bank\Models\IndustryType;
 use employment_bank\Models\Candidate;
 use employment_bank\Models\CandidateInfo;
 use employment_bank\Models\CandidateEduDetails;
+use employment_bank\Models\CandidateExpDetails;
+
 
 class CandidateHomeController extends Controller{
 
@@ -129,18 +132,17 @@ class CandidateHomeController extends Controller{
 
     public function createEdu_details(FormBuilder $formBuilder){
 
+        $exams = [''=>'-- Select --'] + Exam::lists('name', 'id')->all();
+        $boards = [''=>'-- Select --'] + Board::lists('name', 'id')->all();
+        $subjects = [''=>'-- Select --'] + Subject::lists('name', 'id')->all();
+        $url = $this->route.'store.edu_details';
 
-      $exams = [''=>'-- Select --'] + Exam::lists('name', 'id')->all();
-      $boards = [''=>'-- Select --'] + Board::lists('name', 'id')->all();
-      $subjects = [''=>'-- Select --'] + Subject::lists('name', 'id')->all();
-      $url = $this->route.'store.edu_details';
+          // $form = $formBuilder->create('employment_bank\Forms\CandidateEdu_detailsForm', [
+          //      'method' => 'POST',
+          //      'url' => route($this->route.'store.edu_details')
+          // ])->remove('save')->remove('update');
 
-        // $form = $formBuilder->create('employment_bank\Forms\CandidateEdu_detailsForm', [
-        //      'method' => 'POST',
-        //      'url' => route($this->route.'store.edu_details')
-        // ])->remove('save')->remove('update');
-
-        return view($this->content.'edu_details', compact('exams', 'boards', 'subjects', 'url'));
+          return view($this->content.'edu_details', compact('exams', 'boards', 'subjects', 'url'));
     }
 
     public function storeEdu_details(Request $request){
@@ -180,5 +182,40 @@ class CandidateHomeController extends Controller{
 
         return Redirect::route($this->route.'index')->with('message', 'Education Details has been Added!');
     }
+
+    public function createExperience_details(FormBuilder $formBuilder){
+
+        $sectors = [''=>'-- Select --'] + IndustryType::lists('name', 'id')->all();
+        $subjects = [''=>'-- Select --'] + Subject::lists('name', 'id')->all();
+        $url = $this->route.'store.exp_details';
+        return view($this->content.'exp_details', compact('sectors', 'subjects', 'url'));
+    }
+
+    public function storeExperience_details(Request $request){
+        //$data = $request->all();
+        $candidate_id = Auth::candidate()->get()->id;
+        DB::beginTransaction();
+
+        foreach($request->employers_name as $key => $n ){
+
+            $entry = [
+                'candidate_id'    => $candidate_id,
+                'employers_name'	=> $request->employers_name[$key],
+                'post_held'		    => $request->post_held[$key],
+                'year_experience'	=> $request->year_experience[$key],
+                'salary'	        => $request->salary[$key],
+                'experience_id'		=> $request->experience_id[$key],
+                'industry_id'		  => $request->industry_id[$key],
+            ];
+
+            CandidateExpDetails::create($entry);
+        }
+
+        DB::commit();
+
+        return Redirect::route($this->route.'index')->with('message', 'Experience Details has been Added!');
+    }
+
+
 
 }
