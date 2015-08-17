@@ -1,6 +1,8 @@
 @extends('webfront.layouts.default')
 
 @section('page_specific_styles')
+<link href="{{ asset('plugins/jQueryUI/jquery-ui-1.10.3.custom.min.css')}}" rel="stylesheet" type="text/css" />
+
 <style>
 .form-horizontal .form-group {
     margin-right: 0px !important;
@@ -69,43 +71,43 @@
           </div>
           <div class="form-group aug-form-group-sm">
               <label for="dob" class="col-sm-5 control-label">Date of Birth :</label>
-              <div class="col-sm-7">
+              <div class="col-sm-3">
                   {!! form_widget($form->dob) !!}
               </div>
           </div>
           <div class="form-group aug-form-group-sm">
               <label for="sex" class="col-sm-5 control-label">Gender :</label>
-              <div class="col-sm-7">
+              <div class="col-sm-3">
                   {!! form_widget($form->sex) !!}
               </div>
           </div>
           <div class="form-group aug-form-group-sm">
               <label for="caste_id" class="col-sm-5 control-label">Caste :</label>
-              <div class="col-sm-7">
+              <div class="col-sm-4">
                   {!! form_widget($form->caste_id) !!}
               </div>
           </div>
           <div class="form-group aug-form-group-sm">
               <label for="religion" class="col-sm-5 control-label">Religion :</label>
-              <div class="col-sm-7">
+              <div class="col-sm-4">
                   {!! form_widget($form->religion) !!}
               </div>
           </div>
           <div class="form-group aug-form-group-sm">
               <label for="marital_status" class="col-sm-5 control-label">Marital Status :</label>
-              <div class="col-sm-7">
+              <div class="col-sm-4">
                   {!! form_widget($form->marital_status) !!}
               </div>
           </div>
           <div class="form-group aug-form-group-sm">
               <label for="physical_challenge" class="col-sm-5 control-label">Physically challenged :</label>
-              <div class="col-sm-7">
+              <div class="col-sm-4">
                   {!! form_widget($form->physical_challenge) !!}
               </div>
           </div>
           <div class="form-group aug-form-group-sm">
               <label for="ex_service" class="col-sm-5 control-label">Whether Ex-serviceman :</label>
-              <div class="col-sm-7">
+              <div class="col-sm-4">
                   {!! form_widget($form->ex_service) !!}
               </div>
           </div>
@@ -124,19 +126,19 @@
           </div>
           <div class="form-group aug-form-group-sm">
               <label for="state_id" class="col-sm-3 control-label">State :</label>
-              <div class="col-sm-9">
+              <div class="col-sm-5">
                   {!! form_widget($form->state_id) !!}
               </div>
           </div>
           <div class="form-group aug-form-group-sm">
               <label for="district_id" class="col-sm-3 control-label">District :</label>
-              <div class="col-sm-9">
+              <div class="col-sm-5">
                   {!! form_widget($form->district_id) !!}
               </div>
           </div>
           <div class="form-group aug-form-group-sm">
               <label for="pincode" class="col-sm-3 control-label">Pincode :</label>
-              <div class="col-sm-9">
+              <div class="col-sm-4">
                   {!! form_widget($form->pincode) !!}
               </div>
           </div>
@@ -240,4 +242,21 @@
     </div>
   </div>
 </div> -->
+@stop
+
+@section('page_specific_js')
+<script src="{{ URL::asset('plugins/jQueryUI/jquery-ui.min.js') }}" type="text/javascript"></script>
+@stop
+
+@section('page_specific_scripts')
+$( "._date" ).datepicker({
+        changeMonth: true,
+        changeYear: true,
+        defaultDate: "-22Y",
+        //yearRange: "-26:+0",
+        autoSize: true,
+        dateFormat: "dd-mm-yy",
+        //minDate: '-26Y',
+        maxDate: "-16Y"
+  });
 @stop
