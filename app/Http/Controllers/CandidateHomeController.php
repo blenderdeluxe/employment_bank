@@ -6,15 +6,19 @@ use Illuminate\Http\Request;
 
 use employment_bank\Http\Requests;
 use employment_bank\Http\Controllers\Controller;
-use Validator;
+use Validator, Redirect, DB;;
 use Illuminate\Support\Facades\Auth;
-use employment_bank\Models\Candidate;
-use employment_bank\Models\CandidateInfo;
 use Illuminate\Database\QueryException;
 use Kris\LaravelFormBuilder\FormBuilder;
-use Redirect;
 use Illuminate\Support\Str;
 use employment_bank\Helpers\Basehelper;
+
+use employment_bank\Models\Exam;
+use employment_bank\Models\Board;
+use employment_bank\Models\Subject;
+use employment_bank\Models\Candidate;
+use employment_bank\Models\CandidateInfo;
+use employment_bank\Models\CandidateEduDetails;
 
 class CandidateHomeController extends Controller{
 
@@ -123,25 +127,58 @@ class CandidateHomeController extends Controller{
         return Redirect::route($this->route.'index')->with('message', 'Basic Personal/Contact Info  has been Added!');
     }
 
-    // public function createEdu_details(FormBuilder $formBuilder){
-    //
-    //     $form = $formBuilder->create('employment_bank\Forms\CandidateEdu_detailsForm', [
-    //          'method' => 'POST',
-    //          'url' => route($this->route.'store.edu_details')
-    //     ])->remove('save')->remove('update');
-    //
-    //     return view($this->content.'resume', compact('form'));
-    // }
-    //
-    // public function storeEdu_details(Request $request){
-    //
-    //     $validator = Validator::make($data = $request->all(), CandidateInfo::$rules, CandidateInfo::$messages);
-    //     if ($validator->fails())
-    //       return Redirect::back()->withErrors($validator)->withInput();
-    //
-    //     CandidateInfo::create($data);
-    //     return Redirect::route($this->route.'index')->with('message', 'Basic Personal/Contact Info  has been Added!');
-    // }
+    public function createEdu_details(FormBuilder $formBuilder){
 
+
+      $exams = [''=>'-- Select --'] + Exam::lists('name', 'id')->all();
+      $boards = [''=>'-- Select --'] + Board::lists('name', 'id')->all();
+      $subjects = [''=>'-- Select --'] + Subject::lists('name', 'id')->all();
+      $url = $this->route.'store.edu_details';
+
+        // $form = $formBuilder->create('employment_bank\Forms\CandidateEdu_detailsForm', [
+        //      'method' => 'POST',
+        //      'url' => route($this->route.'store.edu_details')
+        // ])->remove('save')->remove('update');
+
+        return view($this->content.'edu_details', compact('exams', 'boards', 'subjects', 'url'));
+    }
+
+    public function storeEdu_details(Request $request){
+
+        //$data = $request->all(); ??NO SERVER SIDE VALIDATION HAS BEEN SET BECAUSE even if you set also if we redirect back the user have reinster every details entry
+        //$exam_id 	= $request->exam_id;
+        //candidate_id
+        // 'board_id'    => 'required|exists,master_boards,id',
+        // 'subject_id'  => 'sometimes',
+        // 'specialization'  =>  'required|max:50',
+        // 'pass_year'  =>  'required|numeric',
+        // 'percentage'  =>  'required|numeric'
+        $candidate_id = Auth::candidate()->get()->id;
+        DB::beginTransaction();
+
+        foreach($request->exam_id as $key => $n ){
+
+            $entry = [
+                'candidate_id'    => $candidate_id,
+                'exam_id'		      => $request->exam_id[$key],
+                'board_id'		    => $request->board_id[$key],
+                'subject_id'		  => $request->subject_id[$key],
+                'specialization'	=> $request->specialization[$key],
+                'pass_year'		    => $request->pass_year[$key],
+                'percentage'		  => $request->percentage[$key],
+            ];
+
+            CandidateEduDetails::create($entry);
+        }
+
+        DB::commit();
+        //Basehelper::clearRoDetails();
+
+        // $validator = Validator::make($data = $request->all(), CandidateInfo::$rules, CandidateInfo::$messages);
+        // if ($validator->fails())
+        //   return Redirect::back()->withErrors($validator)->withInput();
+
+        return Redirect::route($this->route.'index')->with('message', 'Education Details has been Added!');
+    }
 
 }

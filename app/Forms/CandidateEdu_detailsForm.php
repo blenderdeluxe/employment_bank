@@ -1,29 +1,48 @@
 <?php namespace employment_bank\Forms;
 
 use Kris\LaravelFormBuilder\Form;
-use employment_bank\Models\CandidateInfo;
+use employment_bank\Models\Exam;
+use employment_bank\Models\Board;
+use employment_bank\Models\Subject;
+
 
 class CandidateEdu_detailsForm extends Form{
 
     public function buildForm(){
 
-      $this->add('fullname', 'text', [
-          'attr' => ['required', 'maxlength' => '50', 'placeholder'=> 'Full Name'],
-          'label' =>  'Full Name :'
-      ]);
-
-      $this->add('sex', 'select', [
-             'choices' => CandidateInfo::$sex_options,
+      $this->add('exam_id', 'select', [
+             'choices' => Exam::lists('name', 'id')->all(),
              'empty_value' => '--- Select ---',
-             'label' => 'Sex :',
+             'label' => 'Exam :',
              'attr' => ['required'],
       ]);
 
-      $this->add('address', 'textarea', [
-          'attr' => ['maxlength' => '255', 'rows' => '5', 'placeholder'=> 'Address details'],
-          'label' =>  'Address'
+      $this->add('board_id', 'select', [
+             'choices' => Board::lists('name', 'id')->all(),
+             'empty_value' => '--- Select ---',
+             'label' => 'Board/university :',
+             'attr' => ['required'],
+      ]);
+      $this->add('subject_id', 'select', [
+             'choices' => Subject::lists('name', 'id')->all(),
+             'empty_value' => '--- Select ---',
+             'label' => 'Subject/Trade :',
+             'attr' => [],
       ]);
 
+      $this->add('specialization', 'text', [
+          'attr' => ['maxlength' => '50', 'placeholder'=> 'Specialization if any e.g. biology/chemistry'],
+          'label' =>  'Specialization'
+      ]);
+
+      // $this->add('pass_year', 'text', [
+      //     'attr' => ['maxlength' => '4', 'placeholder'=> 'year of passing'],
+      //     'label' =>  'Pass Year'
+      // ]);
+      $this->add('percentage', 'text', [
+          'attr' => ['maxlength' => '5', 'placeholder'=> 'Percentage of marks'],
+          'label' =>  'Percentage'
+      ]);
 
       $this->add('save', 'submit', [
           'attr' => ['class'=>'btn btn-default btn-blue btn-lg']

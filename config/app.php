@@ -147,6 +147,7 @@ return [
         employment_bank\Providers\EventServiceProvider::class,
         employment_bank\Providers\RouteServiceProvider::class,
         employment_bank\Providers\ValidatorServiceProvider::class,
+        employment_bank\Providers\FormServiceProvider::class,
 
         Kris\LaravelFormBuilder\FormBuilderServiceProvider::class,
 
