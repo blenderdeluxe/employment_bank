@@ -16,11 +16,14 @@ use employment_bank\Helpers\Basehelper;
 use employment_bank\Models\Exam;
 use employment_bank\Models\Board;
 use employment_bank\Models\Subject;
+use employment_bank\Models\Language;
 use employment_bank\Models\IndustryType;
 use employment_bank\Models\Candidate;
 use employment_bank\Models\CandidateInfo;
 use employment_bank\Models\CandidateEduDetails;
 use employment_bank\Models\CandidateExpDetails;
+use employment_bank\Models\CandidateLanguageInfo;
+
 
 
 class CandidateHomeController extends Controller{
@@ -212,8 +215,37 @@ class CandidateHomeController extends Controller{
         }
 
         DB::commit();
-
         return Redirect::route($this->route.'index')->with('message', 'Experience Details has been Added!');
+    }
+
+    public function createLanguage_details(FormBuilder $formBuilder){
+
+        $languages = [''=>'-- Select --'] + Language::lists('name', 'id')->all();
+        $url = $this->route.'store.language_details';
+        return view($this->content.'language_details', compact('languages', 'url'));
+    }
+
+    public function storeLanguage_details(Request $request){
+        //$data = $request->all();
+        $candidate_id = Auth::candidate()->get()->id;
+        DB::beginTransaction();
+
+        foreach($request->language_id as $key){
+
+            $entry = [
+                'candidate_id'    => $candidate_id,
+                'language_id'	    => $request->language_id[$key],
+                'can_read'		    => $request->can_read[$key],
+                'can_write'	      => $request->can_write[$key],
+                'can_speak'	      => $request->can_speak[$key],
+                'can_speak_fluently'=> $request->can_speak_fluently[$key],
+            ];
+
+            CandidateLanguageInfo::create($entry);
+        }
+
+        DB::commit();
+        return Redirect::route($this->route.'index')->with('message', 'Language Details has been Added!');
     }
 
 

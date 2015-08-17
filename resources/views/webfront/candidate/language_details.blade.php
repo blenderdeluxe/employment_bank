@@ -50,13 +50,26 @@
       <div class="form-group aug_legend"> Experience Details : </div>
       <div class="col-md-12"></div>
       <div class="_details">
+
           <div class="form-group aug-form-group-sm col-md-4">
-              <label for="experience_id" class="control-label">Exp. Type :</label>
-              {!! Form::select('experience_id[]', $subjects, '', ['id'=>'experience_id', 'class' => 'form-control', 'required']) !!}
+              <label for="experience_id" class="control-label">Language :</label>
+              {!! Form::select('language_id[]', $languages, '', ['id'=>'language_id', 'class' => 'form-control', 'required']) !!}
           </div>
-          <div class="form-group aug-form-group-sm col-md-4">
-              <label for="percentage" class="control-label">Sector :</label>
-              {!! Form::select('industry_id[]', $sectors, '', ['class'=>'form-control', 'required']) !!}
+          <div class="form-group aug-form-group-sm col-md-2">
+              <label for="can_read" class="control-label">Read :</label>
+              {!! Form::select('can_read[]', ['YES'=>'YES','NO'=>'NO'], 'NO', ['class'=>'form-control', 'required']) !!}
+          </div>
+          <div class="form-group aug-form-group-sm col-md-2">
+              <label for="can_write" class="control-label">Write :</label>
+              {!! Form::select('can_write[]', ['YES'=>'YES','NO'=>'NO'], 'NO', ['class'=>'form-control', 'required']) !!}
+          </div>
+          <div class="form-group aug-form-group-sm col-md-2">
+              <label for="can_speak" class="control-label">Speak :</label>
+              {!! Form::select('can_speak[]', ['YES'=>'YES','NO'=>'NO'], 'NO', ['class'=>'form-control', 'required']) !!}
+          </div>
+          <div class="form-group aug-form-group-sm col-md-2">
+              <label for="can_speak_fluently" class="control-label">Speak Fluently :</label>
+              {!! Form::select('can_speak_fluently[]', ['YES'=>'YES','NO'=>'NO'], 'NO', ['class'=>'form-control', 'required']) !!}
           </div>
 
       </div>
@@ -96,7 +109,7 @@
 <script type="text/javascript">
 
   function addRow() {
-		$("._details:first").clone(true).appendTo('#edu_details').find('input, select').val('');
+		$("._details:first").clone(true).appendTo('#edu_details').find('input, select').val('NO');
     //$("._details:first").clone(true).appendTo('#edu_details').find('.datepicker').val('');
 	}
   function removeRow() {

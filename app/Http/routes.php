@@ -66,6 +66,8 @@ Route::group(['middleware'=>['auth.candidate'], 'prefix'=>'candidate'], function
     Route::post('/create_edu_details', ['as' => 'candidate.store.edu_details', 'uses' => 'CandidateHomeController@storeEdu_details']);
     Route::get('/create_experience_details', ['as' => 'candidate.create.exp_details', 'uses' => 'CandidateHomeController@createExperience_details']);
     Route::post('/create_experience_details', ['as' => 'candidate.store.exp_details', 'uses' => 'CandidateHomeController@storeExperience_details']);
+    Route::get('/create_language_details', ['as' => 'candidate.create.language_details', 'uses' => 'CandidateHomeController@createLanguage_details']);
+    Route::post('/create_language_details', ['as' => 'candidate.store.language_details', 'uses' => 'CandidateHomeController@storeLanguage_details']);
 });
 
 Route::controllers([
