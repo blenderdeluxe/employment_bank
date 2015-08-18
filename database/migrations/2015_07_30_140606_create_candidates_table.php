@@ -14,6 +14,7 @@ class CreateCandidatesTable extends Migration{
           $table->string('mobile_no', 10)->unique();
           $table->string('password', 60);
           $table->string('fullname', 50)->nullable();
+          $table->enum('verified_status', ['Verified', 'Not Verified'])->default('Not Verified');
           $table->tinyInteger('status');
           $table->string('confirmation_code', 100)->nullable();
           $table->rememberToken();

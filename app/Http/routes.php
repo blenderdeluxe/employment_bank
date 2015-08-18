@@ -49,8 +49,8 @@ Route::group(['middleware'=>['auth.admin']], function() {
 });
 
 //Public webfront routes
-Route::get('/register', ['as' => 'candidate.register', 'uses' => 'CandidateHomeController@showRegister']);
-Route::post('/register', ['as' => 'candidate.store', 'uses' => 'CandidateHomeController@doRegister']);
+Route::get('/register', ['as' => 'candidate.register', 'uses' => 'WebfrontController@showRegister']);
+Route::post('/register', ['as' => 'candidate.store', 'uses' => 'WebfrontController@doRegister']);
 
 //Candidate Section
 Route::get('/login', ['as' => 'candidate.login', 'uses' => 'Auth\CandidateAuthController@getLogin']);
@@ -62,12 +62,16 @@ Route::group(['middleware'=>['auth.candidate'], 'prefix'=>'candidate'], function
     Route::get('/home', ['as' => 'candidate.home', 'uses' => 'CandidateHomeController@showHome']);
     Route::get('/create_resume', ['as' => 'candidate.create.resume', 'uses' => 'CandidateHomeController@createResume']);
     Route::post('/create_resume', ['as' => 'candidate.store.resume', 'uses' => 'CandidateHomeController@storeResume']);
+    Route::get('/edit_resume', ['as' => 'candidate.edit.resume', 'uses' => 'CandidateHomeController@editResume']);
+    Route::post('/edit_resume', ['as' => 'candidate.update.resume', 'uses' => 'CandidateHomeController@updateResume']);
     Route::get('/create_edu_details', ['as' => 'candidate.create.edu_details', 'uses' => 'CandidateHomeController@createEdu_details']);
     Route::post('/create_edu_details', ['as' => 'candidate.store.edu_details', 'uses' => 'CandidateHomeController@storeEdu_details']);
     Route::get('/create_experience_details', ['as' => 'candidate.create.exp_details', 'uses' => 'CandidateHomeController@createExperience_details']);
     Route::post('/create_experience_details', ['as' => 'candidate.store.exp_details', 'uses' => 'CandidateHomeController@storeExperience_details']);
     Route::get('/create_language_details', ['as' => 'candidate.create.language_details', 'uses' => 'CandidateHomeController@createLanguage_details']);
     Route::post('/create_language_details', ['as' => 'candidate.store.language_details', 'uses' => 'CandidateHomeController@storeLanguage_details']);
+
+    Route::get('/get_identitycard', ['as' => 'candidate.get.i_card', 'uses' => 'CandidateHomeController@get_identitycard']);
 });
 
 Route::controllers([

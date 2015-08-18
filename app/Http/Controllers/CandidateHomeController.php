@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use employment_bank\Http\Requests;
 use employment_bank\Http\Controllers\Controller;
-use Validator, Redirect, DB;;
+use Validator, Redirect, DB;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Kris\LaravelFormBuilder\FormBuilder;
@@ -36,56 +36,6 @@ class CandidateHomeController extends Controller{
 		      $this->candidate_id = Auth::candidate()->get()->id;
 	  }
 
-    public function showRegister(){
-
-      return view($this->content.'register');
-    }
-
-    public function doRegister(Request $request){
-
-        $validator = Validator::make($data = $request->all(), Candidate::$rules, Candidate::$messages);
-        if ($validator->fails())
-          return Redirect::back()->withErrors($validator)->withInput();
-
-        if ($validator->passes()){
-
-          $confirmation_code = Str::quickRandom(30);
-      		$candidate = new Candidate;
-      		//$candidate->name = ucwords($request->fullname);
-        	$candidate->username = $request->username;
-        	$candidate->mobile_no = $request->mobile_no;
-        	$candidate->email = $request->email;
-        	$candidate->password = bcrypt($request->password);
-        	$candidate->confirmation_code = $confirmation_code;
-
-        	$data = ['confirmation_code' => $confirmation_code,
-        			 'username' => $request->username,
-        			 'password' => $request->password,
-        			 'mobile_no' => $request->mobile_no
-        	];
-
-      		Basehelper::sendSMS($request->mobile_no, 'Hello '.$request->username.', you have successfully registere. Your username is '.$request->username.' and password is '.$request->password);
-
-    	  	// Mail::send('emails.verify', $data, function($message) use ($candidate, $data){
-    	  	// 	$message->from('no-reply@employment_bank', 'Employment Bank');
-          //     	$message->to(Input::get('email'), $candidate->name)
-          //         	->subject('Verify your email address');
-          // });
-
-        	if(!$candidate->save())
-  	  		return Redirect::back()->with('message', 'Error while creating your account!<br> Please contact Technical Support');
-
-  	  	  return Redirect::route('candidate.login')->with('message', 'Account has been created!<br>Now Check your email address to verify your account by checking your spam folder or inboxes for verification link after that you can login');
-      	  	//sendConfirmation() Will go the email and sms as needed
-
-        }else{
-
-      		return Redirect::back()->withInput()
-                	->withErrors($validation);
-                // ->with('message', 'There were validation errors.');
-        }
-    }
-
     public function showHome(){
 
         $candidate_id = $this->candidate_id;
@@ -100,9 +50,9 @@ class CandidateHomeController extends Controller{
         if (count($candidate->experience)>=1)
             $progress = 100;
 
-        //return 'Dashboard';
+        $i_card_status = Auth::candidate()->get()->verified_status;
 
-        return view($this->content.'home', compact('progress'));
+        return view($this->content.'home', compact('progress','i_card_status'));
     }
 
     public function createResume(FormBuilder $formBuilder){
@@ -118,7 +68,7 @@ class CandidateHomeController extends Controller{
 
             return view($this->content.'resume', compact('form'));
         }else{
-            return Redirect::route($this->route.'home')->with('message', 'You have already filled up your bio');
+            return Redirect::route($this->route.'edit.resume')->with('message', 'Review your already filled bio');
         }
     }
 
@@ -159,10 +109,75 @@ class CandidateHomeController extends Controller{
                   }
               }
 
-              return Redirect::route($this->route.'index')->with('message', 'Basic Personal/Contact Info  has been Added!');
+              return Redirect::route($this->route.'home')->with('message', 'Basic Personal/Contact Info  has been Added!');
           }else{
 
-              return "edit page";
+              return Redirect::route($this->route.'edit.resume')->with('message', 'Edit your changes if needed');
+          }
+    }
+
+    public function editResume(FormBuilder $formBuilder){
+
+        $candidate_id = $this->candidate_id;
+        $candidate = Candidate::find($candidate_id);
+        $model = CandidateInfo::where('candidate_id', $candidate_id)->first();
+        if(count($candidate->bio)==1){
+
+            $form = $formBuilder->create('employment_bank\Forms\CandidateInfoForm', [
+                 'method' => 'POST',
+                 'model' => $model,
+                 'url' => route($this->route.'update.resume')
+            ])->remove('save')->remove('update');
+
+            return view($this->content.'resume_edit', compact('form'));
+        }else{
+            return Redirect::route($this->route.'home')->with('message', 'You can not edit without filling up your bio');
+        }
+    }
+
+    public function updateResume(Request $request){
+
+        $validator = Validator::make($data = $request->all(), CandidateInfo::$rules, CandidateInfo::$messages);
+        $candidate_id = $this->candidate_id;
+        $candidate = Candidate::find($candidate_id);
+
+        if(count($candidate->bio)==1){
+
+              if ($validator->fails())
+                  return Redirect::back()->withErrors($validator)->withInput();
+
+              $cand_info = CandidateInfo::where('candidate_id', $candidate_id)->firstOrFail();
+  					  $cand_info->fill($data);
+
+              $destination_path = storage_path('candidates/'.$cand_info->id);
+              //Verifying File Presence
+
+              if ($request->hasFile('cv_url')) {
+
+                  if ($request->file('cv_url')->isValid()){
+                      $fileName = 'cv.'.$request->file('cv_url')->getClientOriginalExtension();
+                      $request->file('cv_url')->move($destination_path, $fileName);
+                      $cand_info->cv_url = 'candidates/'.$cand_info->id.'/'.$fileName;
+                  }
+              }
+
+              if ($request->hasFile('photo_url')) {
+
+                  if ($request->file('photo_url')->isValid()){
+                      $fileName = 'photo.'.$request->file('photo_url')->getClientOriginalExtension();
+                      $request->file('photo_url')->move($destination_path, $fileName);
+                      $cand_info->photo_url = 'candidates/'.$cand_info->id.'/'.$fileName;
+                  }
+              }
+
+              if (!$cand_info->save())
+    						  return Redirect::back()->withInput()->with('message', 'Error Updating your data, Please contact Technical Support');
+    					else
+                  return Redirect::route($this->route.'home')->with('message', 'Basic Personal Information has been Updated!');
+
+          }else{
+
+              return Redirect::route($this->route.'create.resume')->with('message', 'You can not edit without inserting data' );
           }
     }
 
@@ -223,10 +238,10 @@ class CandidateHomeController extends Controller{
               }
 
               DB::commit();
-              return Redirect::route($this->route.'index')->with('message', 'Education Details has been Added!');
+              return Redirect::route($this->route.'home')->with('message', 'Education Details has been Added!');
           }else{
 
-              return "TODO REDIRECT TO EDIT/UPDATE EDUCATION DETAILS";
+              return "TODO REDIRECT TO EDIT/UPDATE EDUCATION DETAILS view";
           }
     }
 
@@ -269,7 +284,7 @@ class CandidateHomeController extends Controller{
             }
 
             DB::commit();
-            return Redirect::route($this->route.'index')->with('message', 'Experience Details has been Added!');
+            return Redirect::route($this->route.'home')->with('message', 'Experience Details has been Added!');
         }else{
             return "TODO: <br>SHOW/ EDIT EXISTING EXPERENCE/JOB DETAILS";
         }
@@ -311,10 +326,28 @@ class CandidateHomeController extends Controller{
                 CandidateLanguageInfo::create($entry);
             }
             DB::commit();
-            return Redirect::route($this->route.'index')->with('message', 'Language Details has been Added!');
+            return Redirect::route($this->route.'home')->with('message', 'Language Details has been Added!');
         }else{
             return "LANGUAGES DEATILS ALREADY EXISTS/ REDIRECT TO EDIT/UPDATE LANGUGAE";
         }
+
+    }
+
+    public function get_identitycard(){
+
+        $candidate_id = $this->candidate_id;
+        $candidate = Candidate::find($candidate_id);
+
+        $info = CandidateInfo::where('candidate_id', $candidate_id)->count();
+        $edu = CandidateEduDetails::where('candidate_id', $candidate_id)->count();
+        $lang = CandidateLanguageInfo::where('candidate_id', $candidate_id)->count();
+
+        if($info==0 || $edu ==0 || $lang==0)
+            return Redirect::back()->with('message', 'You profile has not enough information available to Generate Identity Card!');
+
+        return $i_card = Basehelper::generateIdCard($candidate_id);
+        // if($candidate->verified_status!='Verified')
+        //   Candidate::find($candidate_id);
 
     }
 

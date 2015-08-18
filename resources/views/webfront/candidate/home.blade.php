@@ -42,6 +42,9 @@ a.tryitbtn:hover,a.tryitbtn:active,a.showbtn:hover,a.showbtn:active {
         {{$progress}}%
       </div>
     </div>
+    <div>
+        Identity Card Status : {{$i_card_status}}
+    </div>
   </div>
 @stop
 
@@ -49,6 +52,7 @@ a.tryitbtn:hover,a.tryitbtn:active,a.showbtn:hover,a.showbtn:active {
 <div class="container">
     <div class="row">
         <div class="col-md-12">
+          <div class="form-group aug_legend"><i class="fa fa-pencil-square-o"></i> Fill Your Personal Details </div>
             <p>
               <a class="tryitbtn" href="{{URL::route('candidate.create.resume')}}" target="_blank">
                 1. Add Bio/Personal Information »
@@ -64,6 +68,16 @@ a.tryitbtn:hover,a.tryitbtn:active,a.showbtn:hover,a.showbtn:active {
               </a>&nbsp;
             </p>
         </div>
+
+        <div class="col-md-12">
+          <div class="form-group aug_legend"><i class="fa fa-copy"></i> Get Your Temporary Identity Card </div>
+            <p>
+              <a class="tryitbtn" href="{{URL::route('candidate.get.i_card')}}" target="_blank">
+                 Views/Print Identity Card <i class="fa fa-external-link"></i>
+              </a>&nbsp;
+            </p>
+        </div>
+
 
     </div>
 

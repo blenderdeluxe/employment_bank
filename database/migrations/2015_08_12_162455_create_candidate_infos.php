@@ -27,9 +27,9 @@ class CreateCandidateInfos extends Migration{
                 $table->integer('district_id', false)->nullable()->unsigned()->comment('District foriegn key');
                 $table->integer('pincode', false)->nullable();
                 //Physical Measurement
-                $table->decimal('physical_height', 3, 2)->nullable()->comment('in cm');
-                $table->decimal('physical_weight', 3, 2)->nullable()->comment('in k.g.');
-                $table->decimal('physical_chest', 3, 2)->nullable()->comment('Measurement in cm');
+                $table->decimal('physical_height', 5, 2)->nullable()->comment('in cm');
+                $table->decimal('physical_weight', 5, 2)->nullable()->comment('in k.g.');
+                $table->decimal('physical_chest', 5, 2)->nullable()->comment('Measurement in cm');
                 $table->string('photo_url', 200)->nullable()->comment('Photo URL');
                 $table->string('cv_url', 200)->nullable()->comment('CV URL');
                 //Additional Information :

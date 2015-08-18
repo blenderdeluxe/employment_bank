@@ -151,7 +151,7 @@ class CandidateInfoForm extends Form{
       ]);
 
       $this->add('update', 'submit', [
-          'attr' => ['class'=>'btn btn-lg btn-success col-md-12']
+          'attr' => ['class'=>'my_button']
       ]);
     }
 }
