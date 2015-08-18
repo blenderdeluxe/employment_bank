@@ -43,7 +43,7 @@
 			@include('webfront.layouts.top_nav')
       @include('webfront.layouts.header')
 		</div><!-- end main header -->
-
+    @yield('full_content')
 		<div class="main-page-title"><!-- start main page title -->
 			<div class="container">
         @if (Session::has('alert'))
@@ -53,7 +53,7 @@
         </div>
         @endif
 
-          @yield('main_page_container')
+        @yield('main_page_container')
 			</div>
 		</div><!-- end main page title -->
 

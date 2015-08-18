@@ -16,10 +16,14 @@ class WebfrontController extends Controller{
     private $content  = 'webfront.';
     //private $route    = 'master.boards.';
 
+    public function getHome(){
+
+        return view('webfront.index');
+    }
 
     public function showRegister(){
 
-      return view('webfront.candidate.register');
+        return view('webfront.candidate.register');
     }
 
     public function doRegister(Request $request){
@@ -63,7 +67,11 @@ class WebfrontController extends Controller{
 
       		return Redirect::back()->withInput()
                 	->withErrors($validation);
-                // ->with('message', 'There were validation errors.');
         }
+
     }
+
+
+
+
 }

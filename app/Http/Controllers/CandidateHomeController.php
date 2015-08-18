@@ -343,7 +343,7 @@ class CandidateHomeController extends Controller{
         $lang = CandidateLanguageInfo::where('candidate_id', $candidate_id)->count();
 
         if($info==0 || $edu ==0 || $lang==0)
-            return Redirect::back()->with('message', 'You profile has not enough information available to Generate Identity Card!');
+            return Redirect::back()->with('message', 'You profile has not enough information available to Generate Identity Card!<br>Please Update your profile information');
 
         return $i_card = Basehelper::generateIdCard($candidate_id);
         // if($candidate->verified_status!='Verified')

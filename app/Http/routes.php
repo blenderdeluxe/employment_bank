@@ -1,10 +1,6 @@
 <?php
 
-Route::get('/', ['as'=>'home', function () {
-    //return view('welcome');
-    return view('admin.layouts.default');
-    //return view('errors.503');
-}]);
+Route::get('/', ['as'=>'home', 'uses' => 'WebfrontController@getHome']);
 
 Route::get('test', ['as'=>'test', function () {
     return view('webfront.register');
@@ -22,12 +18,16 @@ Route::group(['prefix'=>'admin'], function() {
 
     Route::group(['middleware'=>['auth.admin']], function() {
 
-      Route::get('/dashboard', ['as'=>'admin.home', function () {
-          return view('admin.layouts.default');
-      }]);
+        Route::get('/dashboard', ['as'=>'admin.home', function () {
+            return view('admin.layouts.default');
+        }]);
+        Route::get('/candidates/applications/recieved', ['as'=>'admin.applications_recieved', 'uses' => 'AdminHomeController@applications_recieved']);
     });
 
 });
+
+
+//employer
 
 
 Route::group(['middleware'=>['auth.admin']], function() {

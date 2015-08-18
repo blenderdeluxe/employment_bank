@@ -1,7 +1,7 @@
 <div class="container"><!-- container -->
   <div class="row">
     <div class="col-md-4"><!-- logo -->
-      <a href="index-2.html" title="Job Board" rel="home">
+      <a href="{{URL::route('home')}}" title="Job Board" rel="home">
         <img class="main-logo" src="{{ asset('webfront/images/logo.png')}}" alt="job board" />
       </a>
     </div><!-- logo -->
@@ -9,7 +9,7 @@
       <a id="touch-menu" class="mobile-menu" href="#"><i class="fa fa-bars fa-2x"></i></a>
       <nav>
         <ul class="menu">
-          <li><a href="index-2.html">HOME</a>
+          <li><a href="{{URL::route('home')}}">HOME</a>
             <ul class="sub-menu">
               <li><a href="about.html">About Page</a></li>
               <li><a href="homepage-joblisting.html">Job Listing</a></li>

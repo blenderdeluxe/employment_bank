@@ -14,6 +14,12 @@ use Redirect;
 use Illuminate\Support\Str;
 use employment_bank\Helpers\Basehelper;
 
+use employment_bank\Models\Candidate;
+use employment_bank\Models\CandidateInfo;
+use employment_bank\Models\CandidateEduDetails;
+use employment_bank\Models\CandidateExpDetails;
+use employment_bank\Models\CandidateLanguageInfo;
+
 class AdminHomeController extends Controller{
 
     private $content  = 'admin.';
@@ -73,69 +79,14 @@ class AdminHomeController extends Controller{
         //return view($this->content.'dashboard');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
+    public function applications_recieved(){
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request  $request
-     * @return Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        $results = CandidateInfo::join('candidates', 'candidate_infos.candidate_id', '=', 'candidates.id')
+                ->where('candidates.verified_status', 'Not Verified')
+                ->where('candidate_infos.index_card_no', '!=', 'NULL')
+                ->orWhere('candidate_infos.index_card_no', '!=', '')
+                ->get();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  Request  $request
-     * @param  int  $id
-     * @return Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function destroy($id)
-    {
-        //
+        return view($this->content.'applications.recieved', compact('results'));
     }
 }
