@@ -22,13 +22,13 @@
       <h6 class="widget-title">Recent Tweets</h6>
       <div class="recent-twitt">
         <p>
-          Just released, a <a href="#">http://t.co/</a>
+          Just posted, a <a href="#">http://t.co/</a>
         </p>
-        <div class="hastag">#WordPress 04:29 AM Oct 31</div>
+        <div class="hastag"># 04:29 AM Oct 31</div>
         <p>
-          Just , a Flexible Multi-Purpose Shop Theme <a href="#">http://t.co/</a>
+          Some message or news here
         </p>
-        <div class="hastag">#WordPress 04:29 AM Oct 31</div>
+        <div class="hastag"># 04:29 AM Oct 31</div>
       </div>
     </div><!-- Recent Tweet Widget -->
 
@@ -52,7 +52,7 @@
   </div>
 
   <div class="footer-credits"><!-- Footer credits -->
-    2015 &copy; Unicorn Softwares All Rights Reserved.
+    2015 &copy; Zantrik Technologies All Rights Reserved.
   </div><!-- Footer credits -->
 
 </div><!-- Container -->

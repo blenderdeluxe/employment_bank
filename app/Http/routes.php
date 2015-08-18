@@ -60,7 +60,7 @@ Route::group(['middleware'=>['auth.candidate'], 'prefix'=>'candidate'], function
 
     Route::get('/logout', array('as' => 'candidate.logout', 'uses' => 'Auth\CandidateAuthController@getLogout'));
     Route::get('/home', ['as' => 'candidate.home', 'uses' => 'CandidateHomeController@showHome']);
-    Route::get('/create_resume', ['as' => 'candidate.post.resume', 'uses' => 'CandidateHomeController@createResume']);
+    Route::get('/create_resume', ['as' => 'candidate.create.resume', 'uses' => 'CandidateHomeController@createResume']);
     Route::post('/create_resume', ['as' => 'candidate.store.resume', 'uses' => 'CandidateHomeController@storeResume']);
     Route::get('/create_edu_details', ['as' => 'candidate.create.edu_details', 'uses' => 'CandidateHomeController@createEdu_details']);
     Route::post('/create_edu_details', ['as' => 'candidate.store.edu_details', 'uses' => 'CandidateHomeController@storeEdu_details']);

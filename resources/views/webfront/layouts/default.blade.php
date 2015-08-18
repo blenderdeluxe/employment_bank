@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Job Board</title>
+    <title>Arunachal Government Employment Bank</title>
   <!-- Bootstrap 3.3.4 -->
   <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
 	<!-- Main Style -->
@@ -100,7 +100,7 @@
   <script src="{{ asset('webfront/js/main.js')}}" type="text/javascript"></script>
 
   @yield('page_specific_js')
-  
+
   <script type="text/javascript">
   $(document).ready(function () {
 

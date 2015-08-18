@@ -6,8 +6,7 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class Candidate extends Model implements AuthenticatableContract, CanResetPasswordContract
-{
+class Candidate extends Model implements AuthenticatableContract, CanResetPasswordContract{
 
     use Authenticatable, CanResetPassword;
     protected $table    = 'candidates';
@@ -30,5 +29,23 @@ class Candidate extends Model implements AuthenticatableContract, CanResetPasswo
     ];
 
     protected $fillable = ['username', 'fullname', 'mobile_no', 'email', 'password', 'reset_key', 'status', 'confirmation_code'];
-    //
+
+    public function bio(){
+
+        return $this->hasOne('employment_bank\Models\CandidateInfo', 'candidate_id');
+    }
+
+    public function education(){
+
+        return $this->hasMany('employment_bank\Models\CandidateEduDetails', 'candidate_id');
+        //returns $this->hasMany('Photo')->where('photos.type', '=', 'Cars');
+    }
+    public function experience(){
+        return $this->hasMany('employment_bank\Models\CandidateExpDetails', 'candidate_id');
+    }
+    public function language(){
+        return $this->hasMany('employment_bank\Models\CandidateLanguageInfo', 'candidate_id');
+    }
+
+
 }
