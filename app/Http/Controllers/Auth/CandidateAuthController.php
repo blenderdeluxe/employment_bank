@@ -4,6 +4,8 @@ use employment_bank\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use Validator, Redirect;
+use employment_bank\Models\Candidate;
 
 /**
  * Created by Manash Sonowal.
@@ -20,6 +22,29 @@ class CandidateAuthController extends Controller{
     public function __construct(){
 
         $this->middleware('guest.candidate', ['except' => 'getLogout']);
+    }
+
+    public function showActivate(){
+
+        return view($this->content.'activate_otp');
+    }
+    public function doActivate(Request $request){
+
+        $messages = ['username.exists' => 'Username Does not exists in our System'];
+        $validator = Validator::make($data = $request->all(), ['username'=>'exists:candidates,username'], $messages);
+
+        if ($validator->fails())
+          return Redirect::back()->withErrors($validator)->withInput();
+
+          $candidate = Candidate::where('username', $request->username)->first();
+
+          if($request->confirmation_code == $candidate->confirmation_code){
+              $candidate->status = 1;
+              $candidate->confirmation_code = '';
+              $candidate->save();
+              return Redirect::route('candidate.login')->with('message', 'Youre account is activated <br>Now Login with your username and password');
+          }else
+            return Redirect::back()->withInput()->with('message', 'The OTP Doesnot match!.');
     }
     /**
      * Return the Admin login view

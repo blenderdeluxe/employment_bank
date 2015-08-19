@@ -78,6 +78,8 @@ Route::post('/register', ['as' => 'candidate.store', 'uses' => 'WebfrontControll
 //Candidate Section
 Route::get('/login', ['as' => 'candidate.login', 'uses' => 'Auth\CandidateAuthController@getLogin']);
 Route::post('/login', ['as' => 'candidate.login', 'uses' => 'Auth\CandidateAuthController@postLogin']);
+Route::get('candidate/activate_via_otp', ['as' => 'candidate.activate.otp', 'uses' => 'Auth\CandidateAuthController@showActivate']);
+Route::post('candidate/activate_via_otp', ['as' => 'candidate.activate.otp', 'uses' => 'Auth\CandidateAuthController@doActivate']);
 
 Route::group(['middleware'=>['auth.candidate'], 'prefix'=>'candidate'], function() {
 
