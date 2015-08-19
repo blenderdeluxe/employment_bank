@@ -86,7 +86,7 @@
 
           									<div class="recent-job-list-home"><!-- Tabs content -->
           										<div class="job-list-logo col-md-1 ">
-          											<img src="images/upload/company-2-post.png" class="img-responsive" alt="dummy-joblist" />
+          											<img src="{{asset('zantrik.png')}}" class="img-responsive" alt="dummy-joblist" />
           										</div>
           										<div class="col-md-6 job-list-desc">
           											<h6>{{$job->post_name}}</h6>
@@ -105,7 +105,7 @@
           										<div class="clearfix"></div>
           									</div><!-- Tabs content -->
 												@endforeach
-        									
+
 
           								</div><!-- Tabs section 1 -->
           								<div id="contract"><!-- Tabs section 2 -->
@@ -143,7 +143,7 @@
 
           								<div class="item-home">
           									<div class="job-opening">
-          										<img src="images/upload/dummy-job-open-1.png" class="img-responsive" alt="dummy-job-opening" />
+          										<img src="{{asset('zantrik.png')}}" class="img-responsive" alt="dummy-job-opening" />
 
           										<div class="job-opening-content">
           											HR Manager
