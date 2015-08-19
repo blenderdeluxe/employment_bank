@@ -7,6 +7,7 @@
 @section('main_page_container')
   <h4 class="login-title">Log In</h4>
   <div class="row">
+  
     <div class="col-md-5">
       <div class="form-singin-container">
           {!! Form::open(['route' => 'candidate.login', 'role'=>'form']) !!}
@@ -18,6 +19,7 @@
             {!! Form::password('password', ['class' => 'form-control input-form', 'placeholder' => 'Password', 'required', 'autocomplete'=>'off']) !!}
             <div class="singin-aksen"></div>
             {!! Form::submit('LOGIN', ['class' => 'btn btn-default btn-green']) !!}
+            <a class="btn btn-info" href="{{URL::route('candidate.activate.otp')}}"> <i class="fa fa-link"></i> Activate Via OTP</a>
           </div>
         {!! Form::close() !!}
       </div>

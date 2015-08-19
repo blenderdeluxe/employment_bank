@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use employment_bank\Http\Requests;
 use employment_bank\Http\Controllers\Controller;
 use employment_bank\Models\Candidate;
+use employment_bank\Models\PostedJob;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Support\Str;
 use employment_bank\Helpers\Basehelper;
@@ -18,7 +19,8 @@ class WebfrontController extends Controller{
 
     public function getHome(){
 
-        return view('webfront.index');
+        $postedjobs = PostedJob::with('industry')->paginate(20);
+        return view('webfront.index', compact('postedjobs'));
     }
 
     public function showRegister(){
@@ -34,7 +36,8 @@ class WebfrontController extends Controller{
 
         if ($validator->passes()){
 
-          $confirmation_code = Str::quickRandom(30);
+          //$confirmation_code = Str::quickRandom(30);
+          $confirmation_code = '12345';
       		$candidate = new Candidate;
       		//$candidate->name = ucwords($request->fullname);
         	$candidate->username = $request->username;
@@ -70,8 +73,5 @@ class WebfrontController extends Controller{
         }
 
     }
-
-
-
 
 }

@@ -38,18 +38,17 @@ class EmployerAuthController extends Controller{
      */
     public function postLogin(Request $request){
 
-        $this->validate($request, ['email' => 'required|email|exists:employers,email', 'password' => 'required'], ['email.exists'=>'Email does not exists in our system']);
+        $this->validate($request, ['contact_email' => 'required|email|exists:employers,contact_email', 'password' => 'required'], ['email.exists'=>'Email does not exists in our system']);
 
-        $auth = Auth::employer()->attempt(['email' => $request->get('email'),'password' => $request->get('password'), 'status' => 1]);
+        $auth = Auth::employer()->attempt(['contact_email' => $request->get('contact_email'),'password' => $request->get('password'), 'status' => 1]);
 
         if(!$auth){
             return back()->withInput()
-            ->with(['error'=> 'Either Username or Password is Incorrect! or Acount is Not Yet Activated']);
+            ->with(['message'=> 'Either Username or Password is Incorrect! or Acount is Not Yet Activated']);
         }
 
-        $employerfullname = Auth::employer()->get()->fullname;
-
-        Session::put('userfullname', $employerfullname);
+        $organization_name = Auth::employer()->get()->organization_name;
+        Session::put('userfullname', $organization_name);
 
         return redirect()->route('employer.home');
     }

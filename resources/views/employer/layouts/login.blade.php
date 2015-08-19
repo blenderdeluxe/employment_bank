@@ -43,7 +43,7 @@
         <p class="login-box-msg">Employers Login</p>
         {!! Form::open(['route' => 'employer.login']) !!}
           <div class="form-group has-feedback">
-            {!! Form::email('email', '', ['class' => 'form-control', 'placeholder' => 'Email', 'required', 'autocomplete'=>'off']) !!}
+            {!! Form::email('contact_email', '', ['class' => 'form-control', 'placeholder' => 'cotact person Email', 'required', 'autocomplete'=>'off']) !!}
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
           </div>
           <div class="form-group has-feedback">

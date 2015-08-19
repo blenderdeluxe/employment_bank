@@ -11,13 +11,13 @@
         <ul class="menu">
           <li><a href="{{URL::route('home')}}">HOME</a>
             <ul class="sub-menu">
-              <li><a href="about.html">About Page</a></li>
-              <li><a href="homepage-joblisting.html">Job Listing</a></li>
+              <li><a href="#">About Page</a></li>
+              <li><a href="{{URL::route('home')}}">Job Listing</a></li>
             </ul>
           </li>
           <li><a  href="#">JOB SEARCH</a></li>
-          <li><a  href="post-job.html">POST A JOB</a></li>
-          <li><a  href="post-resume.html">POST A RESUME</a></li>
+          <li><a  href="{{URL::route('employer.create_job')}}"> POST A JOB</a></li>
+          <li><a  href="{{URL::route('candidate.create.resume')}}"> POST A RESUME</a></li>
         </ul>
       </nav>
     </div><!-- Main Navigation -->

@@ -31,13 +31,13 @@
   <body class="skin-blue sidebar-mini fixed">
     <div class="wrapper">
       <header class="main-header">
-          @include('admin.layouts.header')
+          @include('employer.layouts.header')
       </header>
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-            @include('admin.layouts.sidebar')
+            @include('employer.layouts.sidebar')
         </section>
         <!-- /.sidebar -->
       </aside>
@@ -109,8 +109,12 @@
     <!-- ChartJS 1.0.1 -->
     <script src="{{ asset('plugins/chartjs/Chart.min.js')}}" type="text/javascript"></script>
 
+    @yield('page_specific_js')
+
     <script type="text/javascript">
     $(document).ready(function(){
+
+        @yield('page_specific_scripts')
 
         var active = '{{ Request::segment(1) }}';
         var subactive = '{{ Request::segment(2) }}';
