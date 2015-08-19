@@ -2,7 +2,21 @@
 <html>
     <head>
         <title>Laravel</title>
+    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
+    <!-- Font Awesome Icons -->
+    <link href="{{ asset('font-awesome/4.4.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <!-- Theme style -->
+    <link href="{{ asset('admin/css/AdminLTE.min.css') }}" rel="stylesheet" type="text/css" />
+
+    <link href="{{ asset('admin/css/skins/skin-blue.min.css') }}" rel="stylesheet" type="text/css" />
+    <link href="{{ asset('admin/css/custom.css') }}" rel="stylesheet" type="text/css" />
+    <!-- iCheck -->
+    <link href="{{ asset('plugins/iCheck/square/blue.css') }}" rel="stylesheet" type="text/css" />
         <style>
+        td{
+            padding: 5px;
+        }
             html, body {
                 height: 100%;
             }
@@ -12,7 +26,7 @@
                 padding: 0;
                 width: 100%;
                 display: table;
-                font-family: 'Lato';
+                font-family: "Nunito",myriad pro,tahoma,sans-serif;
             }
 
             .container {
@@ -35,11 +49,11 @@
             	margin: auto;
             	height: 20px;
             	border: 0px solid;
-            	background: #ccc;
+            	background: #1ABC9C;
             	table-layout: fixed;
             }
             .table2{
-            	width: 630px;
+            	width: 624px;
             	margin: auto;
             	height: 450px;
             	margin-top: 0px;
@@ -57,11 +71,11 @@
             	table-layout: fixed;
             }
             .table4{
-            	border: 1px solid #ccc;
-            	background: #ccc;
+            	border: 1px solid #1ABC9C;
+            	background: #1ABC9C;
             }
             .table5{
-            	border: 1px solid #ccc;
+            	border: 1px solid #1ABC9C;
             	table-layout: fixed;
             	height: 400px;
             }
@@ -71,14 +85,14 @@
 
             }
             .table7{
-            	border: 1px solid #ccc;
+            	border: 1px solid #1ABC9C;
             	table-layout: fixed;
             	height: 100px;
             	text-align: left;
-            	color: blue;
+            	color: #000;
             }
             .table8{
-            	border: 1px solid #ccc;
+            	border: 1px solid #1ABC9C;
             	table-layout: fixed;
             	height: 100px;
             }
@@ -98,10 +112,10 @@
             <div class="content">
             <table class="table4">
             	<tr>
-            		<td>
+            		<td class="post-resume-page-title">
             			<table class="table1">
             				<tr>
-            					<td align="center"><b><h3>Dear <font color="blue">{{ $data->fullname}}</font></h3></b></td><td align="center"><b><h3><font color="blue">USER ID: {!! $i_card !!}</font></h3></b></td>
+            					<td align="center"><b><h3><font color="#fff">Dear {{ $data->fullname}}</font></h3></b></td><td align="center"><b><h3><font color="#fff">USER ID: {!! $i_card !!}</font></h3></b></td>
             	</tr>
             </table>
             	</td>
@@ -112,11 +126,11 @@
             	<tr>
             		<td>
             		<table class="table2">
-                		<tr><td>Thank you for Enrolment in Employment Bank.</td><td valign="bottom"><a href="#">
-                		         View Index Card</a>
+                		<tr><td><!--Thank you for Enrolment in Employment Bank.</td><td valign="bottom"><a href="#">
+                		         View Index Card</a>-->
                 			</td>
                 		</tr>
-                		<tr><td>Your Temporary <b>Index</b> No:</td><td><b><font color="blue">IN-XYZ/2014/10035</font></b></td></tr>
+                		<tr><td>Your Temporary <b>Index</b> No:</td><td><b>IN-{!! $i_card !!}</b></td></tr>
                 		<tr><td>Date of Enrolment</td><td>{{ date('d-m-Y', strtotime($data->created_at)) }}</td></tr>
                 		<tr><td>Name :</td><td>{{ $data->fullname }}</td></tr>
                 		<tr><td>Date of Birth :</td><td>{{ date('d-m-Y',strtotime($data->dob)) }}</td></tr>
@@ -146,10 +160,10 @@
             			<table class="table6">
 		            		<tr>
 		            			<td>
-		            				<b>You are requested to visit your nearest Employment Exchange within 60 days with all certificates in original for validation of your Enrolment no.<br>
+		            				You are requested to visit your nearest Employment Exchange within 60 days with all certificates in original for validation of your Enrolment no.
 									This is a computer generated document. So prior authorization and approval by Employment Exchange is required for using it as a valid ID Card. Your Membership will be on hold till the time you don't verfy your documents at the Employment Exchange.
-									</b>
-									&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;<font color="#000">For Dept use only</font>
+									
+									&emsp;&emsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;<font color="#000">For Dept use only</font>
 							     </td>
 		            		</tr>
 		            	</table>

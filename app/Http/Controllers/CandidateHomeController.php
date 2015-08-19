@@ -359,13 +359,6 @@ class CandidateHomeController extends Controller{
                           ->select('candidate_infos.fullname', 'candidate_infos.created_at', 'candidate_infos.dob', 'candidate_infos.physical_challenge', 'candidate_infos.ex_service', 'master_casts.name as caste', 'master_exams.name as exam_name', 'master_subjects.name as subject', 'master_proof_details.name as id_proof', 'candidate_infos.proof_no', 'candidate_infos.photo_url')
                           ->where('candidates.id', $candidate_id)
                           ->get();
-      $photo = CandidateInfo::where('id', $candidate_id)->get();
-
-      if(count($photo) > 0) :
-        $photo = $photo->first();
-      else :
-        $photo = array();
-      endif;                    
         return view($this->content.'identitycard',compact('i_card', 'result', 'photo'));
         // if($candidate->verified_status!='Verified')
         //   Candidate::find($candidate_id);
