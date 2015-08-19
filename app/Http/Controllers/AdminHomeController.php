@@ -10,7 +10,7 @@ use Validator;
 use employment_bank\Models\Admin;
 use Illuminate\Database\QueryException;
 use Kris\LaravelFormBuilder\FormBuilder;
-use Redirect;
+use Redirect, Session;
 use Illuminate\Support\Str;
 use employment_bank\Helpers\Basehelper;
 
@@ -81,10 +81,13 @@ class AdminHomeController extends Controller{
 
     public function applications_recieved(){
 
+      
         $results = CandidateInfo::join('candidates', 'candidate_infos.candidate_id', '=', 'candidates.id')
                 ->where('candidates.verified_status', 'Not Verified')
                 ->where('candidate_infos.index_card_no', '!=', 'NULL')
                 ->orWhere('candidate_infos.index_card_no', '!=', '')
+                ->select('candidate_infos.fullname as f_name','candidate_infos.index_card_no as index_card_no',
+                'candidate_infos.sex as sex', 'candidate_infos.address as address'  )
                 ->get();
 
         return view($this->content.'applications.recieved', compact('results'));
