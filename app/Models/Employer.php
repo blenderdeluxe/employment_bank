@@ -14,18 +14,23 @@ class Employer extends Model implements AuthenticatableContract, CanResetPasswor
     protected $hidden   = ['password', 'remember_token'];
 
     public static $rules = [
-        'fullname' => 'required|between:3,100',
-        'mobile_no'=> 'required|digits:10|numeric|unique:admins,mobile_no',
-        'email'=> 'email|required|max:100|unique:admins,email',
+        'organization_name' => 'required|between:3,100',
+        'contact_mobile_no'=> 'required|digits:10|numeric|unique:employers,contact_mobile_no',
+        'organisation_email'=> 'email|required|max:100|unique:employers,organisation_email',
+        'contact_email'   =>  'email|required|max:255|unique:employers,contact_email',
+        'address'       =>  'required|max:255',
         'password'=> 'confirmed|required',
     ];
 
     public static $messages = [
         'fullname.min' => 'fullname must be atleast minimum 3 characters',
-        'mobile_no.numeric' => 'Mobile No can only contain numbers',
+        'contact_mobile_no.numeric' => 'Mobile No can only contain numbers',
         'password.confirmed' => 'Password and Confirm Password does not match',
     ];
-    protected $fillable = ['fullname', 'mobile_no', 'email', 'password', 'reset_key', 'status', 'confirmation_code'];
+    protected $fillable = ['organization_name', 'organization_type', 'organization_sector', 'industry_id', 'address',
+     'state_id', 'district_id', 'pincode','phone_no_ext','phone_no_main','organisation_email','web_address','organisation_idproof',
+    'organisation_profile', 'organisation_pancard', 'contact_name', 'contact_designation', 'contact_mobile_no', 'contact_email',
+    'password', 'status', 'confirmation_code'];
 
     public static $organization_type_options = ['Placement Agency'=>'Placement Agency', 'Employer'=>'Employer', 'Govt Training Providing Organisation'=>'Govt Training Providing Organisation'];
 

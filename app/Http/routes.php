@@ -2,6 +2,7 @@
 
 Route::get('/', ['as'=>'home', 'uses' => 'WebfrontController@getHome']);
 
+Route::post('api/fetch/district', 	['as' 	=> 'district.by.state', 'uses'	=> 'RestController@getDistricts']);
 Route::get('test', ['as'=>'test', function () {
     return view('webfront.register');
 }]);

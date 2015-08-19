@@ -35,7 +35,7 @@ class EmployerForm extends Form{
       ]);
 
       $this->add('address', 'textarea', [
-          'attr' => ['maxlength' => '255', 'rows' => '5', 'placeholder'=> 'Address details'],
+          'attr' => ['maxlength' => '255', 'rows' => '5', 'placeholder'=> 'Address details', 'required'],
           'label' =>  'Address'
       ]);
       $states = State::lists('name', 'id')->all();
@@ -43,14 +43,15 @@ class EmployerForm extends Form{
              'choices' => $states, //currentl only arunachal
              //'empty_value' => '--- Select ---',
              'label' => 'State',
-             'attr' => ['required'],
+             'attr' => ['required','id' => 'state_id',],
       ]);
       //$districts = District::lists('name', 'id')->all();
       $this->add('district_id', 'select', [
              'choices' => [''=>'-- Select State first--'], //currentl only arunachal districts are fetched
              //'empty_value' => '--- Select ---',
+
              'label' => 'District',
-             'attr' => ['required'],
+             'attr' => ['required', 'id'  => 'district_id'],
       ]);
       $this->add('pincode', 'text', [
           'attr' => ['required', 'maxlength' => '6', 'placeholder'=> 'Pincode'],
@@ -71,7 +72,7 @@ class EmployerForm extends Form{
           'label' =>  'Organization Email :'
       ]);
       $this->add('web_address', 'text', [
-          'attr' => ['required', 'maxlength' => '255', 'placeholder'=> 'Organization Web Address URL'],
+          'attr' => ['maxlength' => '255', 'placeholder'=> 'Organization Web Address URL'],
           'label' =>  'Organization Web Address URL :'
       ]);
 
