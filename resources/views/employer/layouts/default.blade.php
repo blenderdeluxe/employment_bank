@@ -31,13 +31,13 @@
   <body class="skin-blue sidebar-mini fixed">
     <div class="wrapper">
       <header class="main-header">
-          @include('admin.layouts.header')
+          @include('employer.layouts.header')
       </header>
       <!-- Left side column. contains the logo and sidebar -->
       <aside class="main-sidebar">
         <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-            @include('admin.layouts.sidebar')
+            @include('employer.layouts.sidebar')
         </section>
         <!-- /.sidebar -->
       </aside>

@@ -60,9 +60,7 @@ Route::group(['prefix'=>'employer'], function() {
 
         Route::get('/create/job', ['as'=>'employer.create_job', 'uses' => 'EmployerHomeController@createJob']);
 
-        Route::get('/dashboard', ['as'=>'employer.home', function () {
-            return view('employer.layouts.default');
-        }]);
+        Route::get('/dashboard', ['as'=>'employer.home', 'uses' => 'EmployerHomeController@showHome']);
         //Route::get('/candidates/applications/recieved', ['as'=>'admin.applications_recieved', 'uses' => 'AdminHomeController@applications_recieved']);
     });
 

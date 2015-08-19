@@ -1,16 +1,15 @@
-@extends('admin.layouts.default')
+@extends('employer.layouts.default')
 
 @section('content-header')
-  University /Boards <small> Master</small>
+  Post a New Job<small> </small>
 @endsection
-
 
 @section('content')
 <div class="row">
   <div class="col-md-8">
     <div class="box box-primary">
       <div class="box-header with-border">
-        <h3 class="box-title">Edit University /Board</h3>
+        <h3 class="box-title">New Exam</h3>
       </div>
 
         {!! form_start($form) !!}

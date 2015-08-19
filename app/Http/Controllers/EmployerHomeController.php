@@ -52,14 +52,8 @@ class EmployerHomeController extends Controller{
 
       		//Basehelper::sendSMS($request->mobile_no, 'Hello '.$request->username.', you have successfully registere. Your username is '.$request->username.' and password is '.$request->password);
 
-    	  	// Mail::send('emails.verify', $data, function($message) use ($employer, $data){
-    	  	// 	$message->from('no-reply@employment_bank', 'Employment Bank');
-          //     	$message->to(Input::get('email'), $employer->name)
-          //         	->subject('Verify your email address');
-          // });
-
         	if(!$employer->save())
-  	  		return Redirect::back()->with('message', 'Error while creating your account!<br> Please contact Technical Support');
+  	  		   return Redirect::back()->with('message', 'Error while creating your account!<br> Please contact Technical Support');
 
   	  	  return Redirect::route('employer.login')->with('message', 'Employer Account has been created!<br>Now Check your email address to verify your account by checking your spam folder or inboxes for verification link after that you can login');
       	  	//sendConfirmation() Will go the email and sms as needed
@@ -73,14 +67,14 @@ class EmployerHomeController extends Controller{
     }
 
     public function showHome(){
-
-        return 'Dashboard';
         //return view($this->content.'dashboard');
+        return view($this->content.'layouts.default');
     }
 
     public function createJob(){
 
-        return "JOBCREATE FORM";
+        //return "JOBCREATE FORM";
+        return view($this->content.'create_job');
     }
 
     public function applications_recieved(){
