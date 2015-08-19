@@ -36,7 +36,8 @@ class WebfrontController extends Controller{
 
         if ($validator->passes()){
 
-          $confirmation_code = Str::quickRandom(30);
+          //$confirmation_code = Str::quickRandom(30);
+          $confirmation_code = '12345';
       		$candidate = new Candidate;
       		//$candidate->name = ucwords($request->fullname);
         	$candidate->username = $request->username;
