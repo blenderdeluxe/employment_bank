@@ -345,7 +345,17 @@ class CandidateHomeController extends Controller{
         if($info==0 || $edu ==0 || $lang==0)
             return Redirect::back()->with('message', 'You profile has not enough information available to Generate Identity Card!<br>Please Update your profile information');
 
-        return $i_card = Basehelper::generateIdCard($candidate_id);
+        $i_card = Basehelper::generateIdCard($candidate_id);
+        $result=Candidate::join('candidate_infos', 'candidates.id', '=', 'candidate_infos.candidate_id')
+                          ->join('master_casts', 'candidate_infos.caste_id', '=', 'master_casts.id')
+                          ->join('master_proof_details', 'candidate_infos.proof_details_id', '=', 'master_proof_details.id')
+                          ->join('candidate_edu_details', 'candidates.id', '=', 'candidate_edu_details.candidate_id')
+                          ->join('master_exams', 'candidate_edu_details.exam_id', '=', 'master_exams.id')
+                          ->join('master_subjects', 'candidate_edu_details.subject_id', '=', 'master_subjects.id')
+                          ->select('candidate_infos.fullname', 'candidate_infos.created_at', 'candidate_infos.dob', 'candidate_infos.physical_challenge', 'candidate_infos.ex_service', 'master_casts.name as caste', 'master_exams.name as exam_name', 'master_subjects.name as subject', 'master_proof_details.name as id_proof', 'candidate_infos.proof_no', 'candidate_infos.photo_url')
+                          ->where('candidates.id', $candidate_id)
+                          ->get();
+        return view($this->content.'identitycard',compact('i_card', 'result'));
         // if($candidate->verified_status!='Verified')
         //   Candidate::find($candidate_id);
 
