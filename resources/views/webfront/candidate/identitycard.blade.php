@@ -82,6 +82,11 @@
             	table-layout: fixed;
             	height: 100px;
             }
+            @media print {
+               .noprint{
+                  display: none !important;
+               }
+            }
         </style>
     </head>
     <body>
@@ -126,7 +131,9 @@
             		</td>
             		<td>
             			<table class="table3">
-                			<tr><td><img src="{{ asset('webfront\images\upload\testimony-image-1.jpg') }}" width="130" height="150"></td></tr>
+                			<tr><td>
+                                    <img src="{{asset($data->photo_url)}}" alt="Missing Image" height="160" width="130"> 
+                              </td></tr>
                 			<tr><td><img src="sig.jpg" width="130" height="100" hidden ></td></tr>
                 		</table>
             		</td>
@@ -155,7 +162,7 @@
             			<table class="table6">
 		            		<tr>
 		            			<td align="left" valign="bottom">
-		            				<button>Print Page</button>
+		            				<button class="noprint" onclick='window.print()'>Print</button>
 							     </td>
 							     <td align="center" valign="bottom">
 							     	(Authorized Signatory)

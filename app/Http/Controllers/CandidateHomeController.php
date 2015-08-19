@@ -84,13 +84,14 @@ class CandidateHomeController extends Controller{
               if ($validator->fails())
                 return Redirect::back()->withErrors($validator)->withInput();
 
-        			$info = CandidateInfo::create($data);
+        			
 
               $files = [];
               //return $data;
               //return $serverFileName = "photo.".$request->photo_url->getClientOriginalExtension();
               //$file = $request->file('cv_url');
-              $destination_path = storage_path('candidates/'.$info->id);
+              //$destination_path = storage_path('candidates/'.$candidate->id);
+              $destination_path = public_path('candidates/'.$candidate->id);
               //Verifying File Presence
 
               if ($request->hasFile('cv_url')) {
@@ -98,6 +99,7 @@ class CandidateHomeController extends Controller{
                   if ($request->file('cv_url')->isValid()){
                       $fileName = 'cv.'.$request->file('cv_url')->getClientOriginalExtension();
                       $request->file('cv_url')->move($destination_path, $fileName);
+                      $data['cv_url'] = 'candidates/'.$candidate->id.'/'.$fileName;
                   }
               }
 
@@ -105,11 +107,13 @@ class CandidateHomeController extends Controller{
 
                   if ($request->file('photo_url')->isValid()){
                       $fileName = 'photo.'.$request->file('photo_url')->getClientOriginalExtension();
-                      $request->file('photo_url')->move($destination_path, $fileName);
+                      $request->file('photo_url')->move($destination_path, $fileName);                      
+                      $data['photo_url'] = 'candidates/'.$candidate->id.'/'.$fileName;
                   }
               }
 
-              return Redirect::route($this->route.'home')->with('message', 'Basic Personal/Contact Info  has been Added!');
+              $info = CandidateInfo::create($data);
+                  return Redirect::route($this->route.'home')->with('message', 'Basic Personal/Contact Info  has been Added!');
           }else{
 
               return Redirect::route($this->route.'edit.resume')->with('message', 'Edit your changes if needed');
@@ -355,7 +359,14 @@ class CandidateHomeController extends Controller{
                           ->select('candidate_infos.fullname', 'candidate_infos.created_at', 'candidate_infos.dob', 'candidate_infos.physical_challenge', 'candidate_infos.ex_service', 'master_casts.name as caste', 'master_exams.name as exam_name', 'master_subjects.name as subject', 'master_proof_details.name as id_proof', 'candidate_infos.proof_no', 'candidate_infos.photo_url')
                           ->where('candidates.id', $candidate_id)
                           ->get();
-        return view($this->content.'identitycard',compact('i_card', 'result'));
+      $photo = CandidateInfo::where('id', $candidate_id)->get();
+
+      if(count($photo) > 0) :
+        $photo = $photo->first();
+      else :
+        $photo = array();
+      endif;                    
+        return view($this->content.'identitycard',compact('i_card', 'result', 'photo'));
         // if($candidate->verified_status!='Verified')
         //   Candidate::find($candidate_id);
 
