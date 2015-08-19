@@ -47,6 +47,15 @@
 
         <!-- Main content -->
         <section class="content">
+          @if ($errors->any())
+          <div class="alert alert-warning alert-dismissable">
+              <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+              <i class="icon fa fa-info"></i>
+              <ul>
+                  {!! implode('', $errors->all('<li>:message</li>')) !!}
+              </ul>
+            </div>
+          @endif
           @if (Session::has('message') || Session::has('alert-info'))
             <div class="alert alert-info alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -99,9 +108,11 @@
     <script src="{{ asset('plugins/slimScroll/jquery.slimscroll.min.js')}}" type="text/javascript"></script>
     <!-- ChartJS 1.0.1 -->
     <script src="{{ asset('plugins/chartjs/Chart.min.js')}}" type="text/javascript"></script>
-
+    @yield('page_specific_js')
     <script type="text/javascript">
     $(document).ready(function(){
+
+        @yield('page_specific_scripts')
 
         var active = '{{ Request::segment(1) }}';
         var subactive = '{{ Request::segment(2) }}';

@@ -37,38 +37,31 @@ class EmployerHomeController extends Controller{
 
     public function doRegister(Request $request){
 
-        $validator = Validator::make($data = $request->all(), Admin::$rules, Admin::$messages);
+        $validator = Validator::make($data = $request->all(), Employer::$rules, Employer::$messages);
         if ($validator->fails())
           return Redirect::back()->withErrors($validator)->withInput();
 
         if ($validator->passes()){
 
-          $confirmation_code = Str::quickRandom(30);
-      		$admin = new Admin;
-      		$admin->fullname = ucwords($request->fullname);
-        	$admin->mobile_no = $request->mobile_no;
-        	$admin->email = $request->email;
-        	$admin->password = bcrypt($request->password);
-        	$admin->confirmation_code = $confirmation_code;
-
-        	$data = ['confirmation_code' => $confirmation_code,
-        			 'username' => $request->username,
-        			 'password' => $request->password,
-        			 'mobile_no' => $request->mobile_no
-        	];
+            $confirmation_code = Str::quickRandom(30);
+        		$employer = new Employer;
+            $employer->fill($data);
+        		//$employer->fullname = ucwords($request->fullname);
+          	$employer->password = bcrypt($request->password);
+          	$employer->confirmation_code = $confirmation_code;
 
       		//Basehelper::sendSMS($request->mobile_no, 'Hello '.$request->username.', you have successfully registere. Your username is '.$request->username.' and password is '.$request->password);
 
-    	  	// Mail::send('emails.verify', $data, function($message) use ($admin, $data){
+    	  	// Mail::send('emails.verify', $data, function($message) use ($employer, $data){
     	  	// 	$message->from('no-reply@employment_bank', 'Employment Bank');
-          //     	$message->to(Input::get('email'), $admin->name)
+          //     	$message->to(Input::get('email'), $employer->name)
           //         	->subject('Verify your email address');
           // });
 
-        	if(!$admin->save())
+        	if(!$employer->save())
   	  		return Redirect::back()->with('message', 'Error while creating your account!<br> Please contact Technical Support');
 
-  	  	  return Redirect::route('admin.login')->with('message', 'Account has been created!<br>Now Check your email address to verify your account by checking your spam folder or inboxes for verification link after that you can login');
+  	  	  return Redirect::route('employer.login')->with('message', 'Employer Account has been created!<br>Now Check your email address to verify your account by checking your spam folder or inboxes for verification link after that you can login');
       	  	//sendConfirmation() Will go the email and sms as needed
 
         }else{
