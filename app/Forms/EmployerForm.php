@@ -49,7 +49,6 @@ class EmployerForm extends Form{
       $this->add('district_id', 'select', [
              'choices' => [''=>'-- Select State first--'], //currentl only arunachal districts are fetched
              //'empty_value' => '--- Select ---',
-
              'label' => 'District',
              'attr' => ['required', 'id'  => 'district_id'],
       ]);

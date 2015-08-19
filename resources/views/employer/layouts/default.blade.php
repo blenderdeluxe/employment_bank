@@ -109,8 +109,12 @@
     <!-- ChartJS 1.0.1 -->
     <script src="{{ asset('plugins/chartjs/Chart.min.js')}}" type="text/javascript"></script>
 
+    @yield('page_specific_js')
+
     <script type="text/javascript">
     $(document).ready(function(){
+
+        @yield('page_specific_scripts')
 
         var active = '{{ Request::segment(1) }}';
         var subactive = '{{ Request::segment(2) }}';

@@ -58,7 +58,12 @@ Route::group(['prefix'=>'employer'], function() {
 
     Route::group(['middleware'=>['auth.employer']], function() {
 
-        Route::get('/create/job', ['as'=>'employer.create_job', 'uses' => 'EmployerHomeController@createJob']);
+        Route::get('/job/create', ['as'=>'employer.create_job', 'uses' => 'EmployerHomeController@createJob']);
+        Route::post('/job/create', ['as'=>'employer.create_job', 'uses' => 'EmployerHomeController@storeJob']);
+
+        Route::get('/job/list', ['as'=>'employer.list_job', 'uses' => 'EmployerHomeController@listJobs']);
+        Route::get('/job/edit/{id}', ['as'=>'employer.edit_job', 'uses' => 'EmployerHomeController@editJob']);
+        Route::put('/job/edit/{id}', ['as'=>'employer.update_job', 'uses' => 'EmployerHomeController@updateJob']);
 
         Route::get('/dashboard', ['as'=>'employer.home', 'uses' => 'EmployerHomeController@showHome']);
         //Route::get('/candidates/applications/recieved', ['as'=>'admin.applications_recieved', 'uses' => 'AdminHomeController@applications_recieved']);
