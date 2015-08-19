@@ -9,10 +9,13 @@
       </ul>
       <ul class="media-top-2 clearfix">
 <<<<<<< HEAD
+<<<<<<< HEAD
         <li><a href="{{URL::route('candidate.logout')}}" class="btn btn-default btn-blue btn-sm">LOGOUT</a></li>
         <li><a href="{{URL::route('candidate.register')}}" class="btn btn-default btn-blue btn-sm">REGISTER</a></li>
         <li><a href="{{URL::route('candidate.login')}}" class="btn btn-default btn-green btn-sm" >LOG IN</a></li>
 =======
+=======
+>>>>>>> master
         @if (Auth::candidate()->guest())
             <li><a href="{{URL::route('candidate.register')}}" class="btn btn-default btn-blue btn-sm">REGISTER</a></li>
             <li><a href="{{URL::route('candidate.login')}}" class="btn btn-default btn-green btn-sm" >LOG IN</a></li>
@@ -28,7 +31,10 @@
             </li>
         @endif
 
+<<<<<<< HEAD
 >>>>>>> employer-job-posting
+=======
+>>>>>>> master
       </ul>
       <div class="clearfix"></div>
     </div>
