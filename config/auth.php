@@ -6,19 +6,19 @@ return [
     'multi' => [
         'admin' => [
             'driver' => 'eloquent',
-            'model' => 'App\Admin',
+            'model' => 'employment_bank\Models\Admin',
         ],
         'employer' => [
             'driver' => 'eloquent',
-            'model' => 'App\Employer',
+            'model' => 'employment_bank\Models\Employer',
         ],
         'candidate' => [
             'driver' => 'eloquent',
-            'model' => 'App\Candidate',
+            'model' => 'employment_bank\Models\Candidate',
         ],
         'institute' => [
             'driver' => 'eloquent',
-            'model' => 'App\Institute',
+            'model' => 'employment_bank\Models\Institute',
         ],
     ],
     /*

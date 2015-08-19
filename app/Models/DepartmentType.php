@@ -11,6 +11,7 @@ class DepartmentType extends Model{
 
   public static $rules = [
     'name' => 'required|min:2|max:255|unique:master_department_types,name,:id',
+    'description' =>  'max:255',
   ];
 
   protected $guarded = ['id', '_token'];

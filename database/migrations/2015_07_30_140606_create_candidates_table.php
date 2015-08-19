@@ -4,24 +4,19 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 class CreateCandidatesTable extends Migration{
-  /**
-   * Run the migrations.
-   *
-   * @return void
-   */
 
    public function up(){
 
       Schema::create('candidates', function (Blueprint $table) {
           $table->increments('id');
+          $table->string('username')->unique();
           $table->string('email')->unique();
           $table->string('mobile_no', 10)->unique();
           $table->string('password', 60);
-          $table->string('firstname', 30);
-          $table->string('lastname', 30)->nullable();
+          $table->string('fullname', 50)->nullable();
+          $table->enum('verified_status', ['Verified', 'Not Verified'])->default('Not Verified');
           $table->tinyInteger('status');
-			    //$table->enum('active', ['YES', 'NO'])->default('NO');
-          $table->string('confirmation_code', 10)->nullable();
+          $table->string('confirmation_code', 100)->nullable();
           $table->rememberToken();
           $table->timestamps();
       });

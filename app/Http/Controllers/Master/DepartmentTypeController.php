@@ -44,12 +44,7 @@ class DepartmentTypeController extends Controller{
   		  if ($validator->fails())
           return Redirect::back()->withErrors($validator)->withInput();
 
-  		  IndustryType::create($data);
-        // IndustryType::create([
-        //     'name' => $request->name,
-        //     'status' => 1,
-        // ]);
-
+  		  DepartmentType::create($data);
         return Redirect::route($this->route.'index')->with('message', 'New Department Type has been Added!');
       }
 
@@ -72,13 +67,12 @@ class DepartmentTypeController extends Controller{
        */
        public function edit($id, FormBuilder $formBuilder){
 
-   		    $result  = IndustryType::findOrFail($id);
+   		    $result  = DepartmentType::findOrFail($id);
    		    $form    = $formBuilder->create('employment_bank\Forms\DepartmentTypeForm', [
    			       'method' => 'PUT',
                'model' => $result,
                'url' => route($this->route.'update', $id)
           ])->remove('save');
-          //->setData('market_values', $markets);
    		    return view($this->content.'edit', compact('form'));
    	  }
 
@@ -89,8 +83,8 @@ class DepartmentTypeController extends Controller{
        * @param  int  $id
        * @return Response
        */
-      public function update(Request $request, $id)
-      {
+      public function update(Request $request, $id){
+
         $model = DepartmentType::findOrFail($id);
         $rules = str_replace(':id', $id, DepartmentType::$rules);
         $validator = Validator::make($data = $request->all(), $rules);
