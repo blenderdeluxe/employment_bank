@@ -21,6 +21,29 @@ class EmployerAuthController extends Controller{
 
         $this->middleware('guest.employer', ['except' => 'getLogout']);
     }
+
+    public function showActivate(){
+
+        return view('employer.activate_otp');
+    }
+    public function doActivate(Request $request){
+
+        $messages = ['username.exists' => 'Username Does not exists in our System'];
+        $validator = Validator::make($data = $request->all(), ['username'=>'exists:employers,username'], $messages);
+
+        if ($validator->fails())
+          return Redirect::back()->withErrors($validator)->withInput();
+
+          $employer = Employer::where('username', $request->username)->first();
+
+          if($employer->confirmation_code == $employer->confirmation_code){
+              $employer->status = 1;
+              $employer->confirmation_code = '';
+              $employer->save();
+              return Redirect::route('employer.login')->with('message', 'Youre account is activated <br>Now Login with your username and password');
+          }else
+            return Redirect::back()->withInput()->with('message', 'The OTP Doesnot match!.');
+    }
     /**
      * Return the employer login view
      *

@@ -44,7 +44,8 @@ class EmployerHomeController extends Controller{
 
         if ($validator->passes()){
 
-            $confirmation_code = Str::quickRandom(30);
+            //$confirmation_code = Str::quickRandom(30);
+            $confirmation_code = '12345';
         		$employer = new Employer;
             $employer->fill($data);
         		//$employer->fullname = ucwords($request->fullname);

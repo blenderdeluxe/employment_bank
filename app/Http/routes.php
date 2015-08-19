@@ -51,6 +51,8 @@ Route::get('employer/login', ['as' => 'employer.login', 'uses' => 'Auth\Employer
 Route::post('employer/login', ['as' => 'employer.login', 'uses' => 'Auth\EmployerAuthController@postLogin']);
 Route::get('employer/register', ['as' => 'employer.register', 'uses' => 'EmployerHomeController@showRegister']);
 Route::post('employer/register', ['as' => 'employer.register', 'uses' => 'EmployerHomeController@doRegister']);
+Route::get('employer/activate_via_otp', ['as' => 'employer.activate.otp', 'uses' => 'Auth\EmployerAuthController@showActivate']);
+Route::post('employer/activate_via_otp', ['as' => 'employer.activate.otp', 'uses' => 'Auth\EmployerAuthController@doActivate']);
 
 Route::group(['prefix'=>'employer'], function() {
 
