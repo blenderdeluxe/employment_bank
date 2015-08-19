@@ -6,10 +6,10 @@ use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
-class Admin extends Model implements AuthenticatableContract, CanResetPasswordContract{
+class Employer extends Model implements AuthenticatableContract, CanResetPasswordContract{
 
     use Authenticatable, CanResetPassword;
-    protected $table    = 'admins';
+    protected $table    = 'employers';
     protected $guarded  = ['_token', 'name'];
     protected $hidden   = ['password', 'remember_token'];
 
@@ -25,7 +25,18 @@ class Admin extends Model implements AuthenticatableContract, CanResetPasswordCo
         'mobile_no.numeric' => 'Mobile No can only contain numbers',
         'password.confirmed' => 'Password and Confirm Password does not match',
     ];
-
     protected $fillable = ['fullname', 'mobile_no', 'email', 'password', 'reset_key', 'status', 'confirmation_code'];
-    //
+
+    public static $organization_type_options = ['Placement Agency'=>'Placement Agency', 'Employer'=>'Employer', 'Govt Training Providing Organisation'=>'Govt Training Providing Organisation'];
+
+    public static $organization_sector_options = [
+          'Private'     =>  'Private',
+          'Central Govt'=>  'Central Govt',
+          'State Govt'  =>  'State Govt',
+          'Central PSU' =>  'Central PSU',
+          'State PSU'   =>  'State PSU',
+          'Local Bodies'=>  'Local Bodies',
+          'Statutory Bodies'  =>  'Statutory Bodies',
+          'Others'      =>  'Others'
+    ];
 }

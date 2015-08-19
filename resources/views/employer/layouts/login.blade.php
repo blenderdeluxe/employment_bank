@@ -40,8 +40,8 @@
           </div>
         @endif
 
-        <p class="login-box-msg">Sign in to start your session</p>
-        {!! Form::open(['route' => 'admin.login']) !!}
+        <p class="login-box-msg">Employers Login</p>
+        {!! Form::open(['route' => 'employer.login']) !!}
           <div class="form-group has-feedback">
             {!! Form::email('email', '', ['class' => 'form-control', 'placeholder' => 'Email', 'required', 'autocomplete'=>'off']) !!}
             <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
@@ -73,7 +73,7 @@
           </div>
         @endif
         <!-- <a href="#">I forgot my password</a><br> -->
-        <a href="{{ URL::route('admin.register') }}" class="text-center">Register a new membership</a>
+        <a href="{{ URL::route('employer.register') }}" class="text-center">Register a new membership</a>
 
       </div><!-- /.login-box-body -->
     </div><!-- /.login-box -->

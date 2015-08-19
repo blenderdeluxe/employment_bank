@@ -26,10 +26,6 @@ Route::group(['prefix'=>'admin'], function() {
 
 });
 
-
-//employer
-
-
 Route::group(['middleware'=>['auth.admin']], function() {
 	//Masterentries
 	 Route::group(['prefix'=>'master', 'namespace'=>'Master'], function() {
@@ -46,6 +42,29 @@ Route::group(['middleware'=>['auth.admin']], function() {
        Route::resource('/proof_details', 'ProofDetailsController', ['except' => ['show']]);
 
 	 });
+});
+
+//employer
+//Admin Section
+Route::get('employer/login', ['as' => 'employer.login', 'uses' => 'Auth\EmployerAuthController@getLogin']);
+Route::post('employer/login', ['as' => 'employer.login', 'uses' => 'Auth\EmployerAuthController@postLogin']);
+Route::get('employer/register', ['as' => 'employer.register', 'uses' => 'EmployerHomeController@showRegister']);
+Route::post('employer/register', ['as' => 'employer.register', 'uses' => 'EmployerHomeController@doRegister']);
+
+Route::group(['prefix'=>'employer'], function() {
+
+    Route::get('/logout', array('as' => 'employer.logout', 'uses' => 'Auth\EmployerAuthController@getLogout'));
+
+    Route::group(['middleware'=>['auth.employer']], function() {
+
+        Route::get('/create/job', ['as'=>'employer.create_job', 'uses' => 'EmployerHomeController@createJob']);
+
+        Route::get('/dashboard', ['as'=>'employer.home', function () {
+            return view('employer.layouts.default');
+        }]);
+        //Route::get('/candidates/applications/recieved', ['as'=>'admin.applications_recieved', 'uses' => 'AdminHomeController@applications_recieved']);
+    });
+
 });
 
 //Public webfront routes
