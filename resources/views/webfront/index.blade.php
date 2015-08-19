@@ -82,131 +82,30 @@
           							<div class='panel-container'>
           								<div id="all"><!-- Tabs section 1 -->
 
-          									<div class="recent-job-list-home"><!-- Tabs content -->
-          										<div class="job-list-logo col-md-1 ">
-          											<img src="images/upload/company-2-post.png" class="img-responsive" alt="dummy-joblist" />
-          										</div>
-          										<div class="col-md-6 job-list-desc">
-          											<h6>Store General Manager</h6>
-          											<p>Similique sunt in culpa qui officia deserunt mollitia animi</p>
-          										</div>
-          										<div class="col-md-5 full">
-          											<div class="row">
-          												<div class="job-list-location col-md-7 ">
-          													<h6><i class="fa fa-map-marker"></i>San Fransisco</h6>
-          												</div>
-          												<div class="job-list-type col-md-5 ">
-          													<h6><i class="fa fa-user"></i>Full Time</h6>
-          												</div>
-          											</div>
-          										</div>
-          										<div class="clearfix"></div>
-          									</div><!-- Tabs content -->
-
-          									<div class="recent-job-list-home"><!-- Tabs content -->
-          										<div class="job-list-logo col-md-1 ">
-          											<img src="images/upload/company-1-post.png" class="img-responsive" alt="dummy-joblist" />
-          										</div>
-          										<div class="col-md-6 job-list-desc">
-          											<h6>Department Head</h6>
-          											<p>Similique sunt in culpa qui officia deserunt mollitia animi</p>
-          										</div>
-          										<div class="col-md-5 full">
-          											<div class="row">
-          												<div class="job-list-location col-md-7 ">
-          													<h6><i class="fa fa-map-marker"></i>Denver</h6>
-          												</div>
-          												<div class="job-list-type col-md-5 ">
-          													<h6><i class="fa fa-user"></i>Full Time</h6>
-          												</div>
-          											</div>
-          										</div>
-          										<div class="clearfix"></div>
-          									</div><!-- Tabs content -->
+													@foreach ($postedjobs as $job)
 
           									<div class="recent-job-list-home"><!-- Tabs content -->
           										<div class="job-list-logo col-md-1 ">
           											<img src="images/upload/company-2-post.png" class="img-responsive" alt="dummy-joblist" />
           										</div>
           										<div class="col-md-6 job-list-desc">
-          											<h6>Marketing</h6>
-          											<p>Similique sunt in culpa qui officia deserunt mollitia animi</p>
+          											<h6>{{$job->post_name}}</h6>
+          											<p>{{$job->description}}</p>
           										</div>
           										<div class="col-md-5 full">
           											<div class="row">
           												<div class="job-list-location col-md-7 ">
-          													<h6><i class="fa fa-map-marker"></i>Washington</h6>
+          													<h6><i class="fa fa-map-marker"></i>{{$job->place_of_employment_city}}</h6>
           												</div>
           												<div class="job-list-type col-md-5 ">
-          													<h6><i class="fa fa-user"></i>Part Time</h6>
+          													<h6><i class="fa fa-user"></i>{{$job->job_type}}</h6>
           												</div>
           											</div>
           										</div>
           										<div class="clearfix"></div>
           									</div><!-- Tabs content -->
-
-          									<div class="recent-job-list-home"><!-- Tabs content -->
-          										<div class="job-list-logo col-md-1 ">
-          											<img src="images/upload/company-1-post.png" class="img-responsive" alt="dummy-joblist" />
-          										</div>
-          										<div class="col-md-6 job-list-desc">
-          											<h6>General Manager</h6>
-          											<p>Similique sunt in culpa qui officia deserunt mollitia animi</p>
-          										</div>
-          										<div class="col-md-5 full">
-          											<div class="row">
-          												<div class="job-list-location col-md-7 ">
-          													<h6><i class="fa fa-map-marker"></i>New York</h6>
-          												</div>
-          												<div class="job-list-type col-md-5 ">
-          													<h6><i class="fa fa-user"></i>Full Time</h6>
-          												</div>
-          											</div>
-          										</div>
-          										<div class="clearfix"></div>
-          									</div><!-- Tabs content -->
-
-          									<div class="recent-job-list-home"><!-- Tabs content -->
-          										<div class="job-list-logo col-md-1 ">
-          											<img src="images/upload/company-2-post.png" class="img-responsive" alt="dummy-joblist" />
-          										</div>
-          										<div class="col-md-6 job-list-desc">
-          											<h6>Creative Designer</h6>
-          											<p>Similique sunt in culpa qui officia deserunt mollitia animi</p>
-          										</div>
-          										<div class="col-md-5 full">
-          											<div class="row">
-          												<div class="job-list-location col-md-7 ">
-          													<h6><i class="fa fa-map-marker"></i>Los Angeles</h6>
-          												</div>
-          												<div class="job-list-type col-md-5 ">
-          													<h6><i class="fa fa-user"></i>Full Time</h6>
-          												</div>
-          											</div>
-          										</div>
-          										<div class="clearfix"></div>
-          									</div><!-- Tabs content -->
-
-          									<div class="recent-job-list-home"><!-- Tabs content -->
-          										<div class="job-list-logo col-md-1 ">
-          											<img src="images/upload/company-1-post.png" class="img-responsive" alt="dummy-joblist" />
-          										</div>
-          										<div class="col-md-6 job-list-desc">
-          											<h6>Finance Head</h6>
-          											<p>Similique sunt in culpa qui officia deserunt mollitia animi</p>
-          										</div>
-          										<div class="col-md-5 full">
-          											<div class="row">
-          												<div class="job-list-location col-md-7 ">
-          													<h6><i class="fa fa-map-marker"></i>Texas</h6>
-          												</div>
-          												<div class="job-list-type col-md-5 ">
-          													<h6><i class="fa fa-user"></i>Full Time</h6>
-          												</div>
-          											</div>
-          										</div>
-          										<div class="clearfix"></div>
-          									</div><!-- Tabs content -->
+												@endforeach
+        									
 
           								</div><!-- Tabs section 1 -->
           								<div id="contract"><!-- Tabs section 2 -->
