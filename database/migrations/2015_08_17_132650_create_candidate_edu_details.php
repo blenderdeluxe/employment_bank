@@ -12,7 +12,7 @@ class CreateCandidateEduDetails extends Migration{
               $table->integer('candidate_id', false, true);
               $table->integer('exam_id', false, true)->comment('This will be the foreign key for exam passed');
               $table->integer('board_id', false, true)->comment('This will be the foreign key for Board/university passed');
-              $table->integer('subject_id', false)->unsigned()->default('0')->comment('verified by whom');
+              $table->integer('subject_id', false)->unsigned()->default('0')->comment('Subject by whom');
 
               $table->string('specialization', 50)->nullable();
               $table->integer('pass_year', false)->nullable();

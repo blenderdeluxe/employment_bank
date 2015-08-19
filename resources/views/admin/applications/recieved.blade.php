@@ -16,23 +16,22 @@
           <thead>
               <tr>
                   <th width="2%">#</th>
-                  <th width="10%">Name</th>
-                  <th width="20%">Description</th>
-                  <th width="5%">Status</th>
+                  <th width="10%">FullName</th>
+                  <th width="5%">Index Card No</th>
+                  <th width="5%">Gender</th>
+                  <th width="10%">Address</th>
                   <th width="12%">Actions</th>
               </tr>
           </thead>
         <tbody>
         <?php $count = 1; ?>
-            @if($results->currentPage() != 1)
-                $count = (($results->currentPage() - 1) * $results->perPage()) + 1
-            @endif
         		@foreach($results as $result)
 		        <tr>
 					    <td>{{ $count }}</td>
-					    <td>{{ $result->name }}</td>
-							<td>{{ $result->description }}</td>
-							<td>{{ $result->status }}</td>
+					    <td>{{ $result->f_name }}</td>
+              <td>{{ $result->index_card_no }}</td>
+              <td>{{ $result->sex }}</td>
+							<td>{{ $result->address }}</td>
 							<td>
                 <a href="{!!URL::route('master.boards.edit', $result->id)!!}" class="btn btn-info btn-xs pull-left aug-margin">
                     <i class="fa fa-edit"></i>
@@ -48,7 +47,6 @@
           @endforeach
 	      </tbody>
       </table>
-      {!! $results->render() !!}
       @else
     		<p style="text-align: center;"> No records found.</p>
     	@endif

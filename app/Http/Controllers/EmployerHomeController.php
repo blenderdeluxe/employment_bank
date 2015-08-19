@@ -6,11 +6,10 @@ use Illuminate\Http\Request;
 
 use employment_bank\Http\Requests;
 use employment_bank\Http\Controllers\Controller;
-use Validator;
 use employment_bank\Models\Employer;
 use Illuminate\Database\QueryException;
 use Kris\LaravelFormBuilder\FormBuilder;
-use Redirect;
+use Redirect, Auth, Validator;
 use Illuminate\Support\Str;
 use employment_bank\Helpers\Basehelper;
 
@@ -19,6 +18,8 @@ use employment_bank\Models\CandidateInfo;
 use employment_bank\Models\CandidateEduDetails;
 use employment_bank\Models\CandidateExpDetails;
 use employment_bank\Models\CandidateLanguageInfo;
+use employment_bank\Models\PostedJob;
+use employment_bank\Models\District;
 
 class EmployerHomeController extends Controller{
 
@@ -49,7 +50,6 @@ class EmployerHomeController extends Controller{
         		//$employer->fullname = ucwords($request->fullname);
           	$employer->password = bcrypt($request->password);
           	$employer->confirmation_code = $confirmation_code;
-
       		//Basehelper::sendSMS($request->mobile_no, 'Hello '.$request->username.', you have successfully registere. Your username is '.$request->username.' and password is '.$request->password);
 
         	if(!$employer->save())
@@ -71,11 +71,62 @@ class EmployerHomeController extends Controller{
         return view($this->content.'layouts.default');
     }
 
-    public function createJob(){
+    public function createJob(FormBuilder $formBuilder){
 
+        $form = $formBuilder->create('employment_bank\Forms\JobCreateForm', [
+             'method' => 'POST',
+             'url' => route($this->route.'create_job')
+        ])->remove('update');
         //return "JOBCREATE FORM";
-        return view($this->content.'create_job');
+        return view($this->content.'job.create',compact('form'));
     }
+
+    //PostedJob
+    public function storeJob(Request $request){
+
+        $validator = Validator::make($data = $request->all(), PostedJob::$rules);
+        if ($validator->fails())
+          return Redirect::back()->withErrors($validator)->withInput();
+
+        $data['created_by'] = Auth::employer()->get()->id;
+        //$data['emp_job_id'] = '';
+
+        PostedJob::create($data);
+        return Redirect::route($this->route.'list_job')->with('message', 'New Job has been Posted!');
+    }
+
+    public function listJobs(){
+
+        $results = PostedJob::with('industry')->paginate(20);
+        return view($this->content.'job.index', compact('results'));
+    }
+
+    public function editJob($id, FormBuilder $formBuilder){
+
+        $result  = PostedJob::findOrFail($id);
+        //$districts = District::where('state_id', $result->place_of_employment_district_id);
+        $form    = $formBuilder->create('employment_bank\Forms\JobCreateForm', [
+             'method' => 'PUT',
+            'model' => $result,
+            'url' => route($this->route.'update_job', $id)
+       ])->remove('save');
+
+       return view($this->content.'job.edit', compact('form'));
+    }
+
+    public function updateJob(Request $request, $id){
+
+        $model = PostedJob::findOrFail($id);
+        $rules = str_replace(':id', $id, PostedJob::$rules);
+        $validator = Validator::make($data = $request->all(), PostedJob::$rules);
+        if ($validator->fails())
+          return Redirect::back()->withErrors($validator)->withInput();
+
+        $model->update($data);
+
+        return Redirect::route($this->route.'list_job')->with('alert-success', 'Data has been Updated!');
+    }
+
 
     public function applications_recieved(){
 
