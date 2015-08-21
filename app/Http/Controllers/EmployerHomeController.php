@@ -139,4 +139,13 @@ class EmployerHomeController extends Controller{
 
         return view($this->content.'applications.recieved', compact('results'));
     }
+
+    public function showProfile(){
+
+        $result = Employer::find(Auth::employer()->get()->id);
+        return view($this->content.'profile.show', compact('result'));
+    }
+
+
+
 }

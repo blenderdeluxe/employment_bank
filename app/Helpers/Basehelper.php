@@ -74,4 +74,20 @@ class Basehelper {
         curl_exec($ch);
         curl_close($ch);
     }
+
+    public static function showInlineImage( $img ){
+        //an abstract method for later extending
+        //$path = storage_path('myimages') . '/' . $img;
+        return $path = public_path($img);
+
+        if( File::exists($path) ){
+
+            $filetype = File::type( $path );
+
+            $response = Response::make( File::get( $path ) , 200 );
+
+            $response->header('Content-Type', $filetype);
+            return $response;
+        }
+    }
 }

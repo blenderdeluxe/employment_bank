@@ -70,6 +70,7 @@ Route::group(['prefix'=>'employer'], function() {
         Route::put('/job/edit/{id}', ['as'=>'employer.update_job', 'uses' => 'EmployerHomeController@updateJob']);
 
         Route::get('/dashboard', ['as'=>'employer.home', 'uses' => 'EmployerHomeController@showHome']);
+        Route::get('/profile', ['as'=>'employer.profile', 'uses' => 'EmployerHomeController@showProfile']);
         //Route::get('/candidates/applications/recieved', ['as'=>'admin.applications_recieved', 'uses' => 'AdminHomeController@applications_recieved']);
     });
 
