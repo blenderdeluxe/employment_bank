@@ -2,17 +2,7 @@
 <html>
     <head>
         <title>Laravel</title>
-    <link href="{{ asset('bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" type="text/css" />
-    <!-- Font Awesome Icons -->
-    <link href="{{ asset('font-awesome/4.4.0/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css" />
-
-    <!-- Theme style -->
-    <link href="{{ asset('admin/css/AdminLTE.min.css') }}" rel="stylesheet" type="text/css" />
-
-    <link href="{{ asset('admin/css/skins/skin-blue.min.css') }}" rel="stylesheet" type="text/css" />
-    <link href="{{ asset('admin/css/custom.css') }}" rel="stylesheet" type="text/css" />
-    <!-- iCheck -->
-    <link href="{{ asset('plugins/iCheck/square/blue.css') }}" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="{{ asset('assets/css/all.css') }}">
         <style>
         td{
             padding: 5px;
@@ -43,7 +33,7 @@
             .title {
                 font-size: 96px;
             }
-            
+
             .table1{
             	width: 800px;
             	margin: auto;
@@ -104,10 +94,6 @@
         </style>
     </head>
     <body>
-    @if($result) 
-    @foreach($result as $data)
-    
-      
         <div class="container">
             <div class="content">
             <table class="table4">
@@ -115,13 +101,13 @@
             		<td class="post-resume-page-title">
             			<table class="table1">
             				<tr>
-            					<td align="center"><b><h3><font color="#fff">Dear {{ $data->fullname}}</font></h3></b></td><td align="center"><b><h3><font color="#fff">USER ID: {!! $i_card !!}</font></h3></b></td>
+            					<td align="center"><b><h3><font color="#fff">Dear {{ $result->fullname}}</font></h3></b></td><td align="center"><b><h3><font color="#fff">USER ID: {!! $i_card !!}</font></h3></b></td>
             	</tr>
             </table>
             	</td>
             	</tr>
             </table>
-            
+
             <table class="table5">
             	<tr>
             		<td>
@@ -131,28 +117,27 @@
                 			</td>
                 		</tr>
                 		<tr><td>Your Temporary <b>Index</b> No:</td><td><b>IN-{!! $i_card !!}</b></td></tr>
-                		<tr><td>Date of Enrolment</td><td>{{ date('d-m-Y', strtotime($data->created_at)) }}</td></tr>
-                		<tr><td>Name :</td><td>{{ $data->fullname }}</td></tr>
-                		<tr><td>Date of Birth :</td><td>{{ date('d-m-Y',strtotime($data->dob)) }}</td></tr>
-                		<tr><td>Caste :</td><td>{{ $data->caste}}</td></tr>
-                		<tr><td>Physically Challenged:</td><td>{{ $data->physical_challenge }}</td></tr>
-                		<tr><td>Ex-serviceman:</td><td>{{ $data->ex_service }}</td></tr>
-                		<tr><td>Exam Passed:</td><td>{{ $data->exam_name }}</td></tr>
-                		<tr><td>Subject/TRADE</td><td>{{ $data->subject }}</td></tr>
-                		<tr><td>Proof of Residence:</td><td>{{ $data->id_proof }}</td></tr>
-                		<tr><td>Residence Proof/Id No:</td><td>{{ $data->proof_no }}</td></tr>
+                		<tr><td>Date of Enrolment</td><td>{{ date('d-m-Y', strtotime($result->created_at)) }}</td></tr>
+                		<tr><td>Name :</td><td>{{ $result->fullname }}</td></tr>
+                		<tr><td>Date of Birth :</td><td>{{ date('d-m-Y',strtotime($result->dob)) }}</td></tr>
+                		<tr><td>Caste :</td><td>{{ $result->caste}}</td></tr>
+                		<tr><td>Physically Challenged:</td><td>{{ $result->physical_challenge }}</td></tr>
+                		<tr><td>Ex-serviceman:</td><td>{{ $result->ex_service }}</td></tr>
+                		<tr><td>Exam Passed:</td><td>{{ $result->exam_name }}</td></tr>
+                		<tr><td>Subject/TRADE</td><td>{{ $result->subject }}</td></tr>
+                		<tr><td>Proof of Residence:</td><td>{{ $result->id_proof }}</td></tr>
+                		<tr><td>Residence Proof/Id No:</td><td>{{ $result->proof_no }}</td></tr>
                 	</table>
             		</td>
             		<td>
             			<table class="table3">
                 			<tr><td>
-                                    <img src="{{asset($data->photo_url)}}" alt="Missing Image" height="160" width="130"> 
+                        <img src="{{asset($result->photo_url)}}" alt="Missing Image" height="160" width="130">
                               </td></tr>
                 			<tr><td><img src="sig.jpg" width="130" height="100" hidden ></td></tr>
                 		</table>
             		</td>
             	</tr>
-            	
             </table>
             <table class="table7">
             	<tr>
@@ -162,7 +147,7 @@
 		            			<td>
 		            				You are requested to visit your nearest Employment Exchange within 60 days with all certificates in original for validation of your Enrolment no.
 									This is a computer generated document. So prior authorization and approval by Employment Exchange is required for using it as a valid ID Card. Your Membership will be on hold till the time you don't verfy your documents at the Employment Exchange.
-									
+
 									&emsp;&emsp;&nbsp;&nbsp;&nbsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&nbsp;&nbsp;&nbsp;<font color="#000">For Dept use only</font>
 							     </td>
 		            		</tr>
@@ -186,12 +171,8 @@
             		</td>
             	</tr>
             </table>
-		    
+
             </div>
         </div>
-        @endforeach 
-        @else
-        No Id Card Generated.
-        @endif
     </body>
 </html>

@@ -23,6 +23,8 @@ Route::group(['prefix'=>'admin'], function() {
             return view('admin.layouts.default');
         }]);
         Route::get('/candidates/applications/recieved', ['as'=>'admin.applications_recieved', 'uses' => 'AdminHomeController@applications_recieved']);
+        Route::get('/candidates/view/i_card/{candidate_id}', ['as'=>'admin.view.i_card', 'uses' => 'RestController@viewIdentityCard']);
+
     });
 
 });

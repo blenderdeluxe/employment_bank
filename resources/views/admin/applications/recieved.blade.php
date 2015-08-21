@@ -33,14 +33,9 @@
               <td>{{ $result->sex }}</td>
 							<td>{{ $result->address }}</td>
 							<td>
-                <a href="{!!URL::route('master.boards.edit', $result->id)!!}" class="btn btn-info btn-xs pull-left aug-margin">
-                    <i class="fa fa-edit"></i>
+                <a href="{!!route('admin.view.i_card', [$result->id])!!}" class="btn btn-info btn-xs pull-left aug-margin">
+                    <i class="fa fa-search"></i>
                 </a>
-                {!! Form::open(array('method'=>'DELETE', 'route'=>array('master.boards.destroy', $result->id))) !!}
-                  <button type="submit" class="btn btn-danger btn-xs pull-left show_confirm">
-                      <i class="fa fa-trash"></i>
-                  </button>
-                {!! Form::close() !!}
 							</td>
 						</tr>
 					<?php $count++; ?>

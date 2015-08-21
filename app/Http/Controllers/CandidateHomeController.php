@@ -84,7 +84,7 @@ class CandidateHomeController extends Controller{
               if ($validator->fails())
                 return Redirect::back()->withErrors($validator)->withInput();
 
-        			
+
 
               $files = [];
               //return $data;
@@ -107,7 +107,7 @@ class CandidateHomeController extends Controller{
 
                   if ($request->file('photo_url')->isValid()){
                       $fileName = 'photo.'.$request->file('photo_url')->getClientOriginalExtension();
-                      $request->file('photo_url')->move($destination_path, $fileName);                      
+                      $request->file('photo_url')->move($destination_path, $fileName);
                       $data['photo_url'] = 'candidates/'.$candidate->id.'/'.$fileName;
                   }
               }
@@ -350,7 +350,7 @@ class CandidateHomeController extends Controller{
             return Redirect::back()->with('message', 'You profile has not enough information available to Generate Identity Card!<br>Please Update your profile information');
 
         $i_card = Basehelper::generateIdCard($candidate_id);
-        $result=Candidate::join('candidate_infos', 'candidates.id', '=', 'candidate_infos.candidate_id')
+        $result = Candidate::join('candidate_infos', 'candidates.id', '=', 'candidate_infos.candidate_id')
                           ->join('master_casts', 'candidate_infos.caste_id', '=', 'master_casts.id')
                           ->join('master_proof_details', 'candidate_infos.proof_details_id', '=', 'master_proof_details.id')
                           ->join('candidate_edu_details', 'candidates.id', '=', 'candidate_edu_details.candidate_id')
@@ -358,7 +358,8 @@ class CandidateHomeController extends Controller{
                           ->join('master_subjects', 'candidate_edu_details.subject_id', '=', 'master_subjects.id')
                           ->select('candidate_infos.fullname', 'candidate_infos.created_at', 'candidate_infos.dob', 'candidate_infos.physical_challenge', 'candidate_infos.ex_service', 'master_casts.name as caste', 'master_exams.name as exam_name', 'master_subjects.name as subject', 'master_proof_details.name as id_proof', 'candidate_infos.proof_no', 'candidate_infos.photo_url')
                           ->where('candidates.id', $candidate_id)
-                          ->get();
+                          ->first();
+                          //->get();
         return view($this->content.'identitycard',compact('i_card', 'result', 'photo'));
         // if($candidate->verified_status!='Verified')
         //   Candidate::find($candidate_id);
