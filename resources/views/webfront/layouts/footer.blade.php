@@ -12,7 +12,7 @@
       <div class="footer-widget-nav">
         <ul>
           <li><a href="#">Home</a></li>
-          <li><a href="#">Post A Job</a></li>
+          <li><a href="{{URL::route('employer.create_job')}}">Post A Job</a></li>
           <li><a href="#">Post A Resume</a></li>
         </ul>
       </div>
