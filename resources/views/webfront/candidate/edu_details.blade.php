@@ -62,7 +62,7 @@
 
           <div class="form-group aug-form-group-sm col-md-4">
               <label for="subject_id" class="control-label">Subject/Trade :</label>
-              {!! Form::select('subject_id[]', $boards, null, ['class'=>'subject_id form-control', 'required']) !!}
+              {!! Form::select('subject_id[]', $subjects, null, ['class'=>'subject_id form-control', 'required']) !!}
           </div>
           <div class="form-group aug-form-group-sm col-md-4">
               <label for="specialization" class="control-label">Specialization :</label>

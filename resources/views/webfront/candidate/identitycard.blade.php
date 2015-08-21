@@ -132,7 +132,7 @@
             		<td>
             			<table class="table3">
                 			<tr><td>
-                        <img src="{{asset($result->photo_url)}}" alt="Missing Image" height="160" width="130">
+                        <img src="{{ route('candidate.image_preview', [$result->id]) }}" alt="Missing Image" height="160" width="130">
                               </td></tr>
                 			<tr><td><img src="sig.jpg" width="130" height="100" hidden ></td></tr>
                 		</table>

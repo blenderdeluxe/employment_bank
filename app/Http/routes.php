@@ -101,6 +101,9 @@ Route::group(['middleware'=>['auth.candidate'], 'prefix'=>'candidate'], function
     Route::post('/create_language_details', ['as' => 'candidate.store.language_details', 'uses' => 'CandidateHomeController@storeLanguage_details']);
 
     Route::get('/get_identitycard', ['as' => 'candidate.get.i_card', 'uses' => 'CandidateHomeController@get_identitycard']);
+    Route::get('/files/{file}/preview', ['as' => 'candidate.image_preview', 'uses' => 'CandidateHomeController@image_preview']);
+    Route::get('/files/{file}/{year}/{id}/{file_name}/preview', ['as' => 'candidate.file_preview', 'uses' => 'CandidateHomeController@file_preview']);
+
 });
 
 Route::controllers([
