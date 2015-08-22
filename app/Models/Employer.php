@@ -23,14 +23,14 @@ class Employer extends Model implements AuthenticatableContract, CanResetPasswor
     ];
 
     public static $messages = [
-        'fullname.min' => 'fullname must be atleast minimum 3 characters',
+        'organization_name.between' => 'fullname must be atleast minimum 3 characters',
         'contact_mobile_no.numeric' => 'Mobile No can only contain numbers',
         'password.confirmed' => 'Password and Confirm Password does not match',
     ];
     protected $fillable = ['organization_name', 'organization_type', 'organization_sector', 'industry_id', 'address',
      'state_id', 'district_id', 'pincode','phone_no_ext','phone_no_main','organisation_email','web_address','organisation_idproof',
     'organisation_profile', 'organisation_pancard', 'contact_name', 'contact_designation', 'contact_mobile_no', 'contact_email',
-    'password', 'status', 'confirmation_code'];
+    'password', 'status', 'confirmation_code', 'details', 'photo', 'tagline','web_address'];
 
     public static $organization_type_options = ['Placement Agency'=>'Placement Agency', 'Employer'=>'Employer', 'Govt Training Providing Organisation'=>'Govt Training Providing Organisation'];
 

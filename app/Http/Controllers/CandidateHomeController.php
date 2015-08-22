@@ -83,7 +83,6 @@ class CandidateHomeController extends Controller{
 
               if ($validator->fails())
                 return Redirect::back()->withErrors($validator)->withInput();
-
               //return $serverFileName = "photo.".$request->photo_url->getClientOriginalExtension();
               //$file = $request->file('cv_url');
               $destination_path = storage_path('candidates/'.date('Y').'/'.$candidate->id);

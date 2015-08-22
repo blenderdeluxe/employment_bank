@@ -71,6 +71,7 @@ Route::group(['prefix'=>'employer'], function() {
 
         Route::get('/dashboard', ['as'=>'employer.home', 'uses' => 'EmployerHomeController@showHome']);
         Route::get('/profile', ['as'=>'employer.profile', 'uses' => 'EmployerHomeController@showProfile']);
+        Route::post('/profile', ['as'=>'employer.profile', 'uses' => 'EmployerHomeController@updateProfile']);
         //Route::get('/candidates/applications/recieved', ['as'=>'admin.applications_recieved', 'uses' => 'AdminHomeController@applications_recieved']);
     });
 

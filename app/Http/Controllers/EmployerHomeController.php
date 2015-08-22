@@ -145,6 +145,33 @@ class EmployerHomeController extends Controller{
         $result = Employer::find(Auth::employer()->get()->id);
         return view($this->content.'profile.show', compact('result'));
     }
+    public function updateProfile(Request $request){
+
+        $rules = [
+            'photo' => 'required|mimes:jpeg,png|max:512',
+            'organization_name'=> 'required|max:255',
+            'tagline'=> 'max:100',
+            'web_address'   =>  'url|max:255',
+            'details'       =>  'required|max:500',
+        ];
+        $validator = Validator::make($data = $request->all(), $rules);
+        if ($validator->fails())
+          return Redirect::back()->withErrors($validator)->withInput();
+        $model = Employer::findOrFail(Auth::employer()->get()->id);
+        $destination_path = public_path('uploads/employers/');
+        if ($request->hasFile('photo')) {
+
+            if ($request->file('photo')->isValid()){
+                $fileName = $model->id.$request->file('photo')->getClientOriginalExtension();
+                $request->file('photo')->move($destination_path, $fileName);
+                //$data['cv_url'] = 'candidates/'.$candidate->id.'/'.$fileName;
+                $data['photo'] = 'uploads/employers/'.$fileName;
+            }
+        }
+        $model->update($data);
+        return Redirect::route($this->route.'profile')->with('alert-success', 'Profile has been Updated!');
+
+    }
 
 
 
