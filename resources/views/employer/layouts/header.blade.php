@@ -17,16 +17,16 @@
         <!-- User Account: style can be found in dropdown.less -->
         <li class="dropdown user user-menu">
           <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-            <img src="admin/img/user2-160x160.jpg" class="user-image" alt="User Image" />
-            <span class="hidden-xs">Alexander Pierce</span>
+            <img src="{{ asset(Session::get('profile_photo'))}}" class="user-image" alt="User Image" />
+            <span class="hidden-xs"> {{Session::get('contact_name')}}</span>
           </a>
           <ul class="dropdown-menu">
             <!-- User image -->
             <li class="user-header">
-              <img src="admin/img/user2-160x160.jpg" class="img-circle" alt="User Image" />
+              <img src="{{ asset(Session::get('profile_photo'))}}" class="img-circle" alt="User Image" />
               <p>
-                Alexander Pierce - Web Developer
-                <small>Member since Nov. 2012</small>
+                {{Session::get('organization_name')}} - {{Session::get('contact_name')}}
+                <small>Member since {{Session::get('user_since')}}</small>
               </p>
             </li>
             <!-- Menu Body -->

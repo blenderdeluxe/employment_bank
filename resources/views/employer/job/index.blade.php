@@ -8,7 +8,7 @@
   <div class="col-md-12">
     <div class="box">
       <div class="box-header with-border">
-        <h3 class="box-title"> List of Job Posted Sorted By Recently posted</h3>
+        <h3 class="box-title"> List of Job Posted by You, Sorted By Recently posted</h3>
       </div><!-- /.box-header -->
       <div class="box-body">
     	@if($results->count())

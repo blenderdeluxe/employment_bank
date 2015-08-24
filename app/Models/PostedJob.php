@@ -20,9 +20,13 @@ class PostedJob extends Model{
       //i have declared all the types i.e. enum values rather then querrying to reduce the db load
 
       public function industry(){
-
           //return $this->hasMany('employment_bank\Models\CandidateEduDetails', 'candidate_id');
           return $this->belongsTo('employment_bank\Models\IndustryType', 'industry_id');
       }
+      public function employer(){
+          //return $this->hasMany('employment_bank\Models\CandidateEduDetails', 'candidate_id');
+          return $this->belongsTo('employment_bank\Models\Employer', 'created_by');
+      }
+      //created_by
 
 }

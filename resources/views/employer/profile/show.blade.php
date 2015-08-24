@@ -17,7 +17,7 @@
 	<div class="form-group {{ $errors->has('photo') ? 'has-error' : ''}}">
 		<label class="col-sm-3 control-label">Company Logo/Image</label>
 	   	<div class="col-sm-5">
-<img id="logo" src="{!! asset('uploads/'.$result->photo)!!}"
+<img id="logo" src="{!! asset($result->photo)!!}"
 onerror="$(this).attr('src','{!! asset('uploads/employers/default.jpg')!!}')" style="min-width:129px; max-width:250px; height: 155px;" alt="Picture">
 		</div>
 		<div class="col-sm-4">

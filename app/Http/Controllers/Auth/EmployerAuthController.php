@@ -71,7 +71,15 @@ class EmployerAuthController extends Controller{
         }
 
         $organization_name = Auth::employer()->get()->organization_name;
-        Session::put('userfullname', $organization_name);
+        $profile_photo  = Auth::employer()->get()->photo;
+        $contact_name = Auth::employer()->get()->contact_name;
+        $photo_url = Auth::employer()->get()->photo;
+        $user_since = Auth::employer()->get()->created_at->diffforhumans();
+        Session::put('organization_name', $organization_name);
+        Session::put('profile_photo', $profile_photo);
+        Session::put('contact_name', $contact_name);
+        Session::put('user_photo', $photo_url);
+        Session::put('user_since', $user_since);
 
         return redirect()->route('employer.home');
     }

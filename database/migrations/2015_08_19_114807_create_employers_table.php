@@ -13,7 +13,7 @@ class CreateEmployersTable extends Migration{
               $table->enum('organization_type', ['Placement Agency', 'Employer', 'Govt Training Providing Organisation']);
               $table->enum('organization_sector', ['Private', 'Central Govt', 'State Govt','Central PSU','State PSU','Local Bodies','Statutory Bodies','Others'])->comment('Organisation Sector *');
               $table->integer('industry_id', false, true)->comment('Foregn key for master_industry types');
-              $table->string('photo', 200)->nullable()->default('employers/default.png')->comment('Photo URL');
+              $table->string('photo', 200)->nullable()->default('uploads/employers/default.png')->comment('Photo URL');
               $table->string('tagline', 100)->nullable()->comment('Company Tagline');
               $table->string('details', 500)->nullable()->comment('Company Details');
               $table->string('address')->nullable();

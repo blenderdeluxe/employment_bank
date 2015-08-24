@@ -97,22 +97,22 @@ class EmployerHomeController extends Controller{
     }
 
     public function listJobs(){
-
-        $results = PostedJob::with('industry')->paginate(20);
+        $id = Auth::employer()->get()->id;
+        $results = PostedJob::with('industry')->where('created_by', $id)->paginate(20);
         return view($this->content.'job.index', compact('results'));
     }
 
     public function editJob($id, FormBuilder $formBuilder){
 
         $result  = PostedJob::findOrFail($id);
-        //$districts = District::where('state_id', $result->place_of_employment_district_id);
+        //$districts = [''=>'-- Select State first--'];
         $form    = $formBuilder->create('employment_bank\Forms\JobCreateForm', [
              'method' => 'PUT',
-            'model' => $result,
-            'url' => route($this->route.'update_job', $id)
+             'model' => $result,
+             'url' => route($this->route.'update_job', $id)
        ])->remove('save');
 
-       return view($this->content.'job.edit', compact('form'));
+       return view($this->content.'job.edit', compact('form','result'));
     }
 
     public function updateJob(Request $request, $id){
@@ -148,7 +148,7 @@ class EmployerHomeController extends Controller{
     public function updateProfile(Request $request){
 
         $rules = [
-            'photo' => 'required|mimes:jpeg,png|max:512',
+            'photo' => 'mimes:jpeg,png|max:512',
             'organization_name'=> 'required|max:255',
             'tagline'=> 'max:100',
             'web_address'   =>  'url|max:255',
@@ -162,7 +162,7 @@ class EmployerHomeController extends Controller{
         if ($request->hasFile('photo')) {
 
             if ($request->file('photo')->isValid()){
-                $fileName = $model->id.$request->file('photo')->getClientOriginalExtension();
+                $fileName = $model->id.'.'.$request->file('photo')->getClientOriginalExtension();
                 $request->file('photo')->move($destination_path, $fileName);
                 //$data['cv_url'] = 'candidates/'.$candidate->id.'/'.$fileName;
                 $data['photo'] = 'uploads/employers/'.$fileName;

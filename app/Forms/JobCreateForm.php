@@ -43,6 +43,11 @@ class JobCreateForm extends Form{
              'attr' => ['required', 'id'  => 'place_of_employment_district_id', 'required'],
              'wrapper' => ['class' => 'form-group col-md-4']
       ]);
+
+      // ->add('some_choices', 'choices', [
+      //            'choices' => $this->getData('post_choices')     // When form is created passed as ->setData('post_choices', ['some' => 'array'])
+      //        ])
+
       $this->add('place_of_employment_city', 'text', [
           'attr' => ['maxlength' => '255', 'placeholder'=> 'City'],
           'wrapper' => ['class' => 'form-group col-md-4'] // Shows the wrapper for each e

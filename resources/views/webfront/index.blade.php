@@ -86,7 +86,7 @@
 
           									<div class="recent-job-list-home"><!-- Tabs content -->
           										<div class="job-list-logo col-md-1 ">
-          											<img src="{{asset('zantrik.png')}}" class="img-responsive" alt="dummy-joblist" />
+          											<img src="{{asset($job->employer->photo)}}" class="img-responsive" alt="dummy-joblist" />
           										</div>
           										<div class="col-md-6 job-list-desc">
           											<h6>{{$job->post_name}}</h6>
@@ -140,24 +140,24 @@
           							<div class="clearfix"></div>
           							<br/>
           							<div id="job-opening-carousel" class="owl-carousel">
-
+												@foreach ($top_jobs as $job)
           								<div class="item-home">
           									<div class="job-opening">
-          										<img src="{{asset('zantrik.png')}}" class="img-responsive" alt="dummy-job-opening" />
+          										<img src="{{asset($job->employer->photo)}}" class="img-responsive" alt="dummy-job-opening" />
 
           										<div class="job-opening-content">
-          											HR Manager
+          											{{ $job->post_name}}
           											<p>
-          												Place for worlds best shipping company and work with great level efficiency to break trough in new career.
+          											{{$job->description}}
           											</p>
           										</div>
-
           										<div class="job-opening-meta clearfix">
-          											<div class="meta-job-location meta-block"><i class="fa fa-map-marker"></i>San Fransisco</div>
-          											<div class="meta-job-type meta-block"><i class="fa fa-user"></i>Full Time</div>
+          											<div class="meta-job-location meta-block"><i class="fa fa-map-marker"></i> {{$job->place_of_employment_city}} </div>
+          											<div class="meta-job-type meta-block"><i class="fa fa-user"></i> {{$job->job_type}} </div>
           										</div>
           									</div>
           								</div>
+											@endforeach
 
           								<div class="item-home">
           									<div class="job-opening">
