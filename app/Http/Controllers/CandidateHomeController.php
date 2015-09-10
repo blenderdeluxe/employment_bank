@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 
 use employment_bank\Http\Requests;
 use employment_bank\Http\Controllers\Controller;
-use Validator, Redirect, DB;
+use Validator, Redirect, DB, Session;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\QueryException;
 use Kris\LaravelFormBuilder\FormBuilder;
@@ -34,7 +34,8 @@ class CandidateHomeController extends Controller{
     private $candidate_id;
 
     public function __construct(){
-		      $this->candidate_id = Auth::candidate()->get()->id;
+		      //$this->candidate_id = Auth::candidate()->get()->id;
+          $this->candidate_id = Session::get('candidate_id');
 	  }
 
     public function showHome(){

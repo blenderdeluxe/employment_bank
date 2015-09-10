@@ -75,6 +75,7 @@ class CandidateAuthController extends Controller{
         $candidatefullname = Auth::candidate()->get()->fullname;
 
         Session::put('userfullname', $candidatefullname);
+        Session::put('candidate_id', Auth::candidate()->get()->id);
 
         return redirect()->route('candidate.home');
     }

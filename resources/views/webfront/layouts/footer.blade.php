@@ -44,7 +44,7 @@
         </div>
         <button type="button" class="btn-newstler">Sign Up</button>
       </form>
-      <a href="#" target="blank"><i class="media-footer footer-fb"></i></a>
+      <a href="{{ route('admin.login')}}" target="blank">ADMIN Login<i class="media-footer footer-fb"></i></a>
       <a href="#" target="blank"><i class="media-footer footer-blog"></i></a>
       <a href="#" target="blank"><i class="media-footer footer-rss"></i></a>
     </div><!-- News Leter Widget -->
