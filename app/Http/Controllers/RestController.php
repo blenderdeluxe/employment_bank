@@ -35,7 +35,7 @@ class RestController extends Controller{
           if($info==0 || $edu ==0 || $lang==0)
               return Redirect::back()->with('message', 'The Profile has not enough information available to view Identity Card!');
 
-        return $result = Candidate::join('candidate_infos', 'candidates.id', '=', 'candidate_infos.candidate_id')
+        $result = Candidate::join('candidate_infos', 'candidates.id', '=', 'candidate_infos.candidate_id')
                             ->join('master_casts', 'candidate_infos.caste_id', '=', 'master_casts.id')
                             ->join('master_proof_details', 'candidate_infos.proof_details_id', '=', 'master_proof_details.id')
                             ->join('candidate_edu_details', 'candidates.id', '=', 'candidate_edu_details.candidate_id')
@@ -45,6 +45,11 @@ class RestController extends Controller{
                             ->where('candidates.id', $candidate_id)
                             ->get();
           return view('admin.identitycard',compact('result'));
+      }
+
+      public function viewCandidateProfile($candidate_id)
+      {
+         //code for displaying full profle with bio, educations detals, experience details and so
       }
 
 }
