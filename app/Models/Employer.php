@@ -18,6 +18,7 @@ class Employer extends Model implements AuthenticatableContract, CanResetPasswor
         'contact_mobile_no'=> 'required|digits:10|numeric|unique:employers,contact_mobile_no',
         'organisation_email'=> 'email|required|max:100|unique:employers,organisation_email',
         'contact_email'   =>  'email|required|max:255|unique:employers,contact_email',
+        'web_address'     =>  'url',
         'address'       =>  'required|max:255',
         'password'=> 'confirmed|required',
     ];
@@ -26,6 +27,7 @@ class Employer extends Model implements AuthenticatableContract, CanResetPasswor
         'organization_name.between' => 'fullname must be atleast minimum 3 characters',
         'contact_mobile_no.numeric' => 'Mobile No can only contain numbers',
         'password.confirmed' => 'Password and Confirm Password does not match',
+        'web_address.url' =>  'the Web Address field is not valid. Please ensure that you have added http:// at the begining'
     ];
     protected $fillable = ['organization_name', 'organization_type', 'organization_sector', 'industry_id', 'address',
      'state_id', 'district_id', 'pincode','phone_no_ext','phone_no_main','organisation_email','web_address','organisation_idproof',

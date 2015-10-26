@@ -52,12 +52,14 @@ New Enrolment
       <div class="form-group aug_legend">
           Employer Information:
       </div>
-          <div class="form-group aug-form-group-sm">
+          <!-- <div class="form-group aug-form-group-sm">
               <label for="organization_name" class="col-sm-4 control-label">Organisation Name :</label>
               <div class="col-sm-8">
-                  {!! form_widget($form->organization_name) !!}
+
               </div>
-          </div>
+          </div> -->
+
+          {!! form_row($form->organization_name) !!}
 
           <div class="form-group aug-form-group-sm">
               <label for="organization_type" class="col-sm-4 control-label">Type of Organisation :</label>

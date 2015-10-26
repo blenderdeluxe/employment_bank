@@ -6,13 +6,16 @@ use employment_bank\Models\District;
 use employment_bank\Models\Employer;
 use employment_bank\Models\IndustryType;
 
-class EmployerForm extends Form{
+class EmployerFormFull extends Form{
 
     public function buildForm(){
 
       $this->add('organization_name', 'text', [
+          'wrapper' => ['class' => 'form-group aug-form-group-sm'],
           'attr' => ['required', 'maxlength' => '255', 'placeholder'=> 'Organization Name'],
-          'label' =>  'Organization Name :'
+          'label' =>  'Organization Name :',
+          'label_attr' => ['class' => 'col-sm-4 control-label', 'for' => $this->name],
+          'errors' => ['class' => 'has-error']
       ]);
       $this->add('organization_type', 'select', [
           'choices' => Employer::$organization_type_options,

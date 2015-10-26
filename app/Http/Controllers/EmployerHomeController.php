@@ -20,30 +20,45 @@ use employment_bank\Models\CandidateExpDetails;
 use employment_bank\Models\CandidateLanguageInfo;
 use employment_bank\Models\PostedJob;
 use employment_bank\Models\District;
-
+use employment_bank\Forms\EmployerForm;
+use employment_bank\Forms\EmployerFormFull;
+use Kris\LaravelFormBuilder\FormBuilderTrait;
 class EmployerHomeController extends Controller{
+
+    use FormBuilderTrait;
 
     private $content  = 'employer.';
     private $route  = 'employer.';
 
-    public function showRegister(FormBuilder $formBuilder){
+    public function showRegister(){
 
-        $form = $formBuilder->create('employment_bank\Forms\EmployerForm', [
-             'method' => 'POST',
-             'url' => route($this->route.'register')
-        ])->remove('save')->remove('update');
-
+      $form = $this->form(EmployerFormFull::class, [
+          'method' => 'POST',
+          'url' => route($this->route.'register')
+      ])->remove('save')->remove('update');
+        //->showFieldErrors(true)
+        // $form = $formBuilder->create('employment_bank\Forms\EmployerForm', [
+        //      'method' => 'POST',
+        //      'url' => route($this->route.'register')
+        // ])->remove('save')->remove('update');
         return view($this->content.'register', compact('form'));
     }
 
     public function doRegister(Request $request){
 
+      //  $form = $this->form(EmployerForm::class);
+      //  $form->validate(Employer::$rules, Employer::$messages);
+      // // // It will automatically use current request, get the rules, and do the validation
+      // if (!$form->isValid()) {
+      //     return redirect()->back()->withErrors($form->getErrors())->withInput();
+      // }
+      // Post::create($request->all());
+      // return redirect()->route('posts');
         $validator = Validator::make($data = $request->all(), Employer::$rules, Employer::$messages);
         if ($validator->fails())
           return Redirect::back()->withErrors($validator)->withInput();
 
         if ($validator->passes()){
-
             //$confirmation_code = Str::quickRandom(30);
             $confirmation_code = '12345';
         		$employer = new Employer;
@@ -60,7 +75,6 @@ class EmployerHomeController extends Controller{
       	  	//sendConfirmation() Will go the email and sms as needed
 
         }else{
-
       		return Redirect::back()->withInput()
                 	->withErrors($validation);
                 // ->with('message', 'There were validation errors.');
@@ -127,7 +141,6 @@ class EmployerHomeController extends Controller{
           return Redirect::back()->withErrors($validator)->withInput();
 
         $model->update($data);
-
         return Redirect::route($this->route.'list_job')->with('alert-success', 'Data has been Updated!');
     }
 
