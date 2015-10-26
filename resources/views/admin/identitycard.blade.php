@@ -4,36 +4,12 @@
 <link rel="stylesheet" href="{{ asset('assets/css/all.css') }}">
 <style>
 td{padding: 5px;}
-html, body {
-    height: 100%;
-}
-body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    display: table;
-    font-family: "Nunito",myriad pro,tahoma,sans-serif;
-}
-.container {
-    text-align: center;
-    display: table-cell;
-    vertical-align: middle;
-}
-.content {
-    text-align: center;
-    display: inline-block;
-}
-.title {
-    font-size: 96px;
-}
-.table1{
-	width: 800px;
-	margin: auto;
-	height: 20px;
-	border: 0px solid;
-	background: #1ABC9C;
-	table-layout: fixed;
-}
+html, body {height: 100%;}
+body { margin: 0; padding: 0; width: 100%; display: table; font-family: "Nunito",myriad pro,tahoma,sans-serif;}
+.container { text-align: center; display: table-cell; vertical-align: middle;}
+.content { text-align: center; display: inline-block;}
+.title {font-size: 96px;}
+.table1{ width: 800px;margin: auto; height: 20px; border: 0px solid; background: #1ABC9C; table-layout: fixed;}
 .table2{
 	width: 624px;
 	margin: auto;
@@ -44,45 +20,19 @@ body {
 	text-align: left;
 	table-layout: fixed;
 }
-.table3{
-	width: 166px;
-	margin-top: 0px;
-  margin-bottom: 180px;
-	height: 150px;
-	border: 0px solid;
-	table-layout: fixed;
+.table3{width: 166px;margin-top: 0px;margin-bottom: 180px;height: 150px;border: 0px solid;table-layout: fixed;
 }
-.table4{
-	border: 1px solid #1ABC9C;
-	background: #1ABC9C;
-}
-.table5{
-	border: 1px solid #1ABC9C;
-	table-layout: fixed;
-	height: 400px;
-}
-.table6{
-	width: 800px;
-	table-layout: fixed;
-
-}
-.table7{
-	border: 1px solid #1ABC9C;
-	table-layout: fixed;
-	height: 100px;
-	text-align: left;
-	color: #000;
-}
+.table4{ border: 1px solid #1ABC9C; background: #1ABC9C;}
+.table5{border: 1px solid #1ABC9C;table-layout: fixed;height: 400px;}
+.table6{width: 800px;table-layout: fixed;}
+.table7{border: 1px solid #1ABC9C;
+	table-layout: fixed; height: 100px;text-align: left;color: #000;}
 .table8{
 	border: 1px solid #1ABC9C;
 	table-layout: fixed;
 	height: 100px;
 }
-@media print {
-   .noprint{
-      display: none !important;
-   }
-}
+@media print { .noprint{display: none !important;} }
 </style>
     </head>
     <body>
@@ -95,7 +45,7 @@ body {
       		<td class="post-resume-page-title">
       			<table class="table1">
       				<tr>
-      					<td align="center"><b><h3><font color="#fff">Dear {{ $data->fullname}}</font></h3></b></td>
+      					<td align="center"><b><h3><font color="#fff"> {{ $data->fullname}}</font></h3></b></td>
                 <td align="center"><b><h3><font color="#fff">USER ID: {!! $data->index_card_no !!}</font></h3></b></td>
       	       </tr>
             </table>
@@ -126,7 +76,7 @@ body {
           		<td>
           			<table class="table3">
               		<tr>
-                    <td><img src="{{asset($data->photo_url)}}" alt="Photo Image" height="160" width="130"></td>
+                    <td><img src="{!! route('candidate.image_preview', $data->photo_url) !!}" alt="Photo Image" height="160" width="130"></td>
                   </tr>
               			<tr><td><img src="sig.jpg" width="130" height="100" hidden ></td></tr>
               		</table>

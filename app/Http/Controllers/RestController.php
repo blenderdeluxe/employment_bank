@@ -40,7 +40,9 @@ class RestController extends Controller{
                             ->join('master_subjects', 'candidate_edu_details.subject_id', '=', 'master_subjects.id')
                             ->select('candidates.id', 'candidate_infos.fullname','candidate_infos.index_card_no', 'candidate_infos.created_at', 'candidate_infos.dob', 'candidate_infos.physical_challenge', 'candidate_infos.ex_service', 'master_casts.name as caste', 'master_exams.name as exam_name', 'master_subjects.name as subject', 'master_proof_details.name as id_proof', 'candidate_infos.proof_no', 'candidate_infos.photo_url')
                             ->where('candidates.id', $candidate_id)
+                            //->first();
                             ->get();
+          //return Hashids::encode($result->photo_url);
           return view('admin.identitycard',compact('result'));
       }
 

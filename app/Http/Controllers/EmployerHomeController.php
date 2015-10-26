@@ -166,7 +166,7 @@ class EmployerHomeController extends Controller{
         $rules = [
             'photo' => 'mimes:jpeg,png|max:512',
             'organization_name'=> 'required|max:255',
-            'tagline'=> 'max:100',
+            'tagline'       => 'max:100',
             'web_address'   =>  'url|max:255',
             'details'       =>  'required|max:500',
         ];

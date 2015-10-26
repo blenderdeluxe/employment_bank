@@ -38,9 +38,7 @@
                 </a>
                 <a href="{!!route('admin.view.profile', [Hashids::encode($result->id)])!!}" class="btn btn-info btn-xs pull-left aug-margin">
                     <i class="fa fa-folder-open"></i> View Profile
-                </a>
-
-                
+                </a>                
 							</td>
 						</tr>
 					<?php $count++; ?>
