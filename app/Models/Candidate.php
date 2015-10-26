@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+//use Vinkla\Hashids\HashidsManager;
 
 class Candidate extends Model implements AuthenticatableContract, CanResetPasswordContract{
 
@@ -12,6 +13,18 @@ class Candidate extends Model implements AuthenticatableContract, CanResetPasswo
     protected $table    = 'candidates';
     protected $guarded  = ['_token', 'name'];
     protected $hidden   = ['password', 'remember_token'];
+
+    /*protected $hashids;
+
+    public function __construct(HashidsManager $hashids)
+    {
+        $this->hashids = $hashids;
+    }
+
+    public function hash($id)
+    {
+        $this->hashids->encode($id)
+    }*/
 
     public static $rules = [
         //'fullname' => 'required|between:3,55',

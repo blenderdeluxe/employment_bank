@@ -36,7 +36,7 @@
                 <a href="{!!route('admin.view.i_card', [$result->id])!!}" class="btn btn-info btn-xs pull-left aug-margin">
                     <i class="fa fa-search"></i>
                 </a>
-                <a href="{!!route('admin.view.profile', [$result->id])!!}" class="btn btn-info btn-xs pull-left aug-margin">
+                <a href="{!!route('admin.view.profile', [Hashids::encode($result->id)])!!}" class="btn btn-info btn-xs pull-left aug-margin">
                     <i class="fa fa-folder-open"></i> View Profile
                 </a>
 

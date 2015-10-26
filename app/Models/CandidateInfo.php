@@ -98,15 +98,13 @@ class CandidateInfo extends Model{
       return $this->attributes['physical_chest'] = ($value=='0.00')? '': $value;
   }
 
-  public function getImage()
-    {
+  public function image()
+  {
 
       if(!empty($this->photo_url) && File::exists(storage_path($this->photo_url)))
-      {
-          $filename = basename($this->photo_url);
           return 'images/image.php?id='.$this->photo_url;
-      }
 
       return 'images/missing.png';
   }
+
 }

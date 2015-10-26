@@ -9,7 +9,7 @@ use employment_bank\Http\Controllers\Controller;
 use Kris\LaravelFormBuilder\FormBuilder;
 use Illuminate\Support\Str;
 use employment_bank\Helpers\Basehelper;
-use Validator, Redirect, DB;
+use Validator, Redirect, DB, Hashids;
 use employment_bank\Models\Candidate;
 use employment_bank\Models\CandidateInfo;
 use employment_bank\Models\CandidateEduDetails;
@@ -27,15 +27,12 @@ class RestController extends Controller{
 
       public function viewIdentityCard($candidate_id){
 
-          $candidate = Candidate::find($candidate_id);
-          $info = CandidateInfo::where('candidate_id', $candidate_id)->count();
-          $edu = CandidateEduDetails::where('candidate_id', $candidate_id)->count();
-          $lang = CandidateLanguageInfo::where('candidate_id', $candidate_id)->count();
+          if(!Basehelper::check_candidate($candidate_id)){
 
-          if($info==0 || $edu ==0 || $lang==0)
               return Redirect::back()->with('message', 'The Profile has not enough information available to view Identity Card!');
+          }
 
-        $result = Candidate::join('candidate_infos', 'candidates.id', '=', 'candidate_infos.candidate_id')
+          $result = Candidate::join('candidate_infos', 'candidates.id', '=', 'candidate_infos.candidate_id')
                             ->join('master_casts', 'candidate_infos.caste_id', '=', 'master_casts.id')
                             ->join('master_proof_details', 'candidate_infos.proof_details_id', '=', 'master_proof_details.id')
                             ->join('candidate_edu_details', 'candidates.id', '=', 'candidate_edu_details.candidate_id')
@@ -49,7 +46,18 @@ class RestController extends Controller{
 
       public function viewCandidateProfile($candidate_id)
       {
+
+        //Hashids::getDefaultConnection();
+        $decoded =  Hashids::decode($candidate_id);
+        //return count($decoded);
          //code for displaying full profle with bio, educations detals, experience details and so
+        $candidate = Candidate::find($decoded)->first();
+        //return $candidate;
+        $info = CandidateInfo::where('candidate_id', $decoded)->first();
+        $edu = CandidateEduDetails::where('candidate_id', $decoded)->get();
+        $lang = CandidateLanguageInfo::where('candidate_id', $decoded)->get();
+
+        return view('admin.applications.profile',compact('candidate', 'info', 'edu', 'lang'));
       }
 
 }

@@ -90,4 +90,17 @@ class Basehelper {
             return $response;
         }
     }
+
+    public static function check_candidate($id)
+    {
+        $candidate = Candidate::find($id);
+        $info = CandidateInfo::where('candidate_id', $id)->count();
+        $edu = CandidateEduDetails::where('candidate_id', $id)->count();
+        $lang = CandidateLanguageInfo::where('candidate_id', $id)->count();
+
+        if($info==0 || $edu ==0 || $lang==0)
+            return false;
+        else
+            return true;
+    }
 }

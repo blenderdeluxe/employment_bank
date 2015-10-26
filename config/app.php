@@ -153,6 +153,8 @@ return [
 
         Collective\Html\HtmlServiceProvider::class,
 
+        Vinkla\Hashids\HashidsServiceProvider::class,
+
     ],
 
     /*
@@ -206,6 +208,7 @@ return [
         'Html'      => Collective\Html\HtmlFacade::class,
 
         'Basehelper'=> employment_bank\Helpers\Basehelper::class,
+        'Hashids'   => Vinkla\Hashids\Facades\Hashids::class,
     ],
 
 ];

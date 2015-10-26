@@ -10,6 +10,11 @@ class PostedJob extends Model{
       public static $rules = [
           'post_name' => 'required|min:3|max:255',
           'no_of_post' =>  'required|numeric',
+          'preferred_age_min' => 'integer|min:15|max:70',
+          'preferred_age_max' => 'integer|min:0|max:100',
+          'preferred_age_max' => 'integer|min:0|max:100',
+          //'phone_no_ext' => 'max:',
+          //'preferred_age_max' => 'integer|min:0|max:100',
           //'industry_id'   =>  'required|exists,master_industry_types,id',
       ];
 
@@ -28,5 +33,26 @@ class PostedJob extends Model{
           return $this->belongsTo('employment_bank\Models\Employer', 'created_by');
       }
       //created_by
+
+      public function getPhysicalHeightAttribute($value)
+      {
+        return $this->attributes['physical_height'] = ($value == 0.00) ? '' : $value;
+      }
+
+      public function getPhysicalWeightAttribute($value)
+      {
+        return $this->attributes['physical_weight'] = ($value == 0.00) ? '' : $value;
+      }
+
+      public function getPhysicalChestAttribute($value)
+      {
+        return $this->attributes['physical_chest'] = ($value == 0.00) ? '' : $value;
+      }
+
+      public function getPreferredExperienceAttribute($value)
+      {
+        return $this->attributes['preferred_experience'] = ($value == 0) ? '' : $value;
+      }
+
 
 }

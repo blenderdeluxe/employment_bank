@@ -91,9 +91,12 @@ class EmployerHomeController extends Controller{
 
         $data['created_by'] = Auth::employer()->get()->id;
         //$data['emp_job_id'] = '';
+        if(PostedJob::create($data)){
 
-        PostedJob::create($data);
-        return Redirect::route($this->route.'list_job')->with('message', 'New Job has been Posted!');
+          return Redirect::route($this->route.'list_job')->with('message', 'New Job has been Posted!');
+        }else{
+          return Redirect::back()->withInput()->with('message', 'Unable to process your request');
+        }
     }
 
     public function listJobs(){
