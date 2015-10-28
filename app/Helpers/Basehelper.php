@@ -1,5 +1,5 @@
 <?php
- namespace employment_bank\Helpers;
+namespace employment_bank\Helpers;
 use File, Response;
 use employment_bank\Models\Candidate;
 use employment_bank\Models\CandidateInfo;
@@ -133,7 +133,6 @@ class Basehelper {
         ));
 
         return Response::make(file_get_contents($path), 200, $headers);
-      }
     }
 
     public static function check_candidate($id)

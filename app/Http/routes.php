@@ -25,7 +25,6 @@ Route::group(['prefix'=>'admin'], function() {
         Route::get('/candidates/applications/recieved', ['as'=>'admin.applications_recieved', 'uses' => 'AdminHomeController@applications_recieved']);
         Route::get('/candidates/view/i_card/{candidate_id}', ['as'=>'admin.view.i_card', 'uses' => 'RestController@viewIdentityCard']);
         Route::get('/candidates/view/profile/{candidate_id}', ['as'=>'admin.view.profile', 'uses' => 'RestController@viewCandidateProfile']);
-
     });
 
 });

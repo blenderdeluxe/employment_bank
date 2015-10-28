@@ -48,7 +48,6 @@ class RestController extends Controller{
 
       public function viewCandidateProfile($candidate_id)
       {
-
         //Hashids::getDefaultConnection();
         $decoded =  Hashids::decode($candidate_id);
         //return count($decoded);
@@ -56,9 +55,18 @@ class RestController extends Controller{
         $candidate = Candidate::find($decoded)->first();
         //return $candidate;
         $info = CandidateInfo::where('candidate_id', $decoded)->first();
-        $edu = CandidateEduDetails::where('candidate_id', $decoded)->get();
+        //$edu = CandidateEduDetails::where('candidate_id', $decoded)->get();
+        $edu = CandidateEduDetails::where('candidate_id', $decoded)
+                ->join('master_exams', 'candidate_edu_details.exam_id', '=', 'master_exams.id')
+                ->join('master_boards', 'candidate_edu_details.board_id', '=', 'master_boards.id')
+                ->join('master_subjects', 'candidate_edu_details.subject_id', '=', 'master_subjects.id')
+                ->select('master_exams.name as exam_name', 'master_exams.exam_category',
+                  'candidate_edu_details.specialization', 'candidate_edu_details.pass_year', 'candidate_edu_details.percentage',
+                  'master_boards.name as board_name', 'master_subjects.name as subject_name'
+                 )
+                ->get();
+                //::join('candidates', 'candidate_infos.candidate_id', '=', 'candidates.id')
         $lang = CandidateLanguageInfo::where('candidate_id', $decoded)->get();
-
         return view('admin.applications.profile',compact('candidate', 'info', 'edu', 'lang'));
       }
 

@@ -5,6 +5,8 @@ namespace employment_bank\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Str;
 use File;
+use employment_bank\Models\State;
+use employment_bank\Models\District;
 
 class CandidateInfo extends Model{
 
@@ -96,6 +98,16 @@ class CandidateInfo extends Model{
 
   protected function getPhysicalChestAttribute($value) {
       return $this->attributes['physical_chest'] = ($value=='0.00')? '': $value;
+  }
+
+  // public function state()
+  // {
+  //     return $this->belongsTo('employment_bank\Models\State', 'state_id');
+  // }
+
+  public function district()
+  {
+      return $this->belongsTo('employment_bank\Models\District', 'district_id');
   }
 
   public function image()
