@@ -23,6 +23,7 @@ use employment_bank\Models\CandidateLanguageInfo;
 class AdminHomeController extends Controller{
 
     private $content  = 'admin.';
+    //test changes
 
     public function showRegister(){
 
