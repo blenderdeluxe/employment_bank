@@ -24,6 +24,7 @@ class AdminHomeController extends Controller{
 
     private $content  = 'admin.';
     //test changes
+    //new lol
 
     public function showRegister(){
 
