@@ -74,7 +74,8 @@ class EmployerFormFull extends Form{
           'label' =>  'Organization Email :'
       ]);
       $this->add('web_address', 'url', [
-          'attr' => ['class'=>'form-control input-sm','maxlength' => '255', 'placeholder'=> 'e.g. http://www.google.com', 'title'=>'it must contain http:// at the begining e.g. http://www.google.com'],
+          'value' => 'http://www.',
+          'attr' => ['maxlength' => '255','id' => 'web_address',   'placeholder'=> 'e.g. http://www.google.com', 'title'=>'it must contain http:// at the begining e.g. http://www.google.com'],
           'label' =>  'Organization Web Address URL :'
       ]);
 

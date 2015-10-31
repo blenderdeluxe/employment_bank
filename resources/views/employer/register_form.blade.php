@@ -121,6 +121,7 @@ New Enrolment
           <div class="form-group aug-form-group-sm">
               <label for="web_address" class="col-sm-4 control-label">Web Address URL :</label>
               <div class="col-sm-8">
+                  
                   {!! form_widget($form->web_address) !!}
               </div>
           </div>

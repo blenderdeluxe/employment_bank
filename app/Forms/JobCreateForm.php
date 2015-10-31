@@ -65,7 +65,7 @@ class JobCreateForm extends Form{
       ]);
 
       $this->add('other_benefits', 'text', [
-          'attr' => ['required', 'maxlength' => '8', 'placeholder'=> 'salary other_benefits'],
+          'attr' => [ 'maxlength' => '8', 'placeholder'=> 'salary other_benefits'],
           'wrapper' => ['class' => 'form-group col-md-4'], // Shows the wrapper for each e
           'label'   =>  'Other Benefits (annual)'
       ]);
@@ -88,8 +88,8 @@ class JobCreateForm extends Form{
               'wrapper' => ['class' => 'form-group col-md-3'] // Shows the wrapper default is false
       ]);
 
-      $relegions = ['BUDDISM'=>'BUDDISM', 'CHRISTIANITY'=>'CHRISTIANITY','HINDUISM'=>'HINDUISM','ISLAM'=>'ISLAM',
-          'JAINISM'=>'JAINISM','PARSI'=>'PARSI','SIKHISM'=>'SIKHISM', 'OTHERS'=>'OTHERS', 'ANY'=>'ANY'
+      $relegions = ['ANY'=>'ANY','BUDDHISM'=>'BUDDHISM', 'CHRISTIANITY'=>'CHRISTIANITY','HINDUISM'=>'HINDUISM','ISLAM'=>'ISLAM',
+          'JAINISM'=>'JAINISM','PARSI'=>'PARSI','SIKHISM'=>'SIKHISM', 'OTHERS'=>'OTHERS', 
       ];
       $this->add('preferred_relegion', 'select', [
               'choices' => $relegions,

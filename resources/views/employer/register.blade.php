@@ -242,4 +242,15 @@ New Enrolment
 
 @section('page_specific_scripts')
     $('#state_id').change(function(e){ getDistrictList(this, $('#district_id')); });
+
+    var readOnlyLength = $('#web_address').val().length;
+
+    $('#web_address').on('keypress, keydown', function(event) {
+        var $field = $(this);
+        if ((event.which != 37 && (event.which != 39))
+            && ((this.selectionStart < readOnlyLength)
+            || ((this.selectionStart == readOnlyLength) && (event.which == 8)))) {
+            return false;
+        }
+    });      
 @stop
