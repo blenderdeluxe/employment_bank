@@ -10,7 +10,7 @@ use Validator;
 use employment_bank\Models\Admin;
 use Illuminate\Database\QueryException;
 use Kris\LaravelFormBuilder\FormBuilder;
-use Redirect, Session;
+use Redirect, Session, Hashids, Auth;
 use Illuminate\Support\Str;
 use employment_bank\Helpers\Basehelper;
 
@@ -87,10 +87,24 @@ class AdminHomeController extends Controller{
                 ->where('candidates.verified_status', 'Not Verified')
                 ->where('candidate_infos.index_card_no', '!=', 'NULL')
                 ->orWhere('candidate_infos.index_card_no', '!=', '')
-                ->select('candidates.id', 'candidate_infos.fullname as f_name','candidate_infos.index_card_no as index_card_no',
+                ->select('candidates.id', 'candidate_infos.fullname','candidate_infos.index_card_no as index_card_no',
                 'candidate_infos.sex as sex', 'candidate_infos.address as address'  )
                 ->get();
 
         return view($this->content.'applications.recieved', compact('results'));
+    }
+
+    public function verifyCandidate($candidate_id)
+    {
+        //This will approve the candiate
+        //Hashids::getDefaultConnection();
+        $decoded =  Hashids::decode($candidate_id);
+        $id = $decoded[0];
+        $candidate = Candidate::find($decoded)->first();
+        $candidate->verified_status = 'Verified';
+        $candidate->verified_by = Auth::admin()->get()->id;
+        $candidate->save();
+
+        return $candidate;
     }
 }

@@ -102,11 +102,11 @@ class CandidateInfoForm extends Form{
       ]);
 
       $this->add('photo_url', 'file', [
-          'attr'  =>  ['accept'=>'.jpg'],
+          'attr'  =>  ['accept'=>'.jpg', 'required'],
           'label' =>  'Passport Photo'
       ]);
       $this->add('cv_url', 'file', [
-          'attr'  =>  ['accept'=>'.doc, .docx, .pdf'],
+          'attr'  =>  ['accept'=>'.doc, .docx, .pdf', 'required'],
           'label' =>  'CV :'
       ]);
 

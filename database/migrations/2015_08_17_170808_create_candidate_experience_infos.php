@@ -16,6 +16,7 @@ class CreateCandidateExperienceInfos extends Migration{
             $table->integer('salary', false)->nullable()->comment('Salary');
             $table->integer('experience_id', false, true)->comment('This will be the foreign key for subjects/trade');
             $table->integer('industry_id', false, true)->comment('This will be the foreign key for Industry/Sector');
+            $table->string('note')->nullable()->comment('This field is for specifying job description or antything else');
             $table->timestamps();
             $table->foreign('candidate_id')->references('id')->on('candidates');
             $table->foreign('experience_id')->references('id')->on('master_subjects');

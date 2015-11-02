@@ -12,6 +12,7 @@ use employment_bank\Helpers\Basehelper;
 use Validator, Redirect, DB, Hashids;
 use employment_bank\Models\Candidate;
 use employment_bank\Models\CandidateInfo;
+use employment_bank\Models\CandidateExpDetails;
 use employment_bank\Models\CandidateEduDetails;
 use employment_bank\Models\CandidateLanguageInfo;
 use employment_bank\Models\District;
@@ -67,7 +68,16 @@ class RestController extends Controller{
                 ->get();
                 //::join('candidates', 'candidate_infos.candidate_id', '=', 'candidates.id')
         $lang = CandidateLanguageInfo::where('candidate_id', $decoded)->get();
-        return view('admin.applications.profile',compact('candidate', 'info', 'edu', 'lang'));
-      }
 
+        $exp = CandidateExpDetails::where('candidate_id', $decoded)
+                ->join('master_industry_types', 'candidate_experience_details.industry_id', '=', 'master_industry_types.id')
+                ->join('master_subjects', 'candidate_experience_details.experience_id', '=', 'master_subjects.id')
+                ->select('master_subjects.name as exp_type', 'master_industry_types.name as sector',
+                'candidate_experience_details.post_held', 'candidate_experience_details.year_experience',
+                'candidate_experience_details.salary', 'candidate_experience_details.employers_name')
+                ->orderBy('candidate_experience_details.id', 'DESC')
+                ->get();
+
+        return view('admin.applications.profile',compact('candidate', 'info', 'edu', 'lang', 'exp'));
+      }
 }
