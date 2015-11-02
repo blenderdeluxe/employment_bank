@@ -7,6 +7,7 @@
 @section('page_specific_header')
 <style> #edu th{ font-size: 13px; background-color: #DDDDDD;}
 #exp th{ font-size: 13px; background-color: #DDDDDD;}
+.box-body hr { margin-top: 5px; margin-bottom: 5px;}
 </style>
 @stop
 
@@ -16,8 +17,8 @@
     <!-- Profile Image -->
     <div class="box box-primary">
       <div class="box-body box-profile">
-        <img class="profile-user-img img-responsive img-circle" src="{!!asset($info->image())!!}" alt="User profile picture">
-        <h3 class="profile-username text-center">
+        <img class="profile-user-img img-responsive" src="{!! asset($info->image()) !!}" alt="User profile picture">
+        <h3 class="profile-username text-center" style="font-size: 16px;">
         {{$info->fullname}}
         </h3>
         <p class="text-muted text-center"> Index Card No: <br>{{$info->index_card_no}} </p>
@@ -26,9 +27,20 @@
               <b>Jobs Applied</b> <a class="pull-right">1,322</a>
             </li>
           </ul> -->
-      <a href="{!! URL::route('admin.verify.profile', Hashids::encode($info->id)) !!}" class="btn btn-primary btn-block">
-        <b> <i class="fa fa-check-square-o"></i> Approve Now</b>
+      @if($candidate->verified_status == 'Not Verified')
+      <a title="This will mark the profile as Verified or Approved so that he can apply to any jobs that has been posted" href="{!! URL::route('admin.verify.profile', Hashids::encode($info->id)) !!}" class="btn btn-primary btn-block">
+        <b> <i class="fa fa-check-square-o"></i> Approve Now </b>
+      </a>      
+      @elseif($candidate->verified_status == 'Verified')
+      <a title="This will mark the profile as suspended or halted so that he can not apply to any job posted"
+       href="{!! URL::route('admin.suspend.profile', Hashids::encode($info->id)) !!}" class="btn btn-warning btn-block">
+        <b> <i class="fa fa-stop"></i> set as Halted/Suspended </b>
       </a>
+      @elseif($candidate->verified_status == 'Halted')
+      <a title="This will mark the profile as Verified or Approved so that he can apply to any jobs that has been posted" href="{!! URL::route('admin.verify.profile', Hashids::encode($info->id)) !!}" class="btn btn-success btn-block">
+        <b> <i class="fa fa-check"></i> Re-Approve </b>
+      </a>
+      @endif
     </div><!-- /.box-body -->
   </div><!-- /.box -->
 </div><!-- /.col -->
@@ -70,12 +82,10 @@
   <ul class="nav nav-tabs">
     <li class="active"><a href="#bio" data-toggle="tab"> Profile/Bio</a></li>
     <li><a href="#edu" data-toggle="tab">Education Details</a></li>
-    <li><a href="#exp" data-toggle="tab">Expereince Details</a></li>
+    <li><a href="#exp" data-toggle="tab">Experience Details</a></li>
   </ul>
 <div class="tab-content">
-
   <div class="active tab-pane" id="bio">
-
     <table class="table table-striped">
       <tr>
         <th scope="row" style="width: 200px"> Full Name</th>
@@ -128,6 +138,7 @@
     </table>
   </div><!-- /.tab-pane -->
   <div class="tab-pane" id="exp">
+  @if(count($exp)!=0)
     <table class="table table-condensed">
     <tr>
       <th>Employer's Name</th><th> Sector </th><th>Post Held</th>
@@ -145,6 +156,9 @@
       </tr>
     @endforeach
     </table>
+  @else
+    No Experience records has been provided
+  @endif
   </div><!-- /.tab-pane -->
 
       </div><!-- /.tab-content -->

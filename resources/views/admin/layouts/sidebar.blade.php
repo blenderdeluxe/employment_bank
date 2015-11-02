@@ -104,7 +104,10 @@
       <i class="fa fa-angle-left pull-right"></i>
     </a>
     <ul class="treeview-menu">
-      <li><a href="{{URL::route('admin.applications_recieved')}}"><i class="fa fa-list"></i> Applications Recieved</a></li>
+      <li><a href="{{URL::route('admin.applications_recieved')}}"><i class="text-yellow fa fa-download"></i> Applications Recieved</a></li>
+      <li><a href="{{URL::route('admin.applications_verified')}}"><i class="text-green fa fa-check"></i> Applications Verified</a></li>
+      <li><a href="{{URL::route('admin.applications_suspended')}}"><i class="text-red fa fa-ban"></i> Applications Suspended</a></li>
+      
     </ul>
   </li>
 </ul>

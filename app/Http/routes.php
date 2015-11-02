@@ -26,6 +26,9 @@ Route::group(['prefix'=>'admin'], function() {
         Route::get('/candidates/view/i_card/{candidate_id}', ['as'=>'admin.view.i_card', 'uses' => 'RestController@viewIdentityCard']);
         Route::get('/candidates/view/profile/{candidate_id}', ['as'=>'admin.view.profile', 'uses' => 'RestController@viewCandidateProfile']);
         Route::get('/candidates/verify/profile/{candidate_id}', ['as'=>'admin.verify.profile', 'uses' => 'AdminHomeController@verifyCandidate']);
+        Route::get('/candidates/applications/verified', ['as'=>'admin.applications_verified', 'uses' => 'AdminHomeController@applications_verified']);
+        Route::get('/candidates/suspend/profile/{candidate_id}', ['as'=>'admin.suspend.profile', 'uses' => 'AdminHomeController@suspendCandidate']);
+        Route::get('/candidates/applications/suspended', ['as'=>'admin.applications_suspended', 'uses' => 'AdminHomeController@applications_suspended']);
     });
 
 });

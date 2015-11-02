@@ -84,14 +84,40 @@ class AdminHomeController extends Controller{
     public function applications_recieved(){
 
         $results = CandidateInfo::join('candidates', 'candidate_infos.candidate_id', '=', 'candidates.id')
-                ->where('candidates.verified_status', 'Not Verified')
+                
                 ->where('candidate_infos.index_card_no', '!=', 'NULL')
-                ->orWhere('candidate_infos.index_card_no', '!=', '')
+                ->where('candidate_infos.index_card_no', '!=', '')
+                ->where('candidates.verified_status', 'Not Verified')
                 ->select('candidates.id', 'candidate_infos.fullname','candidate_infos.index_card_no as index_card_no',
                 'candidate_infos.sex as sex', 'candidate_infos.address as address'  )
                 ->get();
 
         return view($this->content.'applications.recieved', compact('results'));
+    }
+
+    public function applications_verified()
+    {
+        $results = CandidateInfo::join('candidates', 'candidate_infos.candidate_id', '=', 'candidates.id')
+                ->where('candidates.verified_status', 'Verified')
+                ->where('candidate_infos.index_card_no', '!=', 'NULL')
+                ->where('candidate_infos.index_card_no', '!=', '')
+                ->select('candidates.id', 'candidate_infos.fullname','candidate_infos.index_card_no as index_card_no',
+                'candidate_infos.sex as sex', 'candidate_infos.address as address'  )
+                ->get();
+
+        return view($this->content.'applications.verified', compact('results'));
+    }
+    public function applications_suspended()
+    {
+        $results = CandidateInfo::join('candidates', 'candidate_infos.candidate_id', '=', 'candidates.id')
+                ->where('candidates.verified_status', 'Halted')
+                // ->where('candidate_infos.index_card_no', '!=', 'NULL')
+                // ->where('candidate_infos.index_card_no', '!=', '')
+                ->select('candidates.id', 'candidate_infos.fullname','candidate_infos.index_card_no as index_card_no',
+                'candidate_infos.sex as sex', 'candidate_infos.address as address'  )
+                ->get();
+
+        return view($this->content.'applications.suspended', compact('results'));
     }
 
     public function verifyCandidate($candidate_id)
@@ -103,8 +129,31 @@ class AdminHomeController extends Controller{
         $candidate = Candidate::find($decoded)->first();
         $candidate->verified_status = 'Verified';
         $candidate->verified_by = Auth::admin()->get()->id;
-        $candidate->save();
+        
+        if($candidate->save()){
 
-        return $candidate;
+            return redirect()->route('admin.applications_verified')->with('message', 'The Application has been Verified Successfully');
+
+        }else{
+            return redirect()->back()->with('message', 'Unable to process your request. Please try again or contact TechSupport.');
+        }
+    }
+
+    public function suspendCandidate($candidate_id)
+    {
+
+        $decoded =  Hashids::decode($candidate_id);
+        $id = $decoded[0];
+        $candidate = Candidate::find($decoded)->first();
+        $candidate->verified_status = 'Halted';
+        $candidate->verified_by = Auth::admin()->get()->id;
+        
+        if($candidate->save()){
+
+            return redirect()->route('admin.applications_suspended')->with('message', 'The Application has been Halted');
+
+        }else{
+            return redirect()->back()->with('message', 'Unable to process your request. Please try again or contact TechSupport.');
+        }
     }
 }
