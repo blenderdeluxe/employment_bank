@@ -6,6 +6,7 @@ New Enrolment
 
 @section('page_specific_styles')
 <style>
+
 .form-horizontal .form-group {
     margin-right: 0px !important;
 }

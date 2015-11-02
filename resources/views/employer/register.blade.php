@@ -6,6 +6,20 @@ New Enrolment
 
 @section('page_specific_styles')
 <style>
+.aug-form-group-sm{
+    /*height: 12px;*/
+    padding: 2px 8px;
+    font-size: 12px;
+    line-height: 1.5;
+    border-radius: 3px;
+    margin-bottom: 0px;
+}
+/*.aug-form-group-sm input, .aug-form-group-sm select{
+    height: 26px;
+    padding: 2px 5px;
+    font-size: 14px;
+    line-height: 1.5;
+}*/
 .form-horizontal .form-group {
     margin-right: 0px !important;
 }
@@ -162,7 +176,7 @@ New Enrolment
               <label for="pincode" class="col-sm-3 control-label">Password :</label>
               <div class="col-sm-9">
                 <div class="input-group">
-                  {!! Form::password('password', ['class' => 'form-control', 'placeholder' => 'Password', 'required', 'autocomplete'=>'off']) !!}
+                  {!! Form::password('password', ['class'=>'form-control input-sm', 'placeholder' => 'Password', 'required', 'autocomplete'=>'off']) !!}
                   <span class="input-group-addon"><i class="fa fa-key"></i></span>
                 </div>
               </div>
@@ -171,14 +185,14 @@ New Enrolment
               <label for="pincode" class="col-sm-3 control-label">Retype Password :</label>
               <div class="col-sm-9">
                   <div class="input-group">
-                    {!! Form::password('password_confirmation', ['class' => 'form-control', 'placeholder' => 'Retype password', 'required', 'autocomplete'=>'off']) !!}
-                    <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                    {!! Form::password('password_confirmation', ['class' => 'form-control input-sm', 'placeholder' => 'Retype password', 'required', 'autocomplete'=>'off']) !!}
+                    <span class="input-group-addon"> <i class="fa fa-key"></i></span>
                   </div>
               </div>
           </div>
 
     </div>
-    <div class="col-md-12">
+    <div class="col-md-12" style="margin-top:20px;">
       <div class="form-group col-sm-12 text-center">
         <button class="btn btn-block btn-primary btn-flat"> Register >> </button>
       </div>
