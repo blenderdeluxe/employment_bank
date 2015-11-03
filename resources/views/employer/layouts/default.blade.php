@@ -7,6 +7,7 @@
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
     <link rel="stylesheet" href="{{ asset('assets/css/all.css') }}">
+    @yield('page_header_custom')
     <style>
     @yield('page_specifi_style')
     </style>

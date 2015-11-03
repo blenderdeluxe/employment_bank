@@ -14,18 +14,18 @@ class JobCreateForm extends Form{
 
       $this->add('post_name', 'text', [
           'attr' => ['required', 'maxlength' => '255', 'placeholder'=> 'name of the POST'],
-          'wrapper' => ['class' => 'form-group col-md-5'] // Shows the wrapper for each e
+          'wrapper' => ['class' => 'form-group-sm col-md-5'] // Shows the wrapper for each e
       ]);
       $this->add('no_of_post', 'number', [
           'attr' => ['required', 'maxlength' => '3', 'placeholder'=> 'no of vacancy'],
-          'wrapper' => ['class' => 'form-group col-md-3'] // Shows the wrapper for each e
+          'wrapper' => ['class' => 'form-group-sm col-md-3'] // Shows the wrapper for each e
       ]);
       $this->add('industry_id', 'select', [
           'choices' => IndustryType::lists('name', 'id')->all(),
           'empty_value' => '--- Select ---',
           'attr' => ['required'],
           'label' =>  'Industry :',
-          'wrapper' => ['class' => 'form-group col-md-4']
+          'wrapper' => ['class' => 'form-group-sm col-md-4']
       ]);
 
       $this->add('place_of_employment_state_id', 'select', [
@@ -33,7 +33,7 @@ class JobCreateForm extends Form{
              'empty_value' => '--- Select ---',
              'label' => 'Place of Employment State',
              'attr' => ['required', 'id'=>'place_of_employment_state_id'],
-             'wrapper' => ['class' => 'form-group col-md-4']
+             'wrapper' => ['class' => 'form-group-sm col-md-4']
       ]);
 
       $districts = [''=>'-- Select State first--'];
@@ -41,7 +41,7 @@ class JobCreateForm extends Form{
              'choices' => $districts, //currentl only arunachal districts are fetched
              'label' => 'District',
              'attr' => ['required', 'id'  => 'place_of_employment_district_id', 'required'],
-             'wrapper' => ['class' => 'form-group col-md-4']
+             'wrapper' => ['class' => 'form-group-sm col-md-4']
       ]);
 
       // ->add('some_choices', 'choices', [
@@ -50,34 +50,34 @@ class JobCreateForm extends Form{
 
       $this->add('place_of_employment_city', 'text', [
           'attr' => ['maxlength' => '255', 'placeholder'=> 'City'],
-          'wrapper' => ['class' => 'form-group col-md-4'] // Shows the wrapper for each e
+          'wrapper' => ['class' => 'form-group-sm col-md-4'] // Shows the wrapper for each e
       ]);
 
       $this->add('salary_offered_min', 'text', [
           'attr' => ['required', 'maxlength' => '8', 'placeholder'=> 'salary offered min'],
-          'wrapper' => ['class' => 'form-group col-md-4'], // Shows the wrapper for each e
+          'wrapper' => ['class' => 'form-group-sm col-md-4'], // Shows the wrapper for each e
           'label'   =>  'Salary Offered Min. (annual)'
       ]);
       $this->add('salary_offered_max', 'text', [
           'attr' => ['required', 'maxlength' => '8', 'placeholder'=> 'salary offered max'],
-          'wrapper' => ['class' => 'form-group col-md-4'],
+          'wrapper' => ['class' => 'form-group-sm col-md-4'],
           'label'   =>  'Salary Offered Max. (annual)'
       ]);
 
       $this->add('other_benefits', 'text', [
           'attr' => [ 'maxlength' => '8', 'placeholder'=> 'salary other_benefits'],
-          'wrapper' => ['class' => 'form-group col-md-4'], // Shows the wrapper for each e
+          'wrapper' => ['class' => 'form-group-sm col-md-4'], // Shows the wrapper for each e
           'label'   =>  'Other Benefits (annual)'
       ]);
 
       $this->add('preferred_age_min', 'number', [
           'attr' => ['required', 'maxlength' => '2', 'placeholder'=> 'preferred_age_min'],
-          'wrapper' => ['class' => 'form-group col-md-3'] // Shows the wrapper for each e
+          'wrapper' => ['class' => 'form-group-sm col-md-3'] // Shows the wrapper for each e
       ]);
 
       $this->add('preferred_age_max', 'number', [
           'attr' => ['required', 'maxlength' => '2', 'placeholder'=> 'preferred_age_max'],
-          'wrapper' => ['class' => 'form-group col-md-3'] // Shows the wrapper for each e
+          'wrapper' => ['class' => 'form-group-sm col-md-3'] // Shows the wrapper for each e
       ]);
       $casts = ['ANY'=>'ANY'] + Caste::lists('name', 'id')->all();
       $this->add('preferred_caste', 'select', [
@@ -85,7 +85,7 @@ class JobCreateForm extends Form{
               'empty_value' => '==== Select ===',
               'label' => 'Preferred Caste',
               'attr' => ['required'],
-              'wrapper' => ['class' => 'form-group col-md-3'] // Shows the wrapper default is false
+              'wrapper' => ['class' => 'form-group-sm col-md-3'] // Shows the wrapper default is false
       ]);
 
       $relegions = ['ANY'=>'ANY','BUDDHISM'=>'BUDDHISM', 'CHRISTIANITY'=>'CHRISTIANITY','HINDUISM'=>'HINDUISM','ISLAM'=>'ISLAM',
@@ -96,7 +96,7 @@ class JobCreateForm extends Form{
               'empty_value' => '==== Select ===',
               'label' => 'Preferred Relegion',
               'attr' => ['required'],
-              'wrapper' => ['class' => 'form-group col-md-3'] // Shows the wrapper default is false
+              'wrapper' => ['class' => 'form-group-sm col-md-3'] // Shows the wrapper default is false
       ]);
 
       $genders = ['ANY'=>'ANY', 'MALE'=>'MALE', 'FEMALE'=>'FEMALE','OTHERS'=>'OTHERS', ];
@@ -105,7 +105,7 @@ class JobCreateForm extends Form{
               'empty_value' => '==== Select ===',
               'label' => 'Preferred Sex',
               'attr' => ['required'],
-              'wrapper' => ['class' => 'form-group col-md-3'] // Shows the wrapper default is false
+              'wrapper' => ['class' => 'form-group-sm col-md-3'] // Shows the wrapper default is false
       ]);
       $job_types = ['Full Time'=>'Full Time', 'Part Time'=>'Part Time'];
       $this->add('job_type', 'select', [
@@ -113,7 +113,7 @@ class JobCreateForm extends Form{
               'empty_value' => '-- Select --',
               'label' => 'Job Type',
               'attr' => ['required'],
-              'wrapper' => ['class' => 'form-group col-md-2'] // Shows the wrapper default is false
+              'wrapper' => ['class' => 'form-group-sm col-md-2'] // Shows the wrapper default is false
       ]);
 
       $this->add('exam_passed_id', 'select', [
@@ -121,25 +121,25 @@ class JobCreateForm extends Form{
              'empty_value' => '--- Select ---',
              'label' => 'Exam Passed :',
              'attr' => ['required'],
-             'wrapper'  =>  ['class'=> 'form-group col-md-3']
+             'wrapper'  =>  ['class'=> 'form-group-sm col-md-3']
       ]);
       $this->add('subject_id', 'select', [
              'choices' => Subject::lists('name', 'id')->all(),
              'empty_value' => '--- Select ---',
              'label' => 'Subject/Trade :',
              //'attr' => ['required'],
-             'wrapper'  =>  ['class'=> 'form-group col-md-4']
+             'wrapper'  =>  ['class'=> 'form-group-sm col-md-4']
       ]);
 
 
       $this->add('specialization', 'text', [
           'attr' => ['maxlength' => '50', 'placeholder'=> 'specialization'],
-          'wrapper' => ['class' => 'form-group col-md-4'] // Shows the wrapper for each e
+          'wrapper' => ['class' => 'form-group-sm col-md-4'] // Shows the wrapper for each e
       ]);
 
       $this->add('preferred_experience', 'number', [
           'attr' => ['maxlength' => '2', 'placeholder'=> 'preferred years of expereince'],
-          'wrapper' => ['class' => 'form-group col-md-2'] // Shows the wrapper for each e
+          'wrapper' => ['class' => 'form-group-sm col-md-2'] // Shows the wrapper for each e
       ]);
 
 
@@ -148,38 +148,38 @@ class JobCreateForm extends Form{
              'empty_value' => '--- Select ---',
              'label' => 'Ex-serviceman',
              'attr' => ['required'],
-             'wrapper' => ['class' => 'form-group col-md-3'] // Shows the wrapper for each e
+             'wrapper' => ['class' => 'form-group-sm col-md-3'] // Shows the wrapper for each e
       ]);
       $this->add('physical_challenge', 'select', [
              'choices' => ['YES'=>'YES', 'NO'=>'NO'],
              'empty_value' => '--- Select ---',
              'label' => 'Physically Challenged',
              'attr' => ['required'],
-             'wrapper' => ['class' => 'form-group col-md-3'] // Shows the wrapper for each e
+             'wrapper' => ['class' => 'form-group-sm col-md-3'] // Shows the wrapper for each e
       ]);
 
       $this->add('physical_height', 'text', [
           'attr' => ['maxlength' => '5', 'placeholder'=> 'height in cm'],
           'label' =>  'Physical height',
-          'wrapper' => ['class' => 'form-group col-md-4'] // Shows the wrapper for each e
+          'wrapper' => ['class' => 'form-group-sm col-md-4'] // Shows the wrapper for each e
       ]);
       $this->add('physical_weight', 'text', [
           'attr' => ['maxlength' => '5', 'placeholder'=> 'weight in k.g.'],
           'label' =>  'Physical weight',
-          'wrapper' => ['class' => 'form-group col-md-4'] // Shows the wrapper for each e
+          'wrapper' => ['class' => 'form-group-sm col-md-4'] // Shows the wrapper for each e
       ]);
       $this->add('physical_chest', 'text', [
           'attr' => ['maxlength' => '5', 'placeholder'=> ' in cm'],
           'label' =>  'Physical Chest',
-          'wrapper' => ['class' => 'form-group col-md-4'] // Shows the wrapper for each e
+          'wrapper' => ['class' => 'form-group-sm col-md-4'] // Shows the wrapper for each e
       ]);
 
       $this->add('description', 'textarea', [
-          'attr' => ['maxlength' => '255', 'rows' => '5', 'placeholder'=> 'additional note/details of the job'],
+          'attr' => ['maxlength' => '255', 'rows' => '3', 'placeholder'=> 'additional note/details of the job'],
           'wrapper' => ['class' => 'form-group col-md-12'] // Shows the wrapper for each e
       ]);
 
-      $this->add('save', 'submit', [
+      $this->add('Submit', 'submit', [
           'attr' => ['class'=>'btn btn-lg btn-primary col-md-12']
       ]);
 

@@ -1,5 +1,17 @@
 @extends('employer.layouts.default')
 
+@section('page_header_custom')
+<link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+<style>
+body{
+    font-family: 'Ubuntu', sans-serif;
+}
+.form-group-sm{
+    margin-top:5px;
+}
+/*will remove this block when css will be mixed via gulp*/
+</style>
+@stop
 @section('content-header')
   Post a New Job<small> </small>
 @endsection

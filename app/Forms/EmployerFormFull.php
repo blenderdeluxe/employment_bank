@@ -38,7 +38,7 @@ class EmployerFormFull extends Form{
       ]);
 
       $this->add('address', 'textarea', [
-          'attr' => ['maxlength' => '255', 'rows' => '5', 'placeholder'=> 'Address details', 'required', 'class'=>'form-control input-sm'],
+          'attr' => ['maxlength' => '255', 'rows' => '3', 'placeholder'=> 'Address details', 'required', 'class'=>'form-control input-sm'],
           'label' =>  'Address'
       ]);
       $states = State::lists('name', 'id')->all();
