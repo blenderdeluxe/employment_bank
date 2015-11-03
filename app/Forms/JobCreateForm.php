@@ -99,7 +99,7 @@ class JobCreateForm extends Form{
               'wrapper' => ['class' => 'form-group col-md-3'] // Shows the wrapper default is false
       ]);
 
-      $genders = ['MALE'=>'MALE', 'FEMALE'=>'FEMALE','OTHERS'=>'OTHERS', 'ANY'=>'ANY'];
+      $genders = ['ANY'=>'ANY', 'MALE'=>'MALE', 'FEMALE'=>'FEMALE','OTHERS'=>'OTHERS', ];
       $this->add('preferred_sex', 'select', [
               'choices' => $genders,
               'empty_value' => '==== Select ===',
@@ -127,7 +127,7 @@ class JobCreateForm extends Form{
              'choices' => Subject::lists('name', 'id')->all(),
              'empty_value' => '--- Select ---',
              'label' => 'Subject/Trade :',
-             'attr' => ['required'],
+             //'attr' => ['required'],
              'wrapper'  =>  ['class'=> 'form-group col-md-4']
       ]);
 

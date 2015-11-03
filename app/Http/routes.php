@@ -70,9 +70,16 @@ Route::group(['prefix'=>'employer'], function() {
         Route::post('/job/create', ['as'=>'employer.create_job', 'uses' => 'EmployerHomeController@storeJob']);
 
         Route::get('/job/list', ['as'=>'employer.list_job', 'uses' => 'EmployerHomeController@listJobs']);
+        
+        Route::get('/job/view/{num}', ['as'=>'employer.view_job', 'uses' => 'EmployerHomeController@viewJob']);
+
+
+
         Route::get('/job/edit/{id}', ['as'=>'employer.edit_job', 'uses' => 'EmployerHomeController@editJob']);
         Route::put('/job/edit/{id}', ['as'=>'employer.update_job', 'uses' => 'EmployerHomeController@updateJob']);
 
+        
+        
         Route::get('/dashboard', ['as'=>'employer.home', 'uses' => 'EmployerHomeController@showHome']);
         Route::get('/profile', ['as'=>'employer.profile', 'uses' => 'EmployerHomeController@showProfile']);
         Route::post('/profile', ['as'=>'employer.profile', 'uses' => 'EmployerHomeController@updateProfile']);

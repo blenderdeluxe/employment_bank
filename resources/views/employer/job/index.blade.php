@@ -1,7 +1,7 @@
 @extends('employer.layouts.default')
 
 @section('content-header')
-  Posted Jobs  <small> List view</small>
+  Posted Jobs
 @endsection
 @section('content')
 <div class="row">
@@ -22,6 +22,7 @@
                   <th width="8%">Age limit</th>
                   <th width="20%">Description</th>
                   <th width="5%">Status</th>
+                  <th width="5%">View</th>
                   <th width="12%">Actions</th>
               </tr>
           </thead>
@@ -38,7 +39,8 @@
               <td>{{ $result->industry->name }}</td>
               <td>{{ $result->preferred_age_min }} - {{ $result->preferred_age_max }}</td>
 							<td>{{ $result->description }}</td>
-							<td>{{ $result->status }}</td>
+							<td>{{ $result->status ? 'Active' : 'Deactivated' }}</td>
+              <td><a href="{{ route('employer.view_job', $result->id)}}">View</td>
 							<td>
                 <a href="{!!URL::route('employer.edit_job', $result->id)!!}" class="btn btn-info btn-xs pull-left aug-margin">
                     <i class="fa fa-edit"></i>

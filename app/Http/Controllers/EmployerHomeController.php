@@ -189,5 +189,10 @@ class EmployerHomeController extends Controller{
     }
 
 
+    public function viewJob($id) {
+      $results = PostedJob::with('industry')->with('district')->with('exam')->with('subject')->with('employer')->findOrFail($id); //dd($results);
+      return view($this->content.'job.view', compact('results'));
+    }
+
 
 }

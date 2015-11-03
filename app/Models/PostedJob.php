@@ -32,7 +32,27 @@ class PostedJob extends Model{
           //return $this->hasMany('employment_bank\Models\CandidateEduDetails', 'candidate_id');
           return $this->belongsTo('employment_bank\Models\Employer', 'created_by');
       }
-      //created_by
+
+      public function district(){
+          //return $this->hasMany('employment_bank\Models\CandidateEduDetails', 'candidate_id');
+          return $this->belongsTo('employment_bank\Models\District', 'place_of_employment_district_id');
+      }
+
+      public function state(){
+          //return $this->hasMany('employment_bank\Models\CandidateEduDetails', 'candidate_id');
+          return $this->belongsTo('employment_bank\Models\State', 'place_of_employment_state_id');
+      }
+
+      public function exam(){
+          //return $this->hasMany('employment_bank\Models\CandidateEduDetails', 'candidate_id');
+          return $this->belongsTo('employment_bank\Models\Exam', 'exam_passed_id');
+      }
+
+      public function subject(){
+          //return $this->hasMany('employment_bank\Models\CandidateEduDetails', 'candidate_id');
+          return $this->belongsTo('employment_bank\Models\Subject', 'subject_id');
+      }
+      //place_of_employment_state_id
 
       public function getPhysicalHeightAttribute($value)
       {
