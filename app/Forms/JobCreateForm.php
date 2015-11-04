@@ -13,11 +13,11 @@ class JobCreateForm extends Form{
     public function buildForm(){
 
       $this->add('post_name', 'text', [
-          'attr' => ['required', 'maxlength' => '255', 'placeholder'=> 'name of the POST'],
+          'attr' => ['required', 'maxlength' => '255', 'placeholder'=> 'name of the POST', 'title'=>'name of the position'],
           'wrapper' => ['class' => 'form-group-sm col-md-5'] // Shows the wrapper for each e
       ]);
       $this->add('no_of_post', 'number', [
-          'attr' => ['required', 'maxlength' => '3', 'placeholder'=> 'no of vacancy'],
+          'attr' => ['required', 'maxlength' => '3', 'placeholder'=> 'no of vacancy', 'title'=>'total position vacant'],
           'wrapper' => ['class' => 'form-group-sm col-md-3'] // Shows the wrapper for each e
       ]);
       $this->add('industry_id', 'select', [
@@ -71,12 +71,12 @@ class JobCreateForm extends Form{
       ]);
 
       $this->add('preferred_age_min', 'number', [
-          'attr' => ['required', 'maxlength' => '2', 'placeholder'=> 'preferred_age_min'],
+          'attr' => ['required', 'maxlength' => '2', 'placeholder'=> 'preferred_age_min', 'min'=>"10", 'max'=>"99"],
           'wrapper' => ['class' => 'form-group-sm col-md-3'] // Shows the wrapper for each e
       ]);
 
       $this->add('preferred_age_max', 'number', [
-          'attr' => ['required', 'maxlength' => '2', 'placeholder'=> 'preferred_age_max'],
+          'attr' => ['required', 'maxlength' => '2', 'placeholder'=> 'preferred_age_max', 'min'=>"10", 'max'=>"99"],
           'wrapper' => ['class' => 'form-group-sm col-md-3'] // Shows the wrapper for each e
       ]);
       $casts = ['ANY'=>'ANY'] + Caste::lists('name', 'id')->all();

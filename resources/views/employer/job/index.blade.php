@@ -1,5 +1,16 @@
 @extends('employer.layouts.default')
-
+@section('page_header_custom')
+<link href='https://fonts.googleapis.com/css?family=Ubuntu' rel='stylesheet' type='text/css'>
+<style>
+body{
+    font-family: 'Ubuntu', sans-serif;
+}
+.form-group-sm{
+    margin-top:5px;
+}
+/*will remove this block when css will be mixed via gulp*/
+</style>
+@stop
 @section('content-header')
   Posted Jobs
 @endsection
@@ -17,7 +28,7 @@
               <tr>
                   <th width="2%">#</th>
                   <th width="10%">Post Name</th>
-                  <th width="6%">No. of Post</th>
+                  <th width="8%">No. of Post</th>
                   <th width="5%">Industry/Sector</th>
                   <th width="8%">Age limit</th>
                   <th width="20%">Description</th>

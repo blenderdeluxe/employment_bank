@@ -9,9 +9,9 @@ class PostedJob extends Model{
       protected $table  =   'posted_jobs';
       public static $rules = [
           'post_name' => 'required|min:3|max:255',
-          'no_of_post' =>  'required|numeric',
+          'no_of_post' =>  'required|numeric|digits_between:1,8',
           'preferred_age_min' => 'integer|min:15|max:70',
-          'preferred_age_max' => 'integer|min:0|max:100',
+          //'preferred_age_max' => 'integer|min:0|max:100',
           'preferred_age_max' => 'integer|min:0|max:100',
           //'phone_no_ext' => 'max:',
           //'preferred_age_max' => 'integer|min:0|max:100',
@@ -73,6 +73,13 @@ class PostedJob extends Model{
       {
         return $this->attributes['preferred_experience'] = ($value == 0) ? '' : $value;
       }
+
+      public function getOtherBenefitsAttribute($value)
+      {
+        return $this->attributes['other_benefits'] = ($value == 0) ? '' : $value;
+      }
+
+      
 
 
 }
