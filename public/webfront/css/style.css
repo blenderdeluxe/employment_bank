@@ -468,12 +468,12 @@ nav{
 }
 .main-page-title{
 	width:100%;
-	min-height:104px;
+	min-height:44px;
 	border-bottom:1px solid #f4f6f7;
 	background:#ecf0f1;
 }
 .page-title{
-	padding:34px 0;
+	padding:14px 0;
 	font-size:24px;
 	font-weight:700;
 	color:#565656;

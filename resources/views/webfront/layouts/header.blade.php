@@ -1,3 +1,10 @@
+@section('page_specific_styles')
+<style>
+.main-logo{
+  margin-top:-0.09%;
+}
+</style>
+@stop
 <div class="container"><!-- container -->
   <div class="row">
     <div class="col-md-4"><!-- logo -->
