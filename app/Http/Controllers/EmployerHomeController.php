@@ -126,7 +126,7 @@ class EmployerHomeController extends Controller{
              'method' => 'PUT',
              'model' => $result,
              'url' => route($this->route.'update_job', $id)
-       ])->remove('save');
+       ])->remove('Submit');
 
        return view($this->content.'job.edit', compact('form','result'));
     }
@@ -190,6 +190,7 @@ class EmployerHomeController extends Controller{
 
 
     public function viewJob($id) {
+      
       $results = PostedJob::with('industry')->with('district')->with('exam')->with('subject')->with('employer')->findOrFail($id); //dd($results);
       return view($this->content.'job.view', compact('results'));
     }
