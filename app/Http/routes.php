@@ -29,6 +29,11 @@ Route::group(['prefix'=>'admin'], function() {
         Route::get('/candidates/applications/verified', ['as'=>'admin.applications_verified', 'uses' => 'AdminHomeController@applications_verified']);
         Route::get('/candidates/suspend/profile/{candidate_id}', ['as'=>'admin.suspend.profile', 'uses' => 'AdminHomeController@suspendCandidate']);
         Route::get('/candidates/applications/suspended', ['as'=>'admin.applications_suspended', 'uses' => 'AdminHomeController@applications_suspended']);
+
+        //Employer Module on Admin Panel
+        Route::get('/employers/list/all', ['as'=>'admin.employer_list_all', 'uses' => 'AdminHomeController@employerListAll']);
+        Route::get('/employers/view/profile/{employer_id}', ['as'=>'admin.employer_view_profile', 'uses' => 'AdminHomeController@viewEmployerProfile']);
+
     });
 
 });

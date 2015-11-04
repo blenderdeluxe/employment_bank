@@ -110,4 +110,15 @@
       
     </ul>
   </li>
+
+  <li class="treeview">
+    <a href="#">
+      <i class="fa fa-share"></i> <span>Employer</span>
+      <i class="fa fa-angle-left pull-right"></i>
+    </a>
+    <ul class="treeview-menu">
+      <li><a href="{{URL::route('admin.employer_list_all')}}"><i class="text-blue fa fa-list"></i> List</a></li>
+    </ul>
+  </li>
+
 </ul>

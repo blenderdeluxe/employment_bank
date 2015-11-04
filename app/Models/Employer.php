@@ -46,14 +46,13 @@ class Employer extends Model implements AuthenticatableContract, CanResetPasswor
           'Statutory Bodies'  =>  'Statutory Bodies',
           'Others'      =>  'Others'
     ];
-    protected function getPhysicalHeightAttribute($value) {
-        return $this->attributes['physical_height'] = ($value=='0.00')? '': $value;
-    }
-    protected function getPhysicalWeightAttribute($value) {
-        return $this->attributes['physical_weight'] = ($value=='0.00')? '': $value;
-    }
 
-    protected function getPhysicalChestAttribute($value) {
-        return $this->attributes['physical_chest'] = ($value=='0.00')? '': $value;
-    }
+    public function industry(){
+          //return $this->hasMany('employment_bank\Models\CandidateEduDetails', 'candidate_id');
+          return $this->belongsTo('employment_bank\Models\IndustryType', 'industry_id');
+      }
+    // protected function getPhysicalHeightAttribute($value) {
+    //     return $this->attributes['physical_height'] = ($value=='0.00')? '': $value;
+    // }
+    
 }

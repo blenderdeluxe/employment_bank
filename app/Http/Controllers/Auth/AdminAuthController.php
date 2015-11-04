@@ -44,7 +44,7 @@ class AdminAuthController extends Controller{
 
         if(!$auth){
             return back()->withInput()
-            ->with(['error'=> 'Either Username or Password is Incorrect! or Acount is Not Yet Activated']);
+            ->withErrors(['error'=> 'Either username or password is incorrect! or account is not yet activated']);
         }
 
         $adminfullname = Auth::admin()->get()->fullname;

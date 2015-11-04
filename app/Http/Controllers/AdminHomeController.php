@@ -13,7 +13,8 @@ use Kris\LaravelFormBuilder\FormBuilder;
 use Redirect, Session, Hashids, Auth;
 use Illuminate\Support\Str;
 use employment_bank\Helpers\Basehelper;
-
+use employment_bank\Models\Employer;
+use employment_bank\Models\PostedJob;
 use employment_bank\Models\Candidate;
 use employment_bank\Models\CandidateInfo;
 use employment_bank\Models\CandidateEduDetails;
@@ -156,4 +157,32 @@ class AdminHomeController extends Controller{
             return redirect()->back()->with('message', 'Unable to process your request. Please try again or contact TechSupport.');
         }
     }
+
+
+    public function employerListAll()
+    {
+        $results = Employer::with('industry')->paginate(1);
+        return view($this->content.'employers.index', compact('results'));
+    }
+
+    public function viewEmployerProfile($employer_id)
+    {
+        //Hashids::getDefaultConnection();
+        $id =  Hashids::decode($employer_id);
+        $employer = Employer::find($id)->first();
+        //return $employer->photo;
+        $jobs_not_verified = PostedJob::with('industry')->where('created_by', $id)
+                            ->where('status', 0)
+                            ->get();
+
+        $jobs_available = PostedJob::with('industry')->where('created_by', $id)
+                            ->where('status', 1)
+                            ->get(); //to gel alll jobs that is marked as available/published
+
+        $jobs_filled_up = PostedJob::with('industry')->where('created_by', $id)
+                            ->where('status', 2)
+                            ->get();
+
+        return view($this->content.'employers.profile', compact('employer', 'jobs_not_verified','jobs_available','jobs_filled_up'));
+      }
 }
