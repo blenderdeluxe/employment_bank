@@ -20,52 +20,49 @@
             <!-- Add the bg color to the header using any of the bg-* classes -->
             <div class="widget-user-header bg-yellow">
               <div class="widget-user-image">
-                <img class="img-circle" src="{!! URL::to($employer->photo) !!}" alt="User Avatar">
+                <img class="" src="{!! URL::to($employer->photo) !!}" alt="User Avatar">
               </div>
               <!-- /.widget-user-image -->
-              <h3 class="widget-user-username">Nadia Carmichael</h3>
-              <h5 class="widget-user-desc">Lead Developer</h5>
+              <h3 class="widget-user-username">{{ $employer->organization_name }}</h3>
+              <h5 class="widget-user-desc"> {{ $employer->organization_type }} / {{ $employer->organization_sector}}</h5>
             </div>
             <div class="box-footer no-padding">
               <ul class="nav nav-stacked">
-                <li><a href="#">Projects <span class="pull-right badge bg-blue">31</span></a></li>
-                <li><a href="#">Tasks <span class="pull-right badge bg-aqua">5</span></a></li>
-                <li><a href="#">Completed Projects <span class="pull-right badge bg-green">12</span></a></li>
-                <li><a href="#">Followers <span class="pull-right badge bg-red">842</span></a></li>
+                <li><a href="#">Total no of Jobs Posted <span class="pull-right badge bg-blue">{{$total_jobs}}</span></a></li>
+                <li><a href="#">Jobs Not Verified yet<span class="pull-right badge bg-red">{{count($jobs_not_verified)}}</span></a></li>
+                <li><a href="#">Jobs Filled up <span class="pull-right badge bg-green">{{count($jobs_filled_up)}}</span></a></li>
+                <li><a href="#">Jobs Available now<span class="pull-right badge bg-aqua">{{count($jobs_available)}}</span></a></li>
               </ul>
             </div>
           </div>
           <!-- /.widget-user -->
         </div>
         <!-- /.col -->
-
 <div class="col-md-4">
 <!-- About Me Box -->
   <div class="box box-primary">
     <div class="box-header with-border">
-      <h3 class="box-title">About Me</h3>
+      <h3 class="box-title"> Contact Person details </h3>
     </div><!-- /.box-header -->
     <div class="box-body">
-      <strong><i class="fa fa-phone margin-r-5"></i>  Phone</strong>
-      <p class="text-muted"> {{$employer->mobile_no}} </p>
+    
+      <strong><i class="fa fa-user margin-r-5"></i> Name </strong>
+      &nbsp;&nbsp;&nbsp;
+      <span> 
+      {{$employer->contact_name}}  ({{ $employer->contact_designation}})
+      </span>
+      <hr>
+      <strong><i class="fa fa-phone margin-r-5"></i> Phone</strong>
+      &nbsp;&nbsp;&nbsp;
+      <span> 
+      {{$employer->contact_mobile_no}}  
+      </span>
       <hr>
       <strong><i class="fa fa-envelope margin-r-5"></i>  E-mail</strong>
-      <p class="text-muted"> {{$employer->email}} </p>
-      <hr>
-      <strong><i class="fa fa-map-marker margin-r-5"></i> Address</strong>
-      <p class="text-muted">
-        {{ $employer->address}}<br/>
-        
-      </p>
-      <!-- <hr>
-      <strong><i class="fa fa-pencil margin-r-5"></i> Languages known</strong>
-      <p>
-        <span class="label label-danger">UI Design</span>
-        <span class="label label-success">Coding</span>
-        <span class="label label-info">Javascript</span>
-        <span class="label label-warning">PHP</span>
-        <span class="label label-primary">Node.js</span>
-      </p> -->
+      &nbsp;&nbsp;&nbsp;
+      <span> 
+      {{$employer->contact_email}}  
+      </span>
       <hr>
       <strong><i class="fa fa-file-text-o margin-r-5"></i> Additional Note</strong>
       <p>{{ $employer->additional_info }}</p>
@@ -75,29 +72,37 @@
 <div class="col-md-12">
 <div class="nav-tabs-custom">
   <ul class="nav nav-tabs">
-    <li class="active"><a href="#bio" data-toggle="tab"> Profile/Bio</a></li>
-    <li><a href="#edu" data-toggle="tab">Education Details</a></li>
-    <li><a href="#exp" data-toggle="tab">Experience Details</a></li>
+    <li class="active"><a href="#bio" data-toggle="tab"> Jobs needs verification</a></li>
+    <li><a href="#edu" data-toggle="tab">Jobs available now</a></li>
+    <li><a href="#exp" data-toggle="tab">Jobs fillied up</a></li>
   </ul>
-<div class="tab-content">
+<div class="tab-content no-padding">
 <div class="active tab-pane" id="edu">
-    <table class="table table-condensed">
+@if(count($jobs_not_verified)!=0)
+  <table class="table table-condensed">
     <tr>
-      <th>Exam Passed</th><th>University/Board/Council</th>
-      <th> Subject/ Trade </th> <th>Specialization</th> <th>Year</th>
-      <th style="width: 80px">% of marks</th>
+      <th>Job ID</th><th>Position</th>
+      <th> No. of post.</th> <th>Industry</th> <th>Type</th>
+      <th> Exam</th><th> Salary Offered</th>
     </tr>
     @foreach($jobs_not_verified as $item)
       <tr>
-        <td> {{ $item->exam_name }}</td>
-        <td> {{ $item->board_name }} </td>
-        <td> {{ $item->subject_name }} </td>
-        <td> {{ $item->specialization }} </td>
-        <td> {{ $item->pass_year }} </td>
-        <td> {{ $item->percentage }} </td>
+        <td> {{ $item->emp_job_id }}</td>
+        <td> {{ $item->post_name }} </td>
+        <td> {{ $item->no_of_post }} </td>
+        <td> {{ $item->industry->name }} </td>
+        <td> {{ $item->job_type }} </td>
+        <td> {{ $item->exam->name }} </td>
+        
+        <td> {{ Basehelper::moneyFormatIndia($item->salary_offered_min) }} -
+        {{ Basehelper::moneyFormatIndia($item->salary_offered_max) }}
+        </td>
       </tr>
     @endforeach
     </table>
+  @else
+  <p class="text-center"> No records available</p>
+  @endif
   </div><!-- /.tab-pane -->
   <div class="tab-pane" id="exp">
   @if(count($jobs_available)!=0)
@@ -119,7 +124,7 @@
     @endforeach
     </table>
   @else
-    No Experience records has been provided
+    <p class="text-center"> No records available</p>
   @endif
   </div><!-- /.tab-pane -->
 

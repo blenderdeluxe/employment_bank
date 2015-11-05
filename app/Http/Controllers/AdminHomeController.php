@@ -171,10 +171,11 @@ class AdminHomeController extends Controller{
         $id =  Hashids::decode($employer_id);
         $employer = Employer::find($id)->first();
         //return $employer->photo;
+        $total_jobs  = PostedJob::where('created_by', $id)
+                            ->count();
         $jobs_not_verified = PostedJob::with('industry')->where('created_by', $id)
                             ->where('status', 0)
                             ->get();
-
         $jobs_available = PostedJob::with('industry')->where('created_by', $id)
                             ->where('status', 1)
                             ->get(); //to gel alll jobs that is marked as available/published
@@ -183,6 +184,6 @@ class AdminHomeController extends Controller{
                             ->where('status', 2)
                             ->get();
 
-        return view($this->content.'employers.profile', compact('employer', 'jobs_not_verified','jobs_available','jobs_filled_up'));
+        return view($this->content.'employers.profile', compact('employer', 'jobs_not_verified','jobs_available','jobs_filled_up','total_jobs'));
       }
 }

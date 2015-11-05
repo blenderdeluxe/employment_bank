@@ -18,7 +18,7 @@ gulp.task("copyfiles", function() {
       .pipe(gulp.dest("resources/assets/css/"));
   gulp.src("public/assets/css/ionicons.min.css")
       .pipe(gulp.dest("resources/assets/css/"));
-  gulp.src("public/assets/css/AdminLTE.min.css")
+  gulp.src("public/assets/css/AdminLTE.css")
       .pipe(gulp.dest("resources/assets/css/"));
   gulp.src("public/assets/css/skin-blue.min.css")
       .pipe(gulp.dest("resources/assets/css/"));
@@ -48,7 +48,7 @@ elixir(function(mix) {
           'bootstrap.min.css',
           'font-awesome.min.css',
           'ionicons.min.css',
-          'AdminLTE.min.css',
+          'AdminLTE.css',
           'skin-blue.min.css',
           'custom.css',
           ], 'public/assets/css');
