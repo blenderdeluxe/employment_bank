@@ -14,7 +14,7 @@
 @section('content')
 
  <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-5">
           <!-- Widget: user widget style 1 -->
           <div class="box box-widget widget-user-2">
             <!-- Add the bg color to the header using any of the bg-* classes -->
