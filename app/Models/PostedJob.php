@@ -3,8 +3,21 @@
 namespace employment_bank\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+use Cviebrock\EloquentSluggable\SluggableTrait;
 
-class PostedJob extends Model{
+class PostedJob extends Model implements SluggableInterface{
+
+      use SluggableTrait;  
+      protected $sluggable = [
+        'build_from' => ['seo_url', 'district.name', 'exam.name']
+        //'build_from' => 'seo'
+      ];
+
+      public function getSeoUrlAttribute($value='')
+      {
+        return $this->post_name.' at '.$this->employer->organization_name.' '.$this->subject->name;
+      }
 
       protected $table  =   'posted_jobs';
       public static $rules = [
@@ -77,9 +90,7 @@ class PostedJob extends Model{
       public function getOtherBenefitsAttribute($value)
       {
         return $this->attributes['other_benefits'] = ($value == 0) ? '' : $value;
-      }
-
-      
+      }     
 
 
 }

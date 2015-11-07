@@ -155,6 +155,8 @@ return [
 
         Vinkla\Hashids\HashidsServiceProvider::class,
 
+        Cviebrock\EloquentSluggable\SluggableServiceProvider::class,
+
     ],
 
     /*

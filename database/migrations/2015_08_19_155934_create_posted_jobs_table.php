@@ -11,6 +11,7 @@ class CreatePostedJobsTable extends Migration{
               $table->increments('id');
               $table->string('emp_job_id')->comment('Job ID')->nullable();
               $table->string('post_name')->comment('Name of the POST');
+              $table->string('slug')->unique();
               $table->integer('no_of_post', false)->nullable();
               $table->integer('industry_id', false, true)->comment('Foregn key for master_industry types Nature of Job sector');
 
