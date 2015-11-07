@@ -34,6 +34,9 @@ Route::group(['prefix'=>'admin'], function() {
         Route::get('/employers/list/all', ['as'=>'admin.employer_list_all', 'uses' => 'AdminHomeController@employerListAll']);
         Route::get('/employers/view/profile/{employer_id}', ['as'=>'admin.employer_view_profile', 'uses' => 'AdminHomeController@viewEmployerProfile']);
 
+        //Posted Job Module on Admin Panel
+        Route::get('/job/list/all', ['as'=>'admin.job_list_all', 'uses' => 'AdminHomeController@jobListAll']);
+
     });
 
 });

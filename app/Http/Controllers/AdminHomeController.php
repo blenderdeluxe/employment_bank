@@ -186,4 +186,11 @@ class AdminHomeController extends Controller{
 
         return view($this->content.'employers.profile', compact('employer', 'jobs_not_verified','jobs_available','jobs_filled_up','total_jobs'));
       }
+
+      public function jobListAll()
+      {
+          $results = PostedJob::with('industry')->get();
+
+          return view($this->content.'jobs.index', compact('results'));
+      }
 }
