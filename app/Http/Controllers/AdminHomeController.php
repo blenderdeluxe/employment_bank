@@ -193,4 +193,25 @@ class AdminHomeController extends Controller{
 
           return view($this->content.'jobs.index', compact('results'));
       }
+
+      public function viewJob($id)
+      {
+            $decoded =  Hashids::decode($id);
+            $id = $decoded[0];
+            $results = PostedJob::with('industry')->with('district','exam','subject','employer')->findOrFail($id); //dd($results);
+            return view($this->content.'jobs.view', compact('results'));
+      }
+      public function jobUpdateStatus($id, Request $request)
+      {
+            $decoded =  Hashids::decode($id);
+            $id = $decoded[0];
+            $modal = PostedJob::findOrFail($id);
+            $model->status = $request->status;
+
+            if($model->save()){
+                return redirect()->back()->with('message', 'Status has been successfully');
+            }else{
+                return redirect()->back()->with('message', 'Unable to process your request');
+            }
+      }
 }

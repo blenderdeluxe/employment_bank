@@ -36,6 +36,9 @@ Route::group(['prefix'=>'admin'], function() {
 
         //Posted Job Module on Admin Panel
         Route::get('/job/list/all', ['as'=>'admin.job_list_all', 'uses' => 'AdminHomeController@jobListAll']);
+        Route::get('/job/view/{id}', ['as'=>'admin.job_view', 'uses' => 'AdminHomeController@viewJob']);
+        Route::get('/job/update_status/{id}', ['as'=>'admin.job_update_status', 'uses' => 'AdminHomeController@jobUpdateStatus']);
+        Route::post('/job/update_status/{id}', ['as'=>'admin.job_update_status', 'uses' => 'AdminHomeController@jobUpdateStatus']);
 
     });
 

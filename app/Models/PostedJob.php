@@ -95,7 +95,19 @@ class PostedJob extends Model implements SluggableInterface{
       public function getOtherBenefitsAttribute($value)
       {
         return $this->attributes['other_benefits'] = ($value == 0) ? '' : $value;
-      }     
+      }
+
+      public function getJobStatusAttribute($value)
+      {
+        if($this->attributes['status'] == 0)
+          return '<span class="label label-warning"> Unpublished </span>';
+
+        if($this->attributes['status'] == 1)
+          return '<span class="label label-success"> Active </span>';
+      
+        if($this->attributes['status'] == 2)
+          return '<span class="label label-danger"> Filled Up </span>';
+      }    
 
 
 }

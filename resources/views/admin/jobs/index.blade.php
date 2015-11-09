@@ -1,9 +1,7 @@
 @extends('admin.layouts.default')
 
 @section('page_specific_header')
-<style> .emp_link{ font-weight: 600;}
-.emp_link:hover{ color:#2F749C;}
-</style>
+<style> .emp_link{ font-weight: 600;} .emp_link:hover{ color:#2F749C;} .label{font-size: 90%; font-weight: 400;}</style>
 @stop
 
 @section('content-header')
@@ -23,11 +21,14 @@
     <tr>
       <th>Job ID</th><th>Position</th>
       <th> No. of post.</th> <th>Industry</th> <th>Type</th>
-      <th> Qualification </th><th> Salary Offered</th>
+      <th> Qualification </th><th> Salary Offered</th> <th>Status</th>
     </tr>
     @foreach($results as $item)
       <tr>
-        <td> {{ $item->emp_job_id }}</td>
+        <td>
+         <a href="{!! route('admin.job_view', Hashids::encode($item->id))!!}"># {{ $item->emp_job_id }} 
+         </a>
+        </td>
         <td> {{ $item->post_name }} </td>
         <td> {{ $item->no_of_post }} </td>
         <td> {{ $item->industry->name }} </td>
@@ -36,6 +37,7 @@
         <td> {{ Basehelper::moneyFormatIndia($item->salary_offered_min) }} -
         {{ Basehelper::moneyFormatIndia($item->salary_offered_max) }}
         </td>
+        <td> {!! $item->job_status !!} </td>
       </tr>
     @endforeach
     </table>
