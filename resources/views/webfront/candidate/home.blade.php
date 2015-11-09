@@ -223,6 +223,8 @@ a.tryitbtn:hover,a.tryitbtn:active,a.showbtn:hover,a.showbtn:active {
 
     <div class="row">
       
+      
+
       <a href="{{URL::route('candidate.create.resume')}}" target="_blank">
         <div class="col-lg-3 col-md-3 col-sm-12 col-xs-12">
           <div class="info-box blue-bg">
@@ -262,6 +264,17 @@ a.tryitbtn:hover,a.tryitbtn:active,a.showbtn:hover,a.showbtn:active {
           </div><!--/.info-box-->     
         </div><!--/.col-->
       </a>
+
+      <!--
+      <strong>Profile Completion</strong>
+      <div class="col-md-12">
+        <div class="progress">
+          <div class="progress-bar" style="width: 60%;">
+              60%
+          </div>
+        </div>  
+      </div> 
+      -->
       
     </div><!--/.row-->
     

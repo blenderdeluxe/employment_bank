@@ -246,10 +246,16 @@
 @stop
 
 @section('page_specific_js')
+
 <script src="{{ URL::asset('plugins/jQueryUI/jquery-ui.min.js') }}" type="text/javascript"></script>
 @stop
 
 @section('page_specific_scripts')
+
+  $('#photo_url').removeAttr('required');
+  $('#cv_url').removeAttr('required');
+
+
 $( "._date" ).datepicker({
         changeMonth: true,
         changeYear: true,
@@ -260,4 +266,5 @@ $( "._date" ).datepicker({
         //minDate: '-26Y',
         maxDate: "-16Y"
   });
+
 @stop

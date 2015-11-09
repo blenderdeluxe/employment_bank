@@ -130,7 +130,7 @@ class CandidateHomeController extends Controller{
                  'url' => route($this->route.'update.resume')
             ])->remove('save')->remove('update');
 
-            return view($this->content.'resume_edit', compact('form'));
+            return view($this->content.'resume_edit', compact('form', 'model'));
         }else{
             return Redirect::route($this->route.'home')->with('message', 'You can not edit without filling up your bio');
         }
