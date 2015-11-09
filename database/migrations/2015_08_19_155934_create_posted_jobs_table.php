@@ -25,7 +25,7 @@ class CreatePostedJobsTable extends Migration{
               $table->integer('preferred_age_min', false)->nullable()->comment('preferred age min');
               $table->integer('preferred_age_max', false)->nullable()->comment('preferred age max');
               $table->string('preferred_caste')->nullable()->comment('Preferred cast');
-              $table->enum('preferred_relegion', ['BUDDISM', 'CHRISTIANITY','HINDUISM','ISLAM','JAINISM','PARSI','SIKHISM', 'OTHERS', 'ANY']);
+              //$table->enum('preferred_relegion', ['BUDDISM', 'CHRISTIANITY','HINDUISM','ISLAM','JAINISM','PARSI','SIKHISM', 'OTHERS', 'ANY']);
               $table->enum('preferred_sex', ['MALE', 'FEMALE','OTHERS', 'ANY'])->comment('gender');
               $table->integer('exam_passed_id', false, true)->comment('This will be the foreign key for exam passed');
               $table->integer('subject_id', false)->unsigned()->default('0')->comment('Subject foregn key from master subjects');

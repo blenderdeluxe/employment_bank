@@ -8,7 +8,7 @@ use employment_bank\Http\Controllers\Controller;
 use employment_bank\Models\Employer;
 use Illuminate\Database\QueryException;
 use Kris\LaravelFormBuilder\FormBuilder;
-use Redirect, Auth, Validator;
+use Redirect, Auth, Validator, DB, Hashids;
 use Illuminate\Support\Str;
 use employment_bank\Helpers\Basehelper;
 
@@ -98,18 +98,25 @@ class EmployerHomeController extends Controller{
     //PostedJob
     public function storeJob(Request $request){
 
-        $validator = Validator::make($data = $request->all(), PostedJob::$rules);
+        $validator = Validator::make($data = $request->all(), PostedJob::$rules, PostedJob::$messages);
         if ($validator->fails())
           return Redirect::back()->withErrors($validator)->withInput();
 
         $data['created_by'] = Auth::employer()->get()->id;
-        //$data['emp_job_id'] = '';
-        if(PostedJob::create($data)){
 
-          return Redirect::route($this->route.'list_job')->with('message', 'New Job has been Posted!');
-        }else{
-          return Redirect::back()->withInput()->with('message', 'Unable to process your request');
+        DB::beginTransaction();
+        //Generate Job id
+        $current_id = PostedJob::all()->last()->id + 1;
+        $job_id = 'EMPJOB'.str_pad($current_id, 6, '0', STR_PAD_LEFT); 
+        $data['emp_job_id'] = $job_id;
+        $job = PostedJob::create($data);
+        if (!$job)
+        {
+            DB::rollbackTransaction();
+            return Redirect::back()->withInput()->with('message', 'Unable to process your request');
         }
+        DB::commit();
+          return Redirect::route($this->route.'list_job')->with('message', 'New Job has been Posted!');
     }
 
     public function listJobs(){
@@ -190,10 +197,11 @@ class EmployerHomeController extends Controller{
 
 
     public function viewJob($id) {
-      
+
+      $decoded =  Hashids::decode($id);
+      $id = $decoded[0];
       $results = PostedJob::with('industry')->with('district')->with('exam')->with('subject')->with('employer')->findOrFail($id); //dd($results);
       return view($this->content.'job.view', compact('results'));
     }
-
 
 }

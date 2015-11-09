@@ -75,6 +75,8 @@ return [
     'unique'               => 'The :attribute has already been taken.',
     'url'                  => 'The :attribute format is invalid.',
     'alpha_spaces'         => 'The :attribute can not contain spaces',
+    'greater_than_field'   => 'The :attribute must be greater then Min field',
+    //to code for dynamically fgetting the name of compared field aug
 
     /*
     |--------------------------------------------------------------------------

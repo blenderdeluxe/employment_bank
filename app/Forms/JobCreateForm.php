@@ -56,12 +56,12 @@ class JobCreateForm extends Form{
       $this->add('salary_offered_min', 'text', [
           'attr' => ['required', 'maxlength' => '8', 'placeholder'=> 'salary offered min'],
           'wrapper' => ['class' => 'form-group-sm col-md-4'], // Shows the wrapper for each e
-          'label'   =>  'Salary Offered Min. (annual)'
+          'label'   =>  'Salary Offered Min. (monthly)'
       ]);
       $this->add('salary_offered_max', 'text', [
           'attr' => ['required', 'maxlength' => '8', 'placeholder'=> 'salary offered max'],
           'wrapper' => ['class' => 'form-group-sm col-md-4'],
-          'label'   =>  'Salary Offered Max. (annual)'
+          'label'   =>  'Salary Offered Max. (monthly)'
       ]);
 
       $this->add('other_benefits', 'text', [
@@ -88,16 +88,16 @@ class JobCreateForm extends Form{
               'wrapper' => ['class' => 'form-group-sm col-md-3'] // Shows the wrapper default is false
       ]);
 
-      $relegions = ['ANY'=>'ANY','BUDDHISM'=>'BUDDHISM', 'CHRISTIANITY'=>'CHRISTIANITY','HINDUISM'=>'HINDUISM','ISLAM'=>'ISLAM',
-          'JAINISM'=>'JAINISM','PARSI'=>'PARSI','SIKHISM'=>'SIKHISM', 'OTHERS'=>'OTHERS', 
-      ];
-      $this->add('preferred_relegion', 'select', [
-              'choices' => $relegions,
-              'empty_value' => '==== Select ===',
-              'label' => 'Preferred Relegion',
-              'attr' => ['required'],
-              'wrapper' => ['class' => 'form-group-sm col-md-3'] // Shows the wrapper default is false
-      ]);
+      // $relegions = ['ANY'=>'ANY','BUDDHISM'=>'BUDDHISM', 'CHRISTIANITY'=>'CHRISTIANITY','HINDUISM'=>'HINDUISM','ISLAM'=>'ISLAM',
+      //     'JAINISM'=>'JAINISM','PARSI'=>'PARSI','SIKHISM'=>'SIKHISM', 'OTHERS'=>'OTHERS', 
+      // ];
+      // $this->add('preferred_relegion', 'select', [
+      //         'choices' => $relegions,
+      //         'empty_value' => '==== Select ===',
+      //         'label' => 'Preferred Relegion',
+      //         'attr' => ['required'],
+      //         'wrapper' => ['class' => 'form-group-sm col-md-3'] // Shows the wrapper default is false
+      // ]);
 
       $genders = ['ANY'=>'ANY', 'MALE'=>'MALE', 'FEMALE'=>'FEMALE','OTHERS'=>'OTHERS', ];
       $this->add('preferred_sex', 'select', [

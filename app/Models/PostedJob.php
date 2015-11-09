@@ -23,13 +23,18 @@ class PostedJob extends Model implements SluggableInterface{
       public static $rules = [
           'post_name' => 'required|min:3|max:255',
           'no_of_post' =>  'required|numeric|digits_between:1,8',
-          'preferred_age_min' => 'integer|min:15|max:70',
+          'preferred_age_min' => 'integer|min:15|max:80',
           //'preferred_age_max' => 'integer|min:0|max:100',
-          'preferred_age_max' => 'integer|min:0|max:100',
+          'preferred_age_max' => 'integer|greater_than_field:preferred_age_min|max:100',
+          'salary_offered_min' => 'required|numeric',
+          'salary_offered_max' => 'required|numeric|greater_than_field:salary_offered_min',
+          'subject_id'  =>  'required|exists:master_subjects,id'
           //'phone_no_ext' => 'max:',
           //'preferred_age_max' => 'integer|min:0|max:100',
           //'industry_id'   =>  'required|exists,master_industry_types,id',
       ];
+
+      public static $messages = ['subject_id.required' => 'The Subject field is required'];
 
       protected $guarded = ['id', '_token', '_method'];
       //protected $fillable = ['name', 'exam_category', 'status', 'description'];
