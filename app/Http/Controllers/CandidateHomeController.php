@@ -139,12 +139,14 @@ class CandidateHomeController extends Controller{
     public function updateResume(Request $request){
 
         $validator = Validator::make($data = $request->all(), CandidateInfo::$rules, CandidateInfo::$messages);
+        
+        $validator = CandidateInfo::getValidationRules($rules = 'update');
         $candidate_id = $this->candidate_id;
         $candidate = Candidate::find($candidate_id);
-
+        $check_if_valid = $this->validate($request, $validator);
         if(count($candidate->bio)==1){
 
-              if ($validator->fails())
+              if ($check_if_valid)
                   return Redirect::back()->withErrors($validator)->withInput();
 
               $cand_info = CandidateInfo::where('candidate_id', $candidate_id)->firstOrFail();

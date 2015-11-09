@@ -43,6 +43,46 @@ class CandidateInfo extends Model{
 
   ];
 
+
+  public static function getValidationRules($rules = '')
+  {
+      if ($rules == 'update')
+      {
+          return 
+          [
+            'fullname'    =>  'required|min:3|max:50',
+            'guar_name'   =>  'required|min:3|max:50',
+            'spouse_name' =>  'max:50',
+            'sex'         =>  'required|in:MALE,FEMALE,OTHERS',
+            'caste_id'    =>  'required|exists:master_casts,id',
+            'religion'    =>  'required|in:BUDDISM,CHRISTIANITY,HINDUISM,ISLAM,JAINISM,PARSI,SIKHISM,OTHERS',
+            'marital_status'=>'required|in:UNMARRIED,MARRIED,DIVORCEE,WIDOW',
+            'dob'         =>  'required|date_format:d-m-Y|before:"now -15 year"',
+            'physical_challenge'  =>  'required|in:YES,NO',
+            'ex_service'  =>  'required|in:YES,NO',
+            'address'     =>  'max:255',
+            'state_id'    =>  'required|exists:master_states,id',
+            'district_id' =>  'required|exists:master_districts,id',
+            'pincode'     =>  'numeric|digits_between:6,6',
+            'physical_height'     =>  'numeric',
+            'physical_weight'     =>  'numeric',
+            'physical_chest'      =>  'numeric',
+
+            'photo_url'           => 'mimes:jpeg,png|max:512',
+            'cv_url'              => 'mimes:pdf,doc,docx|max:102400',
+
+            'proof_details_id'    =>  'required|exists:master_proof_details,id',
+            'proof_no'            =>  'max:100',
+            'relocated'           =>'required|in:No,Within State,Within Country,Outside Country',
+            'bpl'                 =>  'required|in:YES,NO',
+            'adhaar_no'           =>  'max:100',
+            'additional_info'     =>  'max:255',
+          ];
+      } else {
+          return $rules;
+      }
+  }
+
   public static $messages = ['dob.before'=> 'Date of Birth must be minimum 15 year old',
       'photo_url.required' =>  'You must upload your Photo',
       'photo_url.mimes' =>  'The Profile Photo Must be a valid JPG',
