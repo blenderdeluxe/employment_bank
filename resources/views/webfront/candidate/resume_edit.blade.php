@@ -217,6 +217,7 @@
               <label for="cv_url" class="col-sm-3 control-label">CV :</label>
               <div class="col-sm-9">
                   {!! form_widget($form->cv_url) !!}
+                  <p class="help-block">Upload pdf or .doc format only</p>
               </div>
           </div>
       </div>

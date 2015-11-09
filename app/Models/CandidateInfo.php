@@ -60,7 +60,7 @@ class CandidateInfo extends Model{
 
   public static $sex_options = ['MALE'=>'MALE', 'FEMALE'=>'FEMALE', 'OTHERS'=>'OTHERS'];
 
-  public static $religion_options = ['BUDDISM'=>'BUDDISM', 'CHRISTIANITY'=>'CHRISTIANITY','HINDUISM'=>'HINDUISM',
+  public static $religion_options = ['BUDDHISM'=>'BUDDHISM', 'CHRISTIANITY'=>'CHRISTIANITY','HINDUISM'=>'HINDUISM',
     'ISLAM'=>'ISLAM','JAINISM'=>'JAINISM','PARSI'=>'PARSI','SIKHISM'=>'SIKHISM', 'OTHERS'=>'OTHERS'];
 
   public static $marital_status_options = ['UNMARRIED'=>'UNMARRIED', 'MARRIED'=>'MARRIED', 'DIVORCEE'=>'DIVORCEE','WIDOW'=>'WIDOW'];
