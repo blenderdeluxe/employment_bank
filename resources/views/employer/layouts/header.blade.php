@@ -26,7 +26,7 @@
               <img src="{{ asset(Session::get('profile_photo'))}}" class="img-circle" alt="User Image" />
               <p>
                 {{Session::get('organization_name')}} - {{Session::get('contact_name')}}
-                <small>Member since {{Session::get('user_since')}}</small>
+                <small>Member since {{ Session::get('user_since') }}</small>
               </p>
             </li>
             <!-- Menu Body -->

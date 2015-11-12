@@ -60,16 +60,27 @@ class EmployerHomeController extends Controller{
         if ($validator->passes()){
             //$confirmation_code = Str::quickRandom(30);
             $confirmation_code = '12345';
+            DB::beginTransaction();
         		$employer = new Employer;
             $employer->fill($data);
         		//$employer->fullname = ucwords($request->fullname);
           	$employer->password = bcrypt($request->password);
           	$employer->confirmation_code = $confirmation_code;
-      		//Basehelper::sendSMS($request->mobile_no, 'Hello '.$request->username.', you have successfully registere. Your username is '.$request->username.' and password is '.$request->password);
+            //Generate Temp enrollment ID Job id
+            $records = Employer::all()->count();
+            $current_id = 1;
+            if(!$records == 0){
+              $current_id = Employer::all()->last()->id + 1;
+            }
+            $enroll_id = 'TMP_EMP'.date('Y').str_pad($current_id, 5, '0', STR_PAD_LEFT); 
+            $employer->temp_enrollment_no = $enroll_id;
+      		  //Basehelper::sendSMS($request->mobile_no, 'Hello '.$request->username.', you have successfully registere. Your username is '.$request->username.' and password is '.$request->password);
 
-        	if(!$employer->save())
-  	  		   return Redirect::back()->with('message', 'Error while creating your account!<br> Please contact Technical Support');
-
+        	if(!$employer->save()){
+              DB::rollbackTransaction();
+              return Redirect::back()->with('message', 'Error while creating your account!<br> Please contact Technical Support');
+          }
+          DB::commit();
   	  	  return Redirect::route('employer.login')->with('message', 'Employer Account has been created!<br>Now Check your email address to verify your account by checking your spam folder or inboxes for verification link after that you can login');
       	  	//sendConfirmation() Will go the email and sms as needed
 
@@ -98,20 +109,27 @@ class EmployerHomeController extends Controller{
     //PostedJob
     public function storeJob(Request $request){
 
+        if(Auth::employer()->get()->verified_by==0 || Auth::employer()->get()->enrollment_no==''){
+          return redirect()->back()->withInput()->with('message', Basehelper::getMessage('employer_not_active'));
+        }
+
         $validator = Validator::make($data = $request->all(), PostedJob::$rules, PostedJob::$messages);
         if ($validator->fails())
-          return Redirect::back()->withErrors($validator)->withInput();
+          return Redirect::back()->withErrors($validator)->withInput()->with('message', 'Some fields has errors. Please correct it before proceed');
 
         $data['created_by'] = Auth::employer()->get()->id;
 
         DB::beginTransaction();
         //Generate Job id
-        $current_id = PostedJob::all()->last()->id + 1;
+        $records = PostedJob::all()->count();
+        $current_id = 1;
+        if(!$records == 0){
+          $current_id = PostedJob::all()->last()->id + 1;
+        }
         $job_id = 'EMPJOB'.str_pad($current_id, 6, '0', STR_PAD_LEFT); 
         $data['emp_job_id'] = $job_id;
         $job = PostedJob::create($data);
-        if (!$job)
-        {
+        if (!$job){
             DB::rollbackTransaction();
             return Redirect::back()->withInput()->with('message', 'Unable to process your request');
         }

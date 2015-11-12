@@ -206,10 +206,10 @@ class AdminHomeController extends Controller{
             $decoded =  Hashids::decode($id);
             $id = $decoded[0];
             $modal = PostedJob::findOrFail($id);
-            $model->status = $request->status;
+            $modal->status = $request->status;
 
-            if($model->save()){
-                return redirect()->back()->with('message', 'Status has been successfully');
+            if($modal->save()){
+                return redirect()->back()->with('message', 'Status has been successfully Updated');
             }else{
                 return redirect()->back()->with('message', 'Unable to process your request');
             }

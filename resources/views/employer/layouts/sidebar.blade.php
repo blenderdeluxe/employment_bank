@@ -2,7 +2,12 @@
 
 <!-- sidebar menu: : style can be found in sidebar.less -->
 <ul id="sidebar" class="sidebar-menu">
-  <li class="header">EMPLOYER MODULE</li>
+  <li class="header">
+  EMPLOYER MODULE <br/>
+  Enrollment No:&nbsp;<span class="text-yellow"> {{ Basehelper::getEmployerInfo('employer_enrollment') }} </span>
+  <br/>
+  Verifcation Status:&nbsp; <span class="text-yellow"> {!! Basehelper::getEmployerInfo('verification_status') !!} </span>
+  </li>
   <!-- <li><a href="{{ URL::route('master.industrytypes.index')}}"><i class="fa fa-book"></i> <span>Industry Types</span></a></li> -->
 
   <li class="treeview">

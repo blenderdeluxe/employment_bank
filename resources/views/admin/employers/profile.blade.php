@@ -1,12 +1,11 @@
 @extends('admin.layouts.default')
 
 @section('content-header')
-  Verification Status <small> | s</small>
+  Verification Status <small> | Enrollment No: <strong> {{ $employer->employer_enrollment }} </strong></small>
 @stop
 
 @section('page_specific_header')
-<style> #edu th{ font-size: 13px; background-color: #DDDDDD;}
-#exp th{ font-size: 13px; background-color: #DDDDDD;}
+<style> th{background-color: #EEEEEE;}
 .box-body hr { margin-top: 5px; margin-bottom: 5px;}
 </style>
 @stop
@@ -24,7 +23,8 @@
               </div>
               <!-- /.widget-user-image -->
               <h3 class="widget-user-username">{{ $employer->organization_name }}</h3>
-              <h5 class="widget-user-desc"> {{ $employer->organization_type }} / {{ $employer->organization_sector}}</h5>
+              <h5 class="widget-user-desc"> {{ $employer->organization_type }} / {{ $employer->organization_sector}}
+              </h5>
             </div>
             <div class="box-footer no-padding">
               <ul class="nav nav-stacked">
@@ -77,7 +77,7 @@
     <li><a href="#jobs_filled_up" data-toggle="tab">Jobs fillied up</a></li>
   </ul>
 <div class="tab-content no-padding">
-<div class="active tab-pane" id="edu">
+<div class="active tab-pane" id="not_verified">
 @if(count($jobs_not_verified)!=0)
   <table class="table table-condensed">
     <tr>
@@ -87,7 +87,11 @@
     </tr>
     @foreach($jobs_not_verified as $item)
       <tr>
-        <td> {{ $item->emp_job_id }}</td>
+        <td> 
+          <a href="{!! route('admin.job_view', Hashids::encode($item->id))!!}">
+          #{{ $item->emp_job_id }}
+          </a>
+        </td>
         <td> {{ $item->post_name }} </td>
         <td> {{ $item->no_of_post }} </td>
         <td> {{ $item->industry->name }} </td>
@@ -108,18 +112,25 @@
   @if(count($jobs_available)!=0)
     <table class="table table-condensed">
     <tr>
-      <th>Employer's Name</th><th> Sector </th><th>Post Held</th>
-      <th> Exp. Type </th>  <th>Salary</th>
-      <th style="width: 130px">Year of experience</th>
+      <th>Job ID</th><th>Position</th>
+      <th> No. of post.</th> <th>Industry</th> <th>Type</th>
+      <th> Qualification</th><th> Salary Offered</th>
     </tr>
     @foreach($jobs_available as $item)
       <tr>
-        <td> {{ $item->employers_name }}</td>
-        <td> {{ $item->sector }} </td>
-        <td> {{ $item->post_held }} </td>
-        <td> {{ $item->exp_type }} </td>
-        <td> {{ $item->salary }} </td>
-        <td> {{ $item->year_experience }} </td>
+        <td> 
+         <a href="{!! route('admin.job_view', Hashids::encode($item->id))!!}">
+          #{{ $item->emp_job_id }}
+          </a>
+        </td>
+        <td> {{ $item->post_name }} </td>
+        <td> {{ $item->no_of_post }} </td>
+        <td> {{ $item->industry->name }} </td>
+        <td> {{ $item->job_type }} </td>
+        <td> {{ $item->exam->name }} </td>
+        <td> {{ Basehelper::moneyFormatIndia($item->salary_offered_min) }} -
+        {{ Basehelper::moneyFormatIndia($item->salary_offered_max) }}
+        </td>
       </tr>
     @endforeach
     </table>
@@ -128,21 +139,28 @@
   @endif
   </div><!-- /.tab-pane -->
   <div class="tab-pane" id="jobs_filled_up">
-  @if(count($jobs_available)!=0)
+  @if(count($jobs_filled_up)!=0)
     <table class="table table-condensed">
     <tr>
-      <th>Employer's Name</th><th> Sector </th><th>Post Held</th>
-      <th> Exp. Type </th>  <th>Salary</th>
-      <th style="width: 130px">Year of experience</th>
+      <th>Job ID</th><th>Position</th>
+      <th> No. of post.</th> <th>Industry</th> <th>Type</th>
+      <th> Qualification</th><th> Salary Offered</th>
     </tr>
-    @foreach($jobs_available as $item)
+    @foreach($jobs_filled_up as $item)
       <tr>
-        <td> {{ $item->employers_name }}</td>
-        <td> {{ $item->sector }} </td>
-        <td> {{ $item->post_held }} </td>
-        <td> {{ $item->exp_type }} </td>
-        <td> {{ $item->salary }} </td>
-        <td> {{ $item->year_experience }} </td>
+        <td> 
+         <a href="{!! route('admin.job_view', Hashids::encode($item->id))!!}">
+          #{{ $item->emp_job_id }}
+        </a>
+        </td>
+        <td> {{ $item->post_name }} </td>
+        <td> {{ $item->no_of_post }} </td>
+        <td> {{ $item->industry->name }} </td>
+        <td> {{ $item->job_type }} </td>
+        <td> {{ $item->exam->name }} </td>
+        <td> {{ Basehelper::moneyFormatIndia($item->salary_offered_min) }} -
+        {{ Basehelper::moneyFormatIndia($item->salary_offered_max) }}
+        </td>
       </tr>
     @endforeach
     </table>

@@ -1,6 +1,6 @@
 <?php
 namespace employment_bank\Helpers;
-use File, Response;
+use File, Response, Session;
 use employment_bank\Models\Candidate;
 use employment_bank\Models\CandidateInfo;
 use employment_bank\Models\CandidateEduDetails;
@@ -170,5 +170,29 @@ class Basehelper {
             $thecash = $num;
         }
         return $thecash; // writes the final format where $currency is the currency symbol.
+    }
+
+    public static function getEmployerInfo($value='id')
+    {
+        $model = Session::get('employer_info');
+
+        if($value=='verification_status'){
+
+            if($model->verified_by==0){
+                return '<span class="text-red"> Not Verified </span>';
+            }else{
+                return '<span class="text-green"> Verified</span>';
+            }
+        }
+        return $model->$value;
+    }
+
+    public static function getMessage($value = '')
+    {
+        $msg = '';
+        if($value=='employer_not_active'){
+            $msg = 'Your account is not yet Verified by Department Admin. Please contact Department Admin after that only you can access these features in the Portal';
+        }
+        return $msg;
     }
 }

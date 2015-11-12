@@ -35,6 +35,9 @@ class CreateEmployersTable extends Migration{
               $table->string('password', 60);
               $table->tinyInteger('status');
               $table->string('confirmation_code', 10)->nullable();
+              $table->string('temp_enrollment_no')->nullable();
+              $table->string('enrollment_no')->nullable();
+              $table->integer('verified_by', false)->unsigned()->default('0')->comment('verified by whom admin');
               $table->rememberToken();
               $table->timestamps();
               $table->foreign('industry_id')->references('id')->on('master_industry_types');

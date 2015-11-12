@@ -80,6 +80,7 @@ class EmployerAuthController extends Controller{
         Session::put('contact_name', $contact_name);
         Session::put('user_photo', $photo_url);
         Session::put('user_since', $user_since);
+        Session::put('employer_info', Auth::employer()->get());
 
         return redirect()->route('employer.home');
     }

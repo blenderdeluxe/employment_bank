@@ -32,7 +32,7 @@ class Employer extends Model implements AuthenticatableContract, CanResetPasswor
     protected $fillable = ['organization_name', 'organization_type', 'organization_sector', 'industry_id', 'address',
      'state_id', 'district_id', 'pincode','phone_no_ext','phone_no_main','organisation_email','web_address','organisation_idproof',
     'organisation_profile', 'organisation_pancard', 'contact_name', 'contact_designation', 'contact_mobile_no', 'contact_email',
-    'password', 'status', 'confirmation_code', 'details', 'photo', 'tagline','web_address'];
+    'password', 'status', 'confirmation_code', 'details', 'photo', 'tagline','web_address', 'temp_enrollment_no'];
 
     public static $organization_type_options = ['Placement Agency'=>'Placement Agency', 'Employer'=>'Employer', 'Govt Training Providing Organisation'=>'Govt Training Providing Organisation'];
 
@@ -50,9 +50,15 @@ class Employer extends Model implements AuthenticatableContract, CanResetPasswor
     public function industry(){
           //return $this->hasMany('employment_bank\Models\CandidateEduDetails', 'candidate_id');
           return $this->belongsTo('employment_bank\Models\IndustryType', 'industry_id');
-      }
-    // protected function getPhysicalHeightAttribute($value) {
-    //     return $this->attributes['physical_height'] = ($value=='0.00')? '': $value;
-    // }
-    
+    }
+                  //getJobStatusAttribute
+    public function getEmployerEnrollmentAttribute()
+    {
+        //if(starts_with($this->temp_enrollment_no, 'TMP_EMP')){
+        if($this->verified_by == 0){
+          return $this->temp_enrollment_no;
+        }else{
+          return $this->enrollment_no;
+        }
+    }
 }
