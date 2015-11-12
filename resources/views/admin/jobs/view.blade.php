@@ -10,6 +10,7 @@
   .project-add-info{
     font-size: 14px;
   }
+  .project-add-info .label{ font-size: 14px;}
 
 </style>
 @stop
@@ -19,6 +20,11 @@
     <div class="box box-primary">
         <div class="box-body job-view">
         <a href="{{ route('admin.job_list_all')}}" class="btn btn-primary btn-sm pull-left"><span class="glyphicon glyphicon-chevron-left"></span> List</a>
+        &nbsp;&nbsp;
+        <a href="{!! route('admin.employer_view_profile', [Hashids::encode($results->employer->id)])!!}" class="btn btn-primary btn-sm">
+          <span class="fa fa-building-o"></span>&nbsp;
+           View Employer profile
+        </a>
           <h4>Post - {{ $results->post_name }}</h4>
             <div class="row">
               <div class="col-md-6">

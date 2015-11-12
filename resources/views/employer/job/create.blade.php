@@ -49,6 +49,9 @@ body{
                 $.each(msg, function(key, value) {
                     $("<option>").val(value.id).text(value.name).appendTo($district);
                 });
+                @if(Session::has('message'))
+                    $district.val('{{ old('place_of_employment_district_id') }}')
+                @endif
                 return true;
             });
         }else
@@ -59,4 +62,7 @@ body{
 
 @section('page_specific_scripts')
     $('#place_of_employment_state_id').change(function(e){ getDistrictList(this, $('#place_of_employment_district_id')); });
+    @if(Session::has('message'))
+    $('#place_of_employment_state_id').trigger('change');
+    @endif    
 @stop

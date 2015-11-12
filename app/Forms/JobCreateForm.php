@@ -71,12 +71,12 @@ class JobCreateForm extends Form{
       ]);
 
       $this->add('preferred_age_min', 'number', [
-          'attr' => ['required', 'maxlength' => '2', 'placeholder'=> 'preferred_age_min', 'min'=>"10", 'max'=>"99"],
+          'attr' => ['required', 'maxlength' => '2', 'placeholder'=> 'preferred_age_min', 'min'=>"15", 'max'=>"99"],
           'wrapper' => ['class' => 'form-group-sm col-md-3'] // Shows the wrapper for each e
       ]);
 
       $this->add('preferred_age_max', 'number', [
-          'attr' => ['required', 'maxlength' => '2', 'placeholder'=> 'preferred_age_max', 'min'=>"10", 'max'=>"99"],
+          'attr' => ['required', 'maxlength' => '2', 'placeholder'=> 'preferred_age_max', 'min'=>"15", 'max'=>"99"],
           'wrapper' => ['class' => 'form-group-sm col-md-3'] // Shows the wrapper for each e
       ]);
       $casts = ['ANY'=>'ANY'] + Caste::lists('name', 'id')->all();
