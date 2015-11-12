@@ -186,24 +186,25 @@ class CandidateHomeController extends Controller{
 
     public function createEdu_details(FormBuilder $formBuilder){
 
-        $candidate = Candidate::find($this->candidate_id);
+      $candidate = Candidate::find($this->candidate_id);
 
-        if(count($candidate->education)==0){
+      //check if candidate education details exisis
+      if(count($candidate->education) == 0){
 
-            $exams = [''=>'-- Select --'] + Exam::lists('name', 'id')->all();
-            $boards = [''=>'-- Select --'] + Board::lists('name', 'id')->all();
-            $subjects = [''=>'-- Select --'] + Subject::lists('name', 'id')->all();
-            $url = $this->route.'store.edu_details';
+          $exams = [''=>'-- Select --'] + Exam::lists('name', 'id')->all();
+          $boards = [''=>'-- Select --'] + Board::lists('name', 'id')->all();
+          $subjects = [''=>'-- Select --'] + Subject::lists('name', 'id')->all();
+          $url = $this->route.'store.edu_details';
 
-              // $form = $formBuilder->create('employment_bank\Forms\CandidateEdu_detailsForm', [
-              //      'method' => 'POST',
-              //      'url' => route($this->route.'store.edu_details')
-              // ])->remove('save')->remove('update');
+            // $form = $formBuilder->create('employment_bank\Forms\CandidateEdu_detailsForm', [
+            //      'method' => 'POST',
+            //      'url' => route($this->route.'store.edu_details')
+            // ])->remove('save')->remove('update');
 
-            return view($this->content.'edu_details', compact('exams', 'boards', 'subjects', 'url'));
+          return view($this->content.'edu_details', compact('exams', 'boards', 'subjects', 'url'));
       }else{
-
-            return "DATA ALREADY EXISTS IN EDUCATION DETAILS, SO <br>TODO REDIRECT TO EDIT/UPDATE EDUCATION DETAILS";
+          return Redirect::route($this->route.'edit.edu_details')->with('message', 'Edit your changes if needed');
+          //return "DATA ALREADY EXISTS IN EDUCATION DETAILS, SO <br>TODO REDIRECT TO EDIT/UPDATE EDUCATION DETAILS";
       }
 
     }
@@ -246,6 +247,27 @@ class CandidateHomeController extends Controller{
 
               return "TODO REDIRECT TO EDIT/UPDATE EDUCATION DETAILS view";
           }
+    }
+
+
+    public function editEdu_details(FormBuilder $formBuilder) {
+      $candidate_id = $this->candidate_id;
+      $candidate = Candidate::find($candidate_id);
+      $model = CandidateEduDetails::where('candidate_id', $candidate_id)->first();
+      
+
+      if(count($candidate->education) >=1){
+
+          $form = $formBuilder->create('employment_bank\Forms\CandidateEdu_detailsForm', [
+               'method' => 'POST',
+               'model' => $model,
+               'url' => route($this->route.'update.resume')
+          ])->remove('save')->remove('update');
+
+          return view($this->content.'edu_details_edit', compact('form', 'model'));
+      }else{
+          return Redirect::route($this->route.'home')->with('message', 'You can not edit without filling up your bio');
+      }
     }
 
     public function createExperience_details(FormBuilder $formBuilder){

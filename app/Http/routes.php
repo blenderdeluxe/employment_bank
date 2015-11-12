@@ -117,8 +117,11 @@ Route::group(['middleware'=>['auth.candidate'], 'prefix'=>'candidate'], function
     Route::post('/create_resume', ['as' => 'candidate.store.resume', 'uses' => 'CandidateHomeController@storeResume']);
     Route::get('/edit_resume', ['as' => 'candidate.edit.resume', 'uses' => 'CandidateHomeController@editResume']);
     Route::post('/edit_resume', ['as' => 'candidate.update.resume', 'uses' => 'CandidateHomeController@updateResume']);
+    
     Route::get('/create_edu_details', ['as' => 'candidate.create.edu_details', 'uses' => 'CandidateHomeController@createEdu_details']);
     Route::post('/create_edu_details', ['as' => 'candidate.store.edu_details', 'uses' => 'CandidateHomeController@storeEdu_details']);
+    Route::get('/edit_edu_details', ['as' => 'candidate.edit.edu_details', 'uses' => 'CandidateHomeController@editEdu_details']);
+    
     Route::get('/create_experience_details', ['as' => 'candidate.create.exp_details', 'uses' => 'CandidateHomeController@createExperience_details']);
     Route::post('/create_experience_details', ['as' => 'candidate.store.exp_details', 'uses' => 'CandidateHomeController@storeExperience_details']);
     Route::get('/create_language_details', ['as' => 'candidate.create.language_details', 'uses' => 'CandidateHomeController@createLanguage_details']);

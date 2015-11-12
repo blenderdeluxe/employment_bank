@@ -5,7 +5,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateTriggerPostedJobIdGenerate extends Migration
 {
-    // public function up(){
+     public function up(){
 
     //     DB::unprepared("
     //     CREATE TRIGGER tr_User_Default_Member_Role BEFORE INSERT ON `ebank_posted_jobs` FOR EACH ROW
@@ -17,11 +17,11 @@ class CreateTriggerPostedJobIdGenerate extends Migration
     // SET NEW.appointment_id = ap_id;
     //     END
     //     ");
-    // }
+     }
 
 
-    //  public function down()
+      public function down() {
     //  {
     //   DB::unprepared('DROP TRIGGER `tr_User_Default_Member_Role`');
-    //  }
+      }
 }

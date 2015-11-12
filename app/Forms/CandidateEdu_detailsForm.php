@@ -39,6 +39,13 @@ class CandidateEdu_detailsForm extends Form{
       //     'attr' => ['maxlength' => '4', 'placeholder'=> 'year of passing'],
       //     'label' =>  'Pass Year'
       // ]);
+
+      $this->add('pass_year', 'text', [
+          'attr' => ['maxlength' => '4', 'placeholder'=> 'year of passing'],
+          'label' =>  'Pass Year'
+       ]);
+
+      
       $this->add('percentage', 'text', [
           'attr' => ['maxlength' => '5', 'placeholder'=> 'Percentage of marks'],
           'label' =>  'Percentage'

@@ -217,7 +217,7 @@
               <label for="cv_url" class="col-sm-3 control-label">CV :</label>
               <div class="col-sm-9">
                   {!! form_widget($form->cv_url) !!}
-                  <p class="help-block">Example block-level help text here.</p>
+                  <p class="help-block">CV format should be .doc, .docx or pdf only.</p>
               </div>
           </div>
       </div>

@@ -18,7 +18,7 @@ class CandidateInfo extends Model{
       'spouse_name' =>  'max:50',
       'sex'         =>  'required|in:MALE,FEMALE,OTHERS',
       'caste_id'    =>  'required|exists:master_casts,id',
-      'religion'    =>  'required|in:BUDDISM,CHRISTIANITY,HINDUISM,ISLAM,JAINISM,PARSI,SIKHISM,OTHERS',
+      'religion'    =>  'required|in:BUDDHISM,CHRISTIANITY,HINDUISM,ISLAM,JAINISM,PARSI,SIKHISM,OTHERS',
       'marital_status'=>'required|in:UNMARRIED,MARRIED,DIVORCEE,WIDOW',
       'dob'         =>  'required|date_format:d-m-Y|before:"now -15 year"',
       'physical_challenge'  =>  'required|in:YES,NO',
@@ -55,7 +55,7 @@ class CandidateInfo extends Model{
             'spouse_name' =>  'max:50',
             'sex'         =>  'required|in:MALE,FEMALE,OTHERS',
             'caste_id'    =>  'required|exists:master_casts,id',
-            'religion'    =>  'required|in:BUDDISM,CHRISTIANITY,HINDUISM,ISLAM,JAINISM,PARSI,SIKHISM,OTHERS',
+            'religion'    =>  'required|in:BUDDHISM,CHRISTIANITY,HINDUISM,ISLAM,JAINISM,PARSI,SIKHISM,OTHERS',
             'marital_status'=>'required|in:UNMARRIED,MARRIED,DIVORCEE,WIDOW',
             'dob'         =>  'required|date_format:d-m-Y|before:"now -15 year"',
             'physical_challenge'  =>  'required|in:YES,NO',
@@ -84,12 +84,12 @@ class CandidateInfo extends Model{
   }
 
   public static $messages = ['dob.before'=> 'Date of Birth must be minimum 15 year old',
-      'photo_url.required' =>  'You must upload your Photo',
-      'photo_url.mimes' =>  'The Profile Photo Must be a valid JPG',
-      'photo_url.max'   =>  'The Photo size should be maximum of 512KB',
-      'cv_url.required' =>  'You must upload your CV/Resume',
-      'cv_url.mimes'    =>  'The CV/Resume must be in any one of the formats as specified (PDF/DOC/DOCX)',
-      'cv_url.max'      =>  'The CV/Resume size should be maximum of 1MB or 1024KB',
+      'photo_url.required'  =>  'You must upload your Photo',
+      'photo_url.mimes'     =>  'The Profile Photo Must be a valid JPG',
+      'photo_url.max'       =>  'The Photo size should be maximum of 512KB',
+      'cv_url.required'     =>  'You must upload your CV/Resume',
+      'cv_url.mimes'        =>  'The CV/Resume must be in any one of the formats as specified (PDF/DOC/DOCX)',
+      'cv_url.max'          =>  'The CV/Resume size should be maximum of 1MB or 1024KB',
   ];
 
   protected $guarded = ['id', '_token'];

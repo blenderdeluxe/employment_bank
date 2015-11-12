@@ -186,6 +186,14 @@ a.tryitbtn:hover,a.tryitbtn:active,a.showbtn:hover,a.showbtn:active {
 .text-right {
   text-align: right;
 }
+.aug_legend{
+  transition: background-color 0.5s ease;
+}
+.aug_legend:hover{ 
+  background-color: #119138;
+  color: #fff;
+}
+
 </style>
 @stop
 
