@@ -43,6 +43,7 @@ class CreatePostedJobsTable extends Migration{
               $table->tinyInteger('status')->comment('whther it is still available or filled or na, 0 means not verified, 1 means available, 2 means filled up ');
               $table->integer('created_by', false, true)->comment('The employer id , who have created this job');
               $table->timestamps();
+              $table->softDeletes();
               $table->foreign('industry_id')->references('id')->on('master_industry_types');
               $table->foreign('place_of_employment_state_id')->references('id')->on('master_states');
               $table->foreign('place_of_employment_district_id')->references('id')->on('master_districts');

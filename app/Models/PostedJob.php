@@ -5,10 +5,14 @@ namespace employment_bank\Models;
 use Illuminate\Database\Eloquent\Model;
 use Cviebrock\EloquentSluggable\SluggableInterface;
 use Cviebrock\EloquentSluggable\SluggableTrait;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PostedJob extends Model implements SluggableInterface{
 
-      use SluggableTrait;  
+      use SluggableTrait;
+      use SoftDeletes;
+
+      protected $dates = ['deleted_at'];  //for mutator for softdelete fields
       protected $sluggable = [
         'build_from' => ['seo_url', 'district.name', 'exam.name']
         //'build_from' => 'seo'

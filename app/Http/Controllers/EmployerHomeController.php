@@ -124,7 +124,7 @@ class EmployerHomeController extends Controller{
         $records = PostedJob::all()->count();
         $current_id = 1;
         if(!$records == 0){
-          $current_id = PostedJob::all()->last()->id + 1;
+          $current_id = PostedJob::all()->withTrashed()->last()->id + 1;
         }
         $job_id = 'EMPJOB'.str_pad($current_id, 6, '0', STR_PAD_LEFT); 
         $data['emp_job_id'] = $job_id;
@@ -220,6 +220,16 @@ class EmployerHomeController extends Controller{
       $id = $decoded[0];
       $results = PostedJob::with('industry')->with('district')->with('exam')->with('subject')->with('employer')->findOrFail($id); //dd($results);
       return view($this->content.'job.view', compact('results'));
+    }
+
+    public function deleteJob($id){
+
+        $decoded =  Hashids::decode($id);
+        $id = $decoded[0];
+        if(PostedJob::findOrFail($id)->delete())
+          return redirect()->back()->with('message', 'The Job has been Successfully Deleted!');
+        else
+          return redirect()->back()->with('message', 'Unable to process your request. Please try again.');
     }
 
 }

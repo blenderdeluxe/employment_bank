@@ -27,14 +27,18 @@
                   <th width="5%">Age limit</th>
                   <th width="10%">Salary Offered</th>
                   <th width="5%">Status</th>
-                  <th width="8%">Actions</th>
+                  <th width="4%">Actions</th>
               </tr>
           </thead>
         <tbody>
         
         		@foreach($results as $result)
 		        <tr>
-					    <td>{{ $result->emp_job_id }}</td>
+					    <td>
+              <a class="pull-left" style="margin-right:5px;" href="{!! route('employer.view_job', Hashids::encode($result->id))!!}">
+              # {{ $result->emp_job_id }}
+              </a>
+              </td>
 					    <td>{{ $result->post_name }}</td>
               <td>{{ $result->no_of_post }}</td>
               <td>{{ $result->industry->name }}</td>
@@ -45,12 +49,10 @@
               </td>
 							<td>{{ $result->status ? 'Active' : 'Deactivated' }}</td>
 							<td>
-              <a class="pull-left" style="margin-right:5px;" href="{{ route('employer.view_job', Hashids::encode($result->id))}}"> View
-              </a>
                 <a href="{!!URL::route('employer.edit_job', $result->id)!!}" class="btn btn-info btn-xs pull-left aug-margin">
                     <i class="fa fa-edit"></i>
                 </a>
-                {!! Form::open(array('method'=>'DELETE', 'route'=>array('employer.update_job', $result->id))) !!}
+                {!! Form::open(['method'=>'DELETE', 'route'=>['employer.delete_job', Hashids::encode($result->id)]]) !!}
                   <button type="submit" class="btn btn-danger btn-xs pull-left show_confirm">
                       <i class="fa fa-trash"></i>
                   </button>

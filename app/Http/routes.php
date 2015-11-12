@@ -88,6 +88,7 @@ Route::group(['prefix'=>'employer'], function() {
 
         Route::get('/job/edit/{id}', ['as'=>'employer.edit_job', 'uses' => 'EmployerHomeController@editJob']);
         Route::put('/job/edit/{id}', ['as'=>'employer.update_job', 'uses' => 'EmployerHomeController@updateJob']);
+        Route::delete('/job/delete/{id}', ['as'=>'employer.delete_job', 'uses' => 'EmployerHomeController@deleteJob']);
 
         
         
