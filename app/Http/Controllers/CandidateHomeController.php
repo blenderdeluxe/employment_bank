@@ -253,18 +253,18 @@ class CandidateHomeController extends Controller{
     public function editEdu_details(FormBuilder $formBuilder) {
       $candidate_id = $this->candidate_id;
       $candidate = Candidate::find($candidate_id);
-      $model = CandidateEduDetails::where('candidate_id', $candidate_id)->first();
+      $res = CandidateEduDetails::where('candidate_id', $candidate_id)->get();
       
 
       if(count($candidate->education) >=1){
 
           $form = $formBuilder->create('employment_bank\Forms\CandidateEdu_detailsForm', [
                'method' => 'POST',
-               'model' => $model,
+               //'model' => $model,
                'url' => route($this->route.'update.resume')
           ])->remove('save')->remove('update');
 
-          return view($this->content.'edu_details_edit', compact('form', 'model'));
+          return view($this->content.'edu_details_edit', compact('form', 'res'));
       }else{
           return Redirect::route($this->route.'home')->with('message', 'You can not edit without filling up your bio');
       }
