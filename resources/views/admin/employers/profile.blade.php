@@ -1,7 +1,7 @@
 @extends('admin.layouts.default')
 
 @section('content-header')
-  Verification Status <small> | Enrollment No: <strong> {{ $employer->employer_enrollment }} </strong></small>
+  Verification status <small> | @if($employer->verified_by==0) Not @endif Verified | Enrollment No: <strong> {{ $employer->employer_enrollment }} </strong></small>
 @stop
 
 @section('page_specific_header')

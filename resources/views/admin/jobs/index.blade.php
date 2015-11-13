@@ -41,6 +41,7 @@
       </tr>
     @endforeach
     </table>
+    {!! $results->render() !!}
   @else
   <p class="text-center" style="padding:10px;"> No records available</p>
   @endif

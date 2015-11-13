@@ -190,8 +190,7 @@ class AdminHomeController extends Controller{
 
       public function jobListAll()
       {
-          $results = PostedJob::with('industry')->get();
-
+          $results = PostedJob::with('industry')->orderBy('id', 'DESC')->paginate(10);
           return view($this->content.'jobs.index', compact('results'));
       }
 
