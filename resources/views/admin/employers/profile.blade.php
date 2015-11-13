@@ -17,7 +17,7 @@
           <!-- Widget: user widget style 1 -->
           <div class="box box-widget widget-user-2">
             <!-- Add the bg color to the header using any of the bg-* classes -->
-            <div class="widget-user-header bg-yellow">
+            <div class="widget-user-header bg-aqua-active">
               <div class="widget-user-image">
                 <img class="" src="{!! URL::to($employer->photo) !!}" alt="User Avatar">
               </div>
@@ -32,42 +32,118 @@
                 <li><a href="#">Jobs Not Verified yet<span class="pull-right badge bg-red">{{count($jobs_not_verified)}}</span></a></li>
                 <li><a href="#">Jobs Filled up <span class="pull-right badge bg-green">{{count($jobs_filled_up)}}</span></a></li>
                 <li><a href="#">Jobs Available now<span class="pull-right badge bg-aqua">{{count($jobs_available)}}</span></a></li>
+                
+                @if($employer->verified_by == 0)
+                <li class="approve_employer text-center">
+                  <a title="By clicking approve the Employer profile will be marked as verified and the Employer can use all the features of this portal" href="{!! route('admin.employer_verify', Hashids::encode($employer->id)) !!}" class="show_confirm"> <i class="fa fa-check"></i>&nbsp; Approve Employer 
+                  </a>
+                </li>
+                @else
+                <li class="text-center bg-green">
+                  <p style="position: relative;display: block;padding: 10px 15px;">
+                  Profile Approved
+                  </p>
+                </li>
+                @endif
               </ul>
             </div>
           </div>
           <!-- /.widget-user -->
         </div>
         <!-- /.col -->
-<div class="col-md-4">
-<!-- About Me Box -->
-  <div class="box box-primary">
-    <div class="box-header with-border">
-      <h3 class="box-title"> Contact Person details </h3>
-    </div><!-- /.box-header -->
-    <div class="box-body">
-    
+
+<div class="col-md-7 no-padding">
+<div class="nav-tabs-custom">
+  <ul class="nav nav-tabs">
+    <li class="active"><a href="#tab_1" data-toggle="tab" aria-expanded="true">Contact Person details</a></li>
+    <li class=""><a href="#tab_2" data-toggle="tab" aria-expanded="false">Organisation Details</a></li>
+  </ul>
+  <div class="tab-content">
+    <div class="tab-pane active" id="tab_1">
+    <div class="box-body no-padding" style="padding-top:5px !important;">
       <strong><i class="fa fa-user margin-r-5"></i> Name </strong>
-      &nbsp;&nbsp;&nbsp;
-      <span> 
-      {{$employer->contact_name}}  ({{ $employer->contact_designation}})
-      </span>
-      <hr>
-      <strong><i class="fa fa-phone margin-r-5"></i> Phone</strong>
-      &nbsp;&nbsp;&nbsp;
-      <span> 
-      {{$employer->contact_mobile_no}}  
-      </span>
-      <hr>
-      <strong><i class="fa fa-envelope margin-r-5"></i>  E-mail</strong>
-      &nbsp;&nbsp;&nbsp;
-      <span> 
-      {{$employer->contact_email}}  
-      </span>
-      <hr>
-      <strong><i class="fa fa-file-text-o margin-r-5"></i> Additional Note</strong>
-      <p>{{ $employer->additional_info }}</p>
-    </div><!-- /.box-body -->
-  </div><!-- /.box -->
+        &nbsp;&nbsp;&nbsp;
+        <span> 
+        {{$employer->contact_name}}  ({{ $employer->contact_designation}})
+        </span>
+        <hr>
+        <strong><i class="fa fa-phone margin-r-5"></i> Phone</strong>
+        &nbsp;&nbsp;&nbsp;
+        <span> 
+        {{$employer->contact_mobile_no}}  
+        </span>
+        <hr>
+        <strong><i class="fa fa-envelope margin-r-5"></i>  E-mail</strong>
+        &nbsp;&nbsp;&nbsp;
+        <span> 
+        {{$employer->contact_email}}  
+        </span>
+        <hr>
+        <strong><i class="fa fa-file-text-o margin-r-5"></i> Additional Note</strong>
+        <p>{{ $employer->additional_info }}</p>
+        </div>
+    </div>
+    <!-- /.tab-pane -->
+    <div class="tab-pane no-padding" id="tab_2">
+    <table class="table table-striped table-condensed">
+        <tbody>
+        <tr>
+          <th> Enrollment No</th>
+          <td> {{ $employer->employer_enrollment }} </td>
+        </tr>
+        <tr>
+          <th> Name of the Organisation</th>
+          <td> {{ $employer->organization_name }} </td>
+        </tr>
+        <tr>
+          <th> Organisation type</th>
+          <td> {{ $employer->organization_type }} </td>
+        </tr>
+        <tr>
+          <th> Sector</th>
+          <td> {{ $employer->organization_sector }} </td>
+        </tr>
+        <tr>
+          <th> Industry</th>
+          <td> {{ $employer->industry->name }} </td>
+        </tr>
+        <tr>
+          <th> State, District</th>
+          <td> {{ $employer->state->name }},&nbsp; {{ $employer->district->name}} </td>
+        </tr>
+        <tr>
+          <th> Address</th>
+          <td> {{ $employer->address }} </td>
+        </tr>
+        <tr>
+          <th> Phone no </th>
+          <td> {{ $employer->phone_no_ext}} {{ $employer->phone_no_main }}</td>
+        </tr>
+        <tr>
+          <th> Email</th>
+          <td> {{ $employer->organisation_email}} </td>
+        </tr>
+        <tr>
+          <th> Web address (URL) </th>
+          <td> {{ $employer->web_address}} </td>
+        </tr>
+        <tr>
+          <th> Verification status </th>
+          <td>
+            @if($employer->verified_by == 0) {{ $employer->verification_status}} 
+            @else
+            <a href="{!! route('admin.admins_accounts.view', $employer->verified_by) !!}"> {{ $employer->verification_status}} </a>
+            @endif
+          </td>
+        </tr>
+        
+      </tbody></table>
+    </div>
+    <!-- /.tab-pane -->
+  </div>
+  <!-- /.tab-content -->
+</div>
+<!-- About Me Box -->
 </div><!-- /.col -->
 <div class="col-md-12">
 <div class="nav-tabs-custom">
@@ -105,7 +181,7 @@
     @endforeach
     </table>
   @else
-  <p class="text-center"> No records available</p>
+  <p class="text-center" style="padding:10px;"> No records available</p>
   @endif
   </div><!-- /.tab-pane -->
   <div class="tab-pane" id="jobs_available">
@@ -135,7 +211,7 @@
     @endforeach
     </table>
   @else
-    <p class="text-center"> No records available</p>
+    <p class="text-center" style="padding:10px;"> No records available</p>
   @endif
   </div><!-- /.tab-pane -->
   <div class="tab-pane" id="jobs_filled_up">
@@ -165,7 +241,7 @@
     @endforeach
     </table>
   @else
-    <p class="text-center"> No records available</p>
+    <p class="text-center" style="padding:10px;"> No records available</p>
   @endif
   </div><!-- /.tab-pane -->
 

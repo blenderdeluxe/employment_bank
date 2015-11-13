@@ -20,8 +20,7 @@ Route::group(['prefix'=>'admin'], function() {
     Route::group(['middleware'=>['auth.admin']], function() {
 
         Route::get('/dashboard', ['as'=>'admin.home', function () {
-            return view('admin.layouts.default');
-        }]);
+            return view('admin.layouts.default'); }]);
         Route::get('/candidates/applications/recieved', ['as'=>'admin.applications_recieved', 'uses' => 'AdminHomeController@applications_recieved']);
         Route::get('/candidates/view/i_card/{candidate_id}', ['as'=>'admin.view.i_card', 'uses' => 'RestController@viewIdentityCard']);
         Route::get('/candidates/view/profile/{candidate_id}', ['as'=>'admin.view.profile', 'uses' => 'RestController@viewCandidateProfile']);
@@ -34,11 +33,16 @@ Route::group(['prefix'=>'admin'], function() {
         Route::get('/employers/list/all', ['as'=>'admin.employer_list_all', 'uses' => 'AdminHomeController@employerListAll']);
         Route::get('/employers/view/profile/{employer_id}', ['as'=>'admin.employer_view_profile', 'uses' => 'AdminHomeController@viewEmployerProfile']);
 
+        Route::get('/employers/verify/{id}', ['as'=>'admin.employer_verify', 'uses' => 'AdminHomeController@verifyEmployer']);
+
         //Posted Job Module on Admin Panel
         Route::get('/job/list/all', ['as'=>'admin.job_list_all', 'uses' => 'AdminHomeController@jobListAll']);
         Route::get('/job/view/{id}', ['as'=>'admin.job_view', 'uses' => 'AdminHomeController@viewJob']);
         Route::get('/job/update_status/{id}', ['as'=>'admin.job_update_status', 'uses' => 'AdminHomeController@jobUpdateStatus']);
         Route::post('/job/update_status/{id}', ['as'=>'admin.job_update_status', 'uses' => 'AdminHomeController@jobUpdateStatus']);
+
+        //Admin List view proposedon Admin Panel
+        Route::get('/admins/accounts/view/{id}', ['as'=>'admin.admins_accounts.view', 'uses' => 'AdminHomeController@adminsAccounts']);
 
     });
 

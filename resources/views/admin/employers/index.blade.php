@@ -27,8 +27,8 @@
                   <th width="5%">Type</th>
                   <th width="5%">Sector</th>
                   <th width="5%">Industry</th>
-                  <th width="7%">Contact Person Details</th>
-                  <!-- <th width="6%">Actions</th> -->
+                  <th width="7%">Contact Person</th>
+                  <th width="6%">Verification Status</th>
                   <th width="3%">Created</th>
               </tr>
           </thead>
@@ -46,8 +46,13 @@
               <td>{{ $result->organization_sector }}</td>
               <td>{{ $result->industry->name }}</td>
 							<td>
-                {{ $result->contact_name }} <br/>
-                {{ $result->contact_mobile_no }}
+                {{ $result->contact_name }}
+              </td>
+              <td> 
+                @if($result->verified_by == 0) {{ $result->verification_status}} 
+                @else
+                <a href="{!! route('admin.admins_accounts.view', Hashids::encode($result->verified_by)) !!}"> {{ $result->verification_status}} </a>
+                @endif
               </td>
               <td> {{ $result->created_at->diffforhumans()}}</td>
 						</tr>

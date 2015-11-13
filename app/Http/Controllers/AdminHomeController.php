@@ -20,6 +20,7 @@ use employment_bank\Models\CandidateInfo;
 use employment_bank\Models\CandidateEduDetails;
 use employment_bank\Models\CandidateExpDetails;
 use employment_bank\Models\CandidateLanguageInfo;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class AdminHomeController extends Controller{
 
@@ -213,5 +214,34 @@ class AdminHomeController extends Controller{
             }else{
                 return redirect()->back()->with('message', 'Unable to process your request');
             }
+      }
+
+      public function verifyEmployer($id){
+
+        $decoded =  Hashids::decode($id);
+        $id = $decoded[0];
+        //$employer = Employer::find($id)->first();
+        try{
+              $employer = Employer::findOrFail($id);
+              $employer->enrollment_no = str_replace('TMP_', '', $employer->temp_enrollment_no);
+              $employer->temp_enrollment_no = null;
+              $employer->verified_by = Auth::admin()->get()->id;
+
+              if($employer->save()){
+                return redirect()->back()->with('message', 'The Employer '.$employer->organization_name.' has been Approved Successfully');
+              }else{
+                return redirect()->back()->with('message', 'Unable to process your request. Please try again');
+              }
+
+          }catch(ModelNotFoundException $e){
+              //dd(get_class_methods($e)) // lists all available methods for exception object
+              //dd($e)
+            return redirect()->back()->with('message', 'The employer has not found!. 404');
+          }          
+      }
+
+      public function adminsAccounts(){
+        //TODO list all admin view on admin panel except id 1 cause he is superadmin and all logic for mangaing admins needs to be coded
+        return 'TODO';
       }
 }

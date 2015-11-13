@@ -5,6 +5,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class Employer extends Model implements AuthenticatableContract, CanResetPasswordContract{
 
@@ -60,5 +61,36 @@ class Employer extends Model implements AuthenticatableContract, CanResetPasswor
         }else{
           return $this->enrollment_no;
         }
+    }
+
+    public function getVerificationStatusAttribute(){
+
+        $user_name = '';
+        if($this->verified_by == 0)
+          return 'Not Verified';
+        else{
+          try{
+              $admin = Admin::findOrFail($this->verified_by);
+              $user_name = $admin->fullname;
+
+          }catch(ModelNotFoundException $e){
+              //dd(get_class_methods($e)) // lists all available methods for exception object
+              //dd($e)
+          }
+          
+          return 'Verified by '.$user_name;
+        }
+    }
+
+    public function state(){
+      return $this->belongsTo('employment_bank\Models\State', 'state_id');
+    }
+
+    public function district(){
+      return $this->belongsTo('employment_bank\Models\District', 'district_id');
+    }
+
+    protected function setWebAddressAttribute($value){
+      $this->attributes['web_address'] = ($value == 'http://www.')? '' : $value;
     }
 }
