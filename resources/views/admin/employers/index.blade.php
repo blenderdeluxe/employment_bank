@@ -29,14 +29,19 @@
                   <th width="5%">Industry</th>
                   <th width="7%">Contact Person</th>
                   <th width="6%">Verification Status</th>
-                  <th width="3%">Created</th>
+                  <th width="6%">Created</th>
               </tr>
           </thead>
         <tbody>
-        <?php $count = 1; ?>
+        <?php
+          // $count = 1; 
+          // if($results->currentPage() != 1){
+          //   $count = (($results->currentPage() - 1) * $results->perPage()) + 1;
+          // }
+        ?>
         		@foreach($results as $result)
 		        <tr>
-					    <td>{{ $count }}</td>
+					    <td>{{ $result->id }}</td>
 					    <td> 
                 <a href="{!!route('admin.employer_view_profile', [Hashids::encode($result->id)])!!}" class="emp_link">
                   {{ $result->organization_name }} 
@@ -56,10 +61,11 @@
               </td>
               <td> {{ $result->created_at->diffforhumans()}}</td>
 						</tr>
-					<?php $count++; ?>
+					<?php //$count++; ?>
           @endforeach
 	      </tbody>
       </table>
+      {!! $results->render() !!}
       @else
     		<p style="text-align: center;"> No records found.</p>
     	@endif

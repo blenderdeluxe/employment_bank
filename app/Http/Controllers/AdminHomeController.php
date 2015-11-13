@@ -160,9 +160,9 @@ class AdminHomeController extends Controller{
     }
 
 
-    public function employerListAll()
-    {
-        $results = Employer::with('industry')->paginate(1);
+    public function employerListAll(){
+
+        $results = Employer::with('industry')->orderBy('id', 'DESC')->paginate(10);
         return view($this->content.'employers.index', compact('results'));
     }
 

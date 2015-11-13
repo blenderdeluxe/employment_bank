@@ -42,7 +42,7 @@
     @endforeach
     </table>
   @else
-  <p class="text-center"> No records available</p>
+  <p class="text-center" style="padding:10px;"> No records available</p>
   @endif
         </div>
       </div>
