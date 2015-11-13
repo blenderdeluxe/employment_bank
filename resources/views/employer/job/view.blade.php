@@ -5,21 +5,11 @@
 @endsection
 
 <style>
-  .job-field{
-    padding: 10px 0;
-    background: #f6f6f6;
-    margin-bottom: 5px;
-    font-weight: bold;
-  }
-  h4 {
-    text-align: center;
-    padding: 15px 0;
-    text-decoration: underline;
-  }
-  .project-add-info{
-    font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;
-    font-size: 12px;
-  }
+  .job-field{padding: 6px 0;background: #f6f6f6;margin-bottom: 4px;font-weight: bold;}
+  h4 {text-align: center;padding: 15px 0;text-decoration: underline;}
+  .project-add-info{font-family: Century Gothic,CenturyGothic,AppleGothic,sans-serif;font-size: 14px;}
+  .project-add-info .label{ font-size: 14px;}
+
 </style>
 
 @section('content')
@@ -29,7 +19,7 @@
         <div class="box-body job-view">
           <h4>Post - {{ $results->post_name }}</h4>
             <div class="row">
-              <div class="col-md-6">
+              <div class="col-md-6" style="padding-left:5px; padding-right:0px;">
                 <div class="col-md-12 job-field">
                   <div class="col-md-6"><i class="fa fa-gg"></i> No of Posts </div>
                   <div class="col-md-6"> {{ $results->no_of_post }}</div>
@@ -86,67 +76,65 @@
                 </div>  
               </div>
 
-              <div class="col-md-6">
-                
-
+              <div class="col-md-6" style="padding-left:5px; padding-right:5px;">
                 <div class="col-md-12 job-field">
-                  <div class="col-md-6"><i class="fa fa-gg"></i> Preferred Caste </div>
-                  <div class="col-md-6"> {{ $results->preferred_caste }}</div>
+                  <div class="col-md-6 no-padding"><i class="fa fa-gg"></i> Preferred Caste </div>
+                  <div class="col-md-6 no-padding"> {{ $results->preferred_caste }}</div>
                 </div>
 
                 <div class="col-md-12 job-field">
-                  <div class="col-md-6"><i class="fa fa-gg"></i> Preferred Sex </div>
-                  <div class="col-md-6"> {{ $results->preferred_sex }}</div>
+                  <div class="col-md-6 no-padding"><i class="fa fa-gg"></i> Preferred Sex </div>
+                  <div class="col-md-6 no-padding"> {{ $results->preferred_sex }}</div>
                 </div>
 
                 <div class="col-md-12 job-field">
-                  <div class="col-md-6"><i class="fa fa-gg"></i> Exam Passed </div>
-                  <div class="col-md-6"> {{ $results->exam['name'] }}</div>
+                  <div class="col-md-6 no-padding"><i class="fa fa-gg"></i> Exam Passed </div>
+                  <div class="col-md-6 no-padding"> {{ $results->exam['name'] }}</div>
                 </div>
 
                 <div class="col-md-12 job-field">
-                  <div class="col-md-6"><i class="fa fa-gg"></i> Subject </div>
-                  <div class="col-md-6"> {{ $results->subject['name'] }}</div>
+                  <div class="col-md-6 no-padding"><i class="fa fa-gg"></i> Subject </div>
+                  <div class="col-md-6 no-padding"> {{ $results->subject['name'] }}</div>
                 </div>
 
                 <div class="col-md-12 job-field">
-                  <div class="col-md-6"><i class="fa fa-gg"></i> Specialization </div>
-                  <div class="col-md-6"> {{ $results->specialization }}</div>
+                  <div class="col-md-6 no-padding"><i class="fa fa-gg"></i> Specialization </div>
+                  <div class="col-md-6 no-padding"> {{ $results->specialization }}</div>
                 </div>
 
                 <div class="col-md-12 job-field">
-                  <div class="col-md-6"><i class="fa fa-gg"></i> Preferred Experience </div>
-                  <div class="col-md-6"> {{ $results->preferred_experience }} Year(s)</div>
+                  <div class="col-md-6 no-padding"><i class="fa fa-gg"></i> Preferred Experience </div>
+                  <div class="col-md-6 no-padding"> {{ $results->preferred_experience }} Year(s)</div>
                 </div>
 
                 <div class="col-md-12 job-field">
-                  <div class="col-md-6"><i class="fa fa-gg"></i> Ex-Serviceman </div>
-                  <div class="col-md-6"> {{ $results->ex_service }}</div>
+                  <div class="col-md-6 no-padding"><i class="fa fa-gg"></i> Ex-Serviceman </div>
+                  <div class="col-md-6 no-padding"> {{ $results->ex_service }}</div>
                 </div>
 
                 <div class="col-md-12 job-field">
-                  <div class="col-md-6"><i class="fa fa-gg"></i> Physical Height </div>
-                  <div class="col-md-6"> {{ $results->physical_height }}</div>
+                  <div class="col-md-6 no-padding"><i class="fa fa-gg"></i> Physical Height </div>
+                  <div class="col-md-6 no-padding"> {{ $results->physical_height }}</div>
                 </div>
 
                 <div class="col-md-12 job-field">
-                  <div class="col-md-6"><i class="fa fa-gg"></i> Physical Weight </div>
-                  <div class="col-md-6"> {{ $results->physical_weight }}</div>
+                  <div class="col-md-6 no-padding"><i class="fa fa-gg"></i> Physical Weight </div>
+                  <div class="col-md-6 no-padding"> {{ $results->physical_weight }}</div>
                 </div>
 
                 <div class="col-md-12 job-field">
-                  <div class="col-md-6"><i class="fa fa-gg"></i> Chest </div>
-                  <div class="col-md-6"> {{ $results->physical_chest }}</div>
+                  <div class="col-md-6 no-padding"><i class="fa fa-gg"></i> Chest </div>
+                  <div class="col-md-6 no-padding"> {{ $results->physical_chest }}</div>
                 </div>
 
                 <div class="col-md-12 job-field">
-                  <div class="col-md-6"><i class="fa fa-gg"></i> Physically Challenged </div>
-                  <div class="col-md-6"> {{ $results->physical_challenge }}</div>
+                  <div class="col-md-6 no-padding"><i class="fa fa-gg"></i> Physically Challenged </div>
+                  <div class="col-md-6 no-padding"> {{ $results->physical_challenge }}</div>
                 </div>
 
                 <div class="col-md-12 job-field">
-                  <div class="col-md-6"><i class="fa fa-gg"></i> Job Type </div>
-                  <div class="col-md-6"> {{ $results->job_type }}</div>
+                  <div class="col-md-6 no-padding"><i class="fa fa-gg"></i> Job Type </div>
+                  <div class="col-md-6 no-padding"> {{ $results->job_type }}</div>
                 </div>
               </div>
               @if($results->description != ''):

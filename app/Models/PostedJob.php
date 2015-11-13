@@ -14,7 +14,8 @@ class PostedJob extends Model implements SluggableInterface{
 
       protected $dates = ['deleted_at'];  //for mutator for softdelete fields
       protected $sluggable = [
-        'build_from' => ['seo_url', 'district.name', 'exam.name']
+        'build_from' => ['seo_url', 'district.name', 'exam.name'],
+        'save_to'    => 'slug'
         //'build_from' => 'seo'
       ];
 

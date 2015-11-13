@@ -115,16 +115,17 @@ class EmployerHomeController extends Controller{
 
         $validator = Validator::make($data = $request->all(), PostedJob::$rules, PostedJob::$messages);
         if ($validator->fails())
-          return Redirect::back()->withErrors($validator)->withInput()->with('message', 'Some fields has errors. Please correct it before proceed');
+          return Redirect::back()->withErrors($validator)->withInput()->with('message', 'Some fields has errors. Please correct it and then try again');
 
         $data['created_by'] = Auth::employer()->get()->id;
 
         DB::beginTransaction();
         //Generate Job id
-        $records = PostedJob::all()->count();
+        $records = PostedJob::withTrashed()->count();
+        //all()
         $current_id = 1;
         if(!$records == 0){
-          $current_id = PostedJob::all()->withTrashed()->last()->id + 1;
+          $current_id = PostedJob::withTrashed()->orderBy('id', 'DESC')->first()->id + 1;
         }
         $job_id = 'EMPJOB'.str_pad($current_id, 6, '0', STR_PAD_LEFT); 
         $data['emp_job_id'] = $job_id;
