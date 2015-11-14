@@ -64,7 +64,9 @@
         </div>
           <div class="form-group aug-form-group-sm col-md-2">
               <label for="salary" class="control-label">Salary :</label>
-              {!! Form::number('salary[]', '', ['id'=>'salary_drawn', 'class' => 'form-control', 'required']) !!}
+              {!! Form::number('salary[]', '', ['id' =>'salary_drawn', 'class' => 'form-control', 'required']) !!}
+              <input type="radio" checked value="monthly"> Per month
+              <input type="radio" value="yearly"> Yearly
           </div>
           <div class="form-group aug-form-group-sm col-md-4">
               <label for="experience_id" class="control-label">Exp Type :</label>

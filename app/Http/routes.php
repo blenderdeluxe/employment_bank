@@ -52,16 +52,16 @@ Route::group(['middleware'=>['auth.admin']], function() {
 	//Masterentries
 	 Route::group(['prefix'=>'master', 'namespace'=>'Master'], function() {
 
-		   Route::resource('/industrytypes', 'IndustryTypeController', ['except' => ['show']]);
-       Route::resource('/departmenttypes', 'DepartmentTypeController', ['except' => ['show']]);
-       Route::resource('/exams', 'ExamController', ['except' => ['show']]);
-       Route::resource('/boards', 'BoardController', ['except' => ['show']]);
-       Route::resource('/subjects', 'SubjectsController', ['except' => ['show']]);
-       Route::resource('/languages', 'LanguagesController', ['except' => ['show']]);
-       Route::resource('/casts', 'CasteController', ['except' => ['show']]);
-       Route::resource('/states', 'StateController', ['except' => ['show']]);
-       Route::resource('/districts', 'DistrictController', ['except' => ['show']]);
-       Route::resource('/proof_details', 'ProofDetailsController', ['except' => ['show']]);
+    Route::resource('/industrytypes', 'IndustryTypeController', ['except' => ['show']]);
+    Route::resource('/departmenttypes', 'DepartmentTypeController', ['except' => ['show']]);
+    Route::resource('/exams', 'ExamController', ['except' => ['show']]);
+    Route::resource('/boards', 'BoardController', ['except' => ['show']]);
+    Route::resource('/subjects', 'SubjectsController', ['except' => ['show']]);
+    Route::resource('/languages', 'LanguagesController', ['except' => ['show']]);
+    Route::resource('/casts', 'CasteController', ['except' => ['show']]);
+    Route::resource('/states', 'StateController', ['except' => ['show']]);
+    Route::resource('/districts', 'DistrictController', ['except' => ['show']]);
+    Route::resource('/proof_details', 'ProofDetailsController', ['except' => ['show']]);
 
 	 });
 });
@@ -132,6 +132,9 @@ Route::group(['middleware'=>['auth.candidate'], 'prefix'=>'candidate'], function
     Route::post('/create_experience_details', ['as' => 'candidate.store.exp_details', 'uses' => 'CandidateHomeController@storeExperience_details']);
     Route::get('/create_language_details', ['as' => 'candidate.create.language_details', 'uses' => 'CandidateHomeController@createLanguage_details']);
     Route::post('/create_language_details', ['as' => 'candidate.store.language_details', 'uses' => 'CandidateHomeController@storeLanguage_details']);
+
+    Route::get('/edit_language_details', ['as' => 'candidate.edit.language_details', 'uses' => 'CandidateHomeController@editLanguage_details']);
+    Route::post('/edit_language_details', ['as' => 'candidate.update.language_details', 'uses' => 'CandidateHomeController@updateLanguage_details']);
 
     Route::get('/get_identitycard', ['as' => 'candidate.get.i_card', 'uses' => 'CandidateHomeController@get_identitycard']);
     Route::get('/files/{file}/preview', ['as' => 'candidate.image_preview', 'uses' => 'CandidateHomeController@image_preview']);

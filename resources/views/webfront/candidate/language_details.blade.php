@@ -36,7 +36,7 @@
 @stop
 
 @section('main_page_container')
-  <div class="post-resume-page-title">Fill up Experience Details</div>
+  <div class="post-resume-page-title">Fill up Language Details</div>
   <div class="post-resume-phone">Call: 97999 49999</div>
 @stop
 

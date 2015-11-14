@@ -244,8 +244,8 @@ class CandidateHomeController extends Controller{
               DB::commit();
               return Redirect::route($this->route.'home')->with('message', 'Education Details has been Added!');
           }else{
-
-              return "TODO REDIRECT TO EDIT/UPDATE EDUCATION DETAILS view";
+            //return "TODO REDIRECT TO EDIT/UPDATE EDUCATION DETAILS view";
+            return Redirect::route($this->route.'edit.edu_details')->with('message', 'Edit your changes if needed');
           }
     }
 
@@ -323,7 +323,7 @@ class CandidateHomeController extends Controller{
     }
 
     public function storeExperience_details(Request $request){
-
+        return $request->all();
         $candidate_id = $this->candidate_id;
         $candidate = Candidate::find($candidate_id);
         if(count($candidate->experience)==0){
@@ -362,14 +362,14 @@ class CandidateHomeController extends Controller{
             $url = $this->route.'store.language_details';
             return view($this->content.'language_details', compact('languages', 'url'));
         }else{
-
-            return "EDIT/UPDATE LANGUAGE DETAILS";
+          return Redirect::route($this->route.'edit.language_details')->with('message', 'Edit your changes if needed');
+          //return "EDIT/UPDATE LANGUAGE DETAILS";
         }
     }
 
     public function storeLanguage_details(Request $request){
 
-        //return $request->all();
+        
         $candidate_id = $this->candidate_id;
         $candidate = Candidate::find($candidate_id);
         if(count($candidate->language)==0){
@@ -393,6 +393,54 @@ class CandidateHomeController extends Controller{
             return "LANGUAGES DEATILS ALREADY EXISTS/ REDIRECT TO EDIT/UPDATE LANGUGAE";
         }
 
+    }
+
+    public function editLanguage_details() {
+      $candidate_id = $this->candidate_id;
+      $candidate = Candidate::find($candidate_id);
+      
+      if(count($candidate->language) >=1){
+        $res = CandidateLanguageInfo::where('candidate_id', $candidate_id)->get();
+        $languages = [''=>'-- Select --'] + Language::lists('name', 'id')->all();
+        $url = $this->route.'update.language_details';
+
+        return view($this->content.'language_details_edit', compact('res', 'languages', 'url'));
+      }else{
+          return Redirect::route($this->route.'home')->with('message', 'You can not edit without filling up your bio');
+      }
+    }
+
+    public function updateLanguage_details(Request $request) {
+      $data = $request->all();
+        //dd($data);
+      $candidate_id = $this->candidate_id;
+      $candidate = Candidate::find($candidate_id);
+      //dd($candidate->education);
+      if(count($candidate->language) >= 1){
+          for($i = 0; $i < count($data['langIds']); $i++) {
+
+            $k = $i+1;
+            $rules  = [
+                'can_read_'.$k         =>  'required|in:YES,NO',
+                'can_write_'.$k        =>  'required|in:YES,NO',
+                'can_speak_'.$k        =>  'required|in:YES,NO',
+                'can_speak_fluently_'.$k =>  'required|in:YES,NO',
+            ];
+            $this->validate($request, $rules);
+
+            $candidate_lang_details = CandidateLanguageInfo::find($data['langIds'][$i]);
+
+            $candidate_lang_details->can_read = $data['can_read_'.$k];
+            $candidate_lang_details->can_write = $data['can_write_'.$k];
+            $candidate_lang_details->can_speak = $data['can_speak_'.$k];
+            $candidate_lang_details->can_speak_fluently = $data['can_speak_fluently_'.$k];
+            $candidate_lang_details->save();
+          }
+          return Redirect::route($this->route.'home')->with('message', 'Language Information has been Updated!');
+        }else{
+
+            return Redirect::route($this->route.'create.language_details')->with('message', 'You can not edit without inserting data' );
+        }
     }
 
     public function get_identitycard(){
