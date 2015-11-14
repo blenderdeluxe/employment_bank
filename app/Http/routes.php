@@ -126,6 +126,7 @@ Route::group(['middleware'=>['auth.candidate'], 'prefix'=>'candidate'], function
     Route::get('/create_edu_details', ['as' => 'candidate.create.edu_details', 'uses' => 'CandidateHomeController@createEdu_details']);
     Route::post('/create_edu_details', ['as' => 'candidate.store.edu_details', 'uses' => 'CandidateHomeController@storeEdu_details']);
     Route::get('/edit_edu_details', ['as' => 'candidate.edit.edu_details', 'uses' => 'CandidateHomeController@editEdu_details']);
+    Route::post('/edit_edu_details', ['as' => 'candidate.update.edu_details', 'uses' => 'CandidateHomeController@updateEdu_details']);
     
     Route::get('/create_experience_details', ['as' => 'candidate.create.exp_details', 'uses' => 'CandidateHomeController@createExperience_details']);
     Route::post('/create_experience_details', ['as' => 'candidate.store.exp_details', 'uses' => 'CandidateHomeController@storeExperience_details']);

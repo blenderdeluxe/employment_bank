@@ -261,20 +261,57 @@ class CandidateHomeController extends Controller{
           $form = $formBuilder->create('employment_bank\Forms\CandidateEdu_detailsForm', [
                'method' => 'POST',
                //'model' => $model,
-               'url' => route($this->route.'update.resume')
+               'url' => route($this->route.'edit.edu_details')
           ])->remove('save')->remove('update');
-
           return view($this->content.'edu_details_edit', compact('form', 'res'));
       }else{
           return Redirect::route($this->route.'home')->with('message', 'You can not edit without filling up your bio');
       }
     }
 
+    public function updateEdu_details(Request $request) {
+      $data = $request->all();
+      
+      $candidate_id = $this->candidate_id;
+      $candidate = Candidate::find($candidate_id);
+      //dd($candidate->education);
+      if(count($candidate->education) >= 1){
+          for($i = 0; $i < count($data['eduIds']); $i++) {
+
+            $k = $i+1;
+            $rules  = [
+                //'candidate_id' => 'required' ,
+                'exam_id_'.$k     => 'required',
+                'board_id_'.$k     => 'required',
+                'subject_id_'.$k   => 'sometimes',
+                'specialization_'.$k   =>  'required|max:50',
+                'pass_year_'.$k    =>  'required|numeric',
+                'percentage_'.$k   =>  'required|numeric'
+            ];
+            $this->validate($request, $rules);
+
+            $candidate_edu_details = CandidateEduDetails::find($data['eduIds'][$i]);
+            
+            $candidate_edu_details->exam_id = $data['exam_id_'.$k];
+            $candidate_edu_details->board_id = $data['board_id_'.$k];
+            $candidate_edu_details->subject_id = $data['subject_id_'.$k];
+            $candidate_edu_details->specialization = $data['specialization_'.$k];
+            $candidate_edu_details->pass_year = $data['pass_year_'.$k];
+            $candidate_edu_details->percentage = $data['percentage_'.$k];
+            $candidate_edu_details->save();
+          }
+          return Redirect::route($this->route.'home')->with('message', 'Educational Information has been Updated!');
+        }else{
+
+            return Redirect::route($this->route.'create.edu_details')->with('message', 'You can not edit without inserting data' );
+        }
+    }
+
     public function createExperience_details(FormBuilder $formBuilder){
 
         $candidate_id = $this->candidate_id;
         $candidate = Candidate::find($candidate_id);
-        if(count($candidate->experience)==0){
+        if(count($candidate->experience)==0) {
 
             $sectors = [''=>'-- Select --'] + IndustryType::lists('name', 'id')->all();
             $subjects = [''=>'-- Select --'] + Subject::lists('name', 'id')->all();

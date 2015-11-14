@@ -43,7 +43,7 @@
 @section('content')
 <div class="container">
 <div class="spacer-1">&nbsp;</div>
-{!! Form::open(['route'=>$url, 'role'=>'form']) !!}
+{!! form_start($form, $formOptions = ['class'=>'form-horizontal','role'=>'form']) !!}
   <div class="row" style="background-color: #ECF0F1;">
 
     <div id="edu_details" class="col-md-12 aug_group">
