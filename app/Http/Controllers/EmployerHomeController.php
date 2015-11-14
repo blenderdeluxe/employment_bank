@@ -284,7 +284,7 @@ class EmployerHomeController extends Controller{
             if ($request->file('document')->isValid()){
                 $fileName = uniqid($request->doc_type.'_').$request->file('document')->getClientOriginalExtension();
                 $request->file('document')->move($destination_path, $fileName);
-                $data['doc_url'] = $destination_path.'/'.$fileName;
+                $data['doc_url'] = 'employers/'.$id.'/'.$fileName;
             }
         }
 

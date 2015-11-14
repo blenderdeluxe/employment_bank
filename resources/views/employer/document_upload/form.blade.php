@@ -35,34 +35,9 @@ body{
 @stop
 
 @section('page_specific_js')
-<script type="text/javascript">
-    function getDistrictList(stateElement, districtElement){
-        var url = '{{ URL::route('district.by.state') }}';
-        var state = $(stateElement).val();
-        $district = $(districtElement);
-        districtElement = typeof districtElement !== 'undefined' ? districtElement : '';
 
-        if(state!=''){
-            $.ajax({ url: url, type: 'POST', data: { state_id: state } }).done(function( msg ) {
-                $district.empty();
-                $("<option>").val('').text('--Choose--').appendTo($district);
-                $.each(msg, function(key, value) {
-                    $("<option>").val(value.id).text(value.name).appendTo($district);
-                });
-                @if(Session::has('message'))
-                    $district.val('{{ old('place_of_employment_district_id') }}')
-                @endif
-                return true;
-            });
-        }else
-            $district.empty();
-    }
-</script>
 @stop
 
 @section('page_specific_scripts')
-    $('#place_of_employment_state_id').change(function(e){ getDistrictList(this, $('#place_of_employment_district_id')); });
-    @if(Session::has('message'))
-    $('#place_of_employment_state_id').trigger('change');
-    @endif    
+     
 @stop
