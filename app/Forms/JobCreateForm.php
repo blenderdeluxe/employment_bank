@@ -99,6 +99,15 @@ class JobCreateForm extends Form{
       //         'wrapper' => ['class' => 'form-group-sm col-md-3'] // Shows the wrapper default is false
       // ]);
 
+      $job_sub_categories = ['Govt. Regular'=>'Govt. Regular', 'Govt. Contractual'=>'Govt. Contractual', 'Pvt. Regular'=>'Pvt. Regular','Pvt. Contractual'=>'Pvt. Contractual', 'Not Specified'=>'Not Specified'];
+      $this->add('job_sub_category', 'select', [
+              'choices' => $job_sub_categories,
+              'empty_value' => ' ==== Select === ',
+              'label' => 'Job Category',
+              'attr' => ['required'],
+              'wrapper' => ['class' => 'form-group-sm col-md-3'] // Shows the wrapper default is false
+      ]);
+
       $genders = ['ANY'=>'ANY', 'MALE'=>'MALE', 'FEMALE'=>'FEMALE','OTHERS'=>'OTHERS', ];
       $this->add('preferred_sex', 'select', [
               'choices' => $genders,

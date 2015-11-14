@@ -34,7 +34,8 @@ class PostedJob extends Model implements SluggableInterface{
           'preferred_age_max' => 'integer|greater_than_field:preferred_age_min|max:100',
           'salary_offered_min' => 'required|numeric',
           'salary_offered_max' => 'required|numeric|greater_than_field:salary_offered_min',
-          'subject_id'  =>  'required|exists:master_subjects,id'
+          'subject_id'  =>  'required|exists:master_subjects,id',
+          'job_sub_category' => 'required'
           //'phone_no_ext' => 'max:',
           //'preferred_age_max' => 'integer|min:0|max:100',
           //'industry_id'   =>  'required|exists,master_industry_types,id',

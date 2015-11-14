@@ -1,7 +1,7 @@
 @extends('admin.layouts.default')
 
 @section('content-header')
-  View Job<small> </small>
+  View Job | <small>{{ $results->emp_job_id }} </small>
 @endsection
 @section('page_specific_header')
 <style>
@@ -82,11 +82,14 @@
                   <div class="col-md-6"><i class="fa fa-gg"></i> Max Age preferred </div>
                   <div class="col-md-6"> {{ $results->preferred_age_max }}</div>
                 </div>
+                <div class="col-md-12 job-field">
+                  <div class="col-md-6"><i class="fa fa-gg"></i> Job Category </div>
+                  <div class="col-md-6"> {{ $results->job_sub_category }}</div>
+                </div>
               </div>
 
               <div class="col-md-6">
                 
-
                 <div class="col-md-12 job-field">
                   <div class="col-md-6"><i class="fa fa-gg"></i> Preferred Caste </div>
                   <div class="col-md-6"> {{ $results->preferred_caste }}</div>

@@ -9,7 +9,7 @@ class CreatePostedJobsTable extends Migration{
 
           Schema::create('posted_jobs', function (Blueprint $table) {
               $table->increments('id');
-              $table->string('emp_job_id')->comment('Job ID')->nullable();
+              $table->string('emp_job_id')->comment('Job ID')->unique();
               $table->string('post_name')->comment('Name of the POST');
               $table->string('slug')->unique();
               $table->integer('no_of_post', false)->nullable();

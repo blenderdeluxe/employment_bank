@@ -66,8 +66,7 @@ Route::group(['middleware'=>['auth.admin']], function() {
 	 });
 });
 
-//employer
-//Admin Section
+//employer Section
 Route::get('employer/login', ['as' => 'employer.login', 'uses' => 'Auth\EmployerAuthController@getLogin']);
 Route::post('employer/login', ['as' => 'employer.login', 'uses' => 'Auth\EmployerAuthController@postLogin']);
 Route::get('employer/register', ['as' => 'employer.register', 'uses' => 'EmployerHomeController@showRegister']);
@@ -83,11 +82,12 @@ Route::group(['prefix'=>'employer'], function() {
 
         Route::get('/job/create', ['as'=>'employer.create_job', 'uses' => 'EmployerHomeController@createJob']);
         Route::post('/job/create', ['as'=>'employer.create_job', 'uses' => 'EmployerHomeController@storeJob']);
-
         Route::get('/job/list', ['as'=>'employer.list_job', 'uses' => 'EmployerHomeController@listJobs']);
-        
         Route::get('/job/view/{num}', ['as'=>'employer.view_job', 'uses' => 'EmployerHomeController@viewJob']);
 
+        Route::get('/job/update_status/disabled/{num}', ['as'=>'employer.update_job_status_disabled', 'uses' => 'EmployerHomeController@updateJobStatus']);
+        Route::get('/job/update_status/active/{num}', ['as'=>'employer.update_job_status_active', 'uses' => 'EmployerHomeController@updateJobStatus']);
+        Route::get('/job/update_status/filled_up/{num}', ['as'=>'employer.update_job_status_filled_up', 'uses' => 'EmployerHomeController@updateJobStatus']);
 
 
         Route::get('/job/edit/{id}', ['as'=>'employer.edit_job', 'uses' => 'EmployerHomeController@editJob']);

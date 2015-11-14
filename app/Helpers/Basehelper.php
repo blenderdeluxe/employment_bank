@@ -13,6 +13,8 @@ class Basehelper {
         return '<b>Employment Bank </b>Arunachal Pradesh';
     }
 
+    //public static $= ['Govt. Regular', 'Govt. Contractual', 'Pvt. Regular','Pvt. Contractual', 'Not Specified'];
+
     public static function generateIdCard($candidate_id){
 
         $info = CandidateInfo::where('candidate_id', $candidate_id)->first();

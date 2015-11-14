@@ -1,7 +1,7 @@
 @extends('employer.layouts.default')
 
 @section('content-header')
-  View Job<small> </small>
+  View Job | <small>{{ $results->emp_job_id }} </small>
 @endsection
 
 <style>
@@ -71,9 +71,13 @@
                 </div>
 
                 <div class="col-md-12 job-field">
-                  <div class="col-md-6"><i class="fa fa-gg"></i> Preferred Religion </div>
-                  <div class="col-md-6"> {{ $results->preferred_relegion }}</div>
-                </div>  
+                  <div class="col-md-6"><i class="fa fa-gg"></i> Job Category </div>
+                  <div class="col-md-6"> {{ $results->job_sub_category }}</div>
+                </div>
+                <div class="col-md-12 job-field">
+                  <div class="col-md-6"><i class="fa fa-gg"></i> Job Type </div>
+                  <div class="col-md-6"> {{ $results->job_type }}</div>
+                </div>
               </div>
 
               <div class="col-md-6" style="padding-left:5px; padding-right:5px;">
@@ -130,12 +134,7 @@
                 <div class="col-md-12 job-field">
                   <div class="col-md-6 no-padding"><i class="fa fa-gg"></i> Physically Challenged </div>
                   <div class="col-md-6 no-padding"> {{ $results->physical_challenge }}</div>
-                </div>
-
-                <div class="col-md-12 job-field">
-                  <div class="col-md-6 no-padding"><i class="fa fa-gg"></i> Job Type </div>
-                  <div class="col-md-6 no-padding"> {{ $results->job_type }}</div>
-                </div>
+                </div>                
               </div>
               @if($results->description != ''):
               <div class="col-md-10 col-md-offset-1">
@@ -144,16 +143,27 @@
               @endif
             </div>
 
-            <div class="row">
-              <div class="col-md-6 project-add-info col-md-offset-3">
+            <div class="row" style="margin-top:10px;">
+              <div class="col-md-12 project-add-info">
                 <a href="{{ route('employer.list_job')}}" class="btn btn-primary btn-sm"><span class="glyphicon glyphicon-chevron-left"></span> BACK</a>
                 <a href="{{route('employer.edit_job', $results->id) }}" class="btn btn-success btn-sm"><span class="glyphicon glyphicon-edit"></span> EDIT</a>
+                @if($results->status==1)
+                <a href="{{route('employer.update_job_status_filled_up', Hashids::encode($results->id)) }}" class="btn bg-orange btn-flat btn-sm">
+                <i class="fa fa-archive"></i> &nbsp;Marked Status as Filled Up</a>
+                @elseif($results->status==0 || $results->status==2)
+                <a href="{{route('employer.update_job_status_active', Hashids::encode($results->id)) }}" class="btn bg-olive btn-flat btn-sm">
+                <i class="fa fa-archive"></i> &nbsp;Marked Status as Active</a>
+                @endif
+                @if($results->status!=0)
+                <a href="{{route('employer.update_job_status_disabled', Hashids::encode($results->id)) }}" class="btn btn-danger btn-flat btn-sm">
+                <i class="fa fa-archive"></i> &nbsp;Marked Status as Disabled</a>
+                @endif
               </div>
             </div>
 
             <div class="row" style="margin-top:20px">
               <div class="col-md-8 project-add-info col-md-offset-2">
-                <i class="fa fa-bullseye"></i>Job Status {!! $results->status ? '<span class="btn btn-success btn-xs">Enabled</span>' : '<span class="btn btn-danger btn-xs">Disabled</span>' !!} | <i class="fa fa-calendar-check-o"></i>Job created at <strong>{{ date('d-m-Y h:i A', strtotime($results->created_at)) }}</strong> | <i class="fa fa-get-pocket"></i>Employer <strong>{{ $results->employer['organization_name'] }} </strong>
+                <i class="fa fa-bullseye"></i> Job Status {!! $results->job_status !!} | <i class="fa fa-calendar-check-o"></i>Job created at <strong>{{ date('d-m-Y h:i A', strtotime($results->created_at)) }}</strong> | <i class="fa fa-get-pocket"></i>Employer <strong>{{ $results->employer['organization_name'] }} </strong>
               </div>
             </div>
 

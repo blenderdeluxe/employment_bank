@@ -122,13 +122,13 @@ class EmployerHomeController extends Controller{
         DB::beginTransaction();
         //Generate Job id
         $records = PostedJob::withTrashed()->count();
-        //all()
         $current_id = 1;
         if(!$records == 0){
           $current_id = PostedJob::withTrashed()->orderBy('id', 'DESC')->first()->id + 1;
         }
         $job_id = 'EMPJOB'.str_pad($current_id, 6, '0', STR_PAD_LEFT); 
         $data['emp_job_id'] = $job_id;
+        $data['status'] = 1; //so that by default it gets activated
         $job = PostedJob::create($data);
         if (!$job){
             DB::rollbackTransaction();
@@ -167,6 +167,29 @@ class EmployerHomeController extends Controller{
 
         $model->update($data);
         return Redirect::route($this->route.'list_job')->with('alert-success', 'Data has been Updated!');
+    }
+
+    public function updateJobStatus($id, Request $request){
+
+      $decoded =  Hashids::decode($id);
+      $id = $decoded[0];
+      $status = 1;
+      $route_name = $request->route()->getName();
+      if($route_name=='employer.update_job_status_filled_up'){
+        $status = 2;
+      }elseif ($route_name=='employer.update_job_status_active'){
+        $status = 1;
+      }elseif ($route_name=='employer.update_job_status_disabled'){
+        $status = 0;
+      }
+      $model = PostedJob::findOrFail($id);
+      $model->status = $status;
+
+      if($model->save())
+        return redirect()->back()->with('message', 'Job status has been updated');
+      else
+        return redirect()->back()->with('message', 'Unable to process please try again');
+
     }
 
 
