@@ -19,8 +19,10 @@ use employment_bank\Models\CandidateExpDetails;
 use employment_bank\Models\CandidateLanguageInfo;
 use employment_bank\Models\PostedJob;
 use employment_bank\Models\District;
+use employment_bank\Models\EmployerDocument;
 use employment_bank\Forms\EmployerForm;
 use employment_bank\Forms\EmployerFormFull;
+use employment_bank\Forms\EmployerDocumentUpload;
 use Kris\LaravelFormBuilder\FormBuilderTrait;
 class EmployerHomeController extends Controller{
 
@@ -248,12 +250,48 @@ class EmployerHomeController extends Controller{
 
     public function deleteJob($id){
 
-        $decoded =  Hashids::decode($id);
-        $id = $decoded[0];
-        if(PostedJob::findOrFail($id)->delete())
-          return redirect()->back()->with('message', 'The Job has been Successfully Deleted!');
-        else
-          return redirect()->back()->with('message', 'Unable to process your request. Please try again.');
+      $decoded =  Hashids::decode($id);
+      $id = $decoded[0];
+      if(PostedJob::findOrFail($id)->delete())
+        return redirect()->back()->with('message', 'The Job has been Successfully Deleted!');
+      else
+        return redirect()->back()->with('message', 'Unable to process your request. Please try again.');
     }
 
+    public function showDocumentUploadForm(){
+
+      $form = $this->form(EmployerDocumentUpload::class, [
+          'method' => 'POST',
+          //'class' => 'form-horizontal',
+          'url' => route($this->route.'documents_uploaded_form')
+      ]);
+
+      return view($this->content.'document_upload.form', compact('form'));
+    }
+
+    public function doDocumentUploadForm(Request $request){
+
+      $validator = Validator::make($data = $request->all(), EmployerDocument::$rules);
+      if ($validator->fails())
+        return Redirect::back()->withErrors($validator)->withInput()->with('message', 'Some fields has errors. Please correct it and then try again');
+
+        $id = Auth::employer()->get()->id;
+        $data['employer_id'] = $id;
+        $destination_path = storage_path('employers/'.$id);
+
+        if ($request->hasFile('document')) {
+
+            if ($request->file('document')->isValid()){
+                $fileName = uniqid($request->doc_type.'_').$request->file('document')->getClientOriginalExtension();
+                $request->file('document')->move($destination_path, $fileName);
+                $data['doc_url'] = $destination_path.'/'.$fileName;
+            }
+        }
+
+        $status = EmployerDocument::create($data);
+        if (!$status)
+            return Redirect::back()->withInput()->with('message', 'Unable to process your request');
+        
+        return Redirect::route($this->route.'documents_uploaded_index')->with('message', 'Documents has been uploaded successfully!');      
+    }
 }

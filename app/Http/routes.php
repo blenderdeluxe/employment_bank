@@ -94,6 +94,9 @@ Route::group(['prefix'=>'employer'], function() {
         Route::put('/job/edit/{id}', ['as'=>'employer.update_job', 'uses' => 'EmployerHomeController@updateJob']);
         Route::delete('/job/delete/{id}', ['as'=>'employer.delete_job', 'uses' => 'EmployerHomeController@deleteJob']);
 
+        Route::get('/documents_uploaded/list', ['as'=>'employer.documents_uploaded_index', 'uses' => 'EmployerHomeController@showHome']);
+        Route::get('/documents_uploaded/form', ['as'=>'employer.documents_uploaded_form', 'uses' => 'EmployerHomeController@showDocumentUploadForm']);
+        Route::post('/documents_uploaded/form', ['as'=>'employer.documents_uploaded_form', 'uses' => 'EmployerHomeController@doDocumentUploadForm']);
         
         
         Route::get('/dashboard', ['as'=>'employer.home', 'uses' => 'EmployerHomeController@showHome']);
