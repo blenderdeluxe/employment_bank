@@ -93,4 +93,9 @@ class Employer extends Model implements AuthenticatableContract, CanResetPasswor
     protected function setWebAddressAttribute($value){
       $this->attributes['web_address'] = ($value == 'http://www.')? '' : $value;
     }
+
+    public function documents()
+    {
+        return $this->hasMany('employment_bank\Models\EmployerDocument');
+    }
 }

@@ -294,4 +294,18 @@ class EmployerHomeController extends Controller{
         
         return Redirect::route($this->route.'documents_uploaded_index')->with('message', 'Documents has been uploaded successfully!');      
     }
+
+    public function showDocumentLists()
+    {
+      $id = Auth::employer()->get()->id;
+      $results = Employer::find($id)->documents()->get();
+      //$results = EmployerDocument::where('candidate');documents
+      return view($this->content.'document_upload.index', compact('results'));
+    }
+
+    public function deleteDocument($id)
+    {
+      # code...
+      //TODO decode the id and soft delete/ perm delete it
+    }
 }
