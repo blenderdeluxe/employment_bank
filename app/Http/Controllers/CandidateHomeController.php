@@ -318,12 +318,13 @@ class CandidateHomeController extends Controller{
             $url = $this->route.'store.exp_details';
             return view($this->content.'exp_details', compact('sectors', 'subjects', 'url'));
         }else{
-            return "EXPERIENCE DETAILS ALREADY SET SO REDIRECT THE CANDIDATE TO UPDATE EXISTING DETAILS AND ADD NEW";
+            return Redirect::route($this->route.'edit.exp_details')->with('message', 'Edit your changes if needed' );
+            //return "EXPERIENCE DETAILS ALREADY SET SO REDIRECT THE CANDIDATE TO UPDATE EXISTING DETAILS AND ADD NEW";
         }
     }
 
     public function storeExperience_details(Request $request){
-        return $request->all();
+        //return $request->all();
         $candidate_id = $this->candidate_id;
         $candidate = Candidate::find($candidate_id);
         if(count($candidate->experience)==0){
@@ -348,7 +349,8 @@ class CandidateHomeController extends Controller{
             DB::commit();
             return Redirect::route($this->route.'home')->with('message', 'Experience Details has been Added!');
         }else{
-            return "TODO: <br>SHOW/ EDIT EXISTING EXPERENCE/JOB DETAILS";
+          return Redirect::route($this->route.'edit.exp_details')->with('message', 'Edit your changes if needed');
+          //return "TODO: <br>SHOW/ EDIT EXISTING EXPERENCE/JOB DETAILS";
         }
     }
 
@@ -395,6 +397,56 @@ class CandidateHomeController extends Controller{
 
     }
 
+    public function editExperience_details(Request $request) {
+        $candidate_id = $this->candidate_id;
+        $candidate = Candidate::find($candidate_id);
+        if(count($candidate->experience) >= 1){
+          $res = CandidateExpDetails::where('candidate_id', $candidate_id)->get();
+          $sectors = [''=>'-- Select --'] + IndustryType::lists('name', 'id')->all();
+          $subjects = [''=>'-- Select --'] + Subject::lists('name', 'id')->all();
+          $url = $this->route.'update.exp_details';
+          return view($this->content.'exp_details_edit', compact('res', 'sectors', 'subjects', 'url'));
+        }else{
+          return Redirect::route($this->route.'edit.language_details')->with('message', 'Edit your changes if needed');
+          //return "EDIT/UPDATE LANGUAGE DETAILS";
+        }
+    }
+
+    public function updateExperience_details(Request $request) {
+      $data = $request->all();
+        //dd($data);
+      $candidate_id = $this->candidate_id;
+      $candidate = Candidate::find($candidate_id);
+      //dd($candidate->education);
+      if(count($candidate->language) >= 1){
+          for($i = 0; $i < count($data['langIds']); $i++) {
+
+            $k = $i+1;
+            $rules  = [
+              'employers_name'  =>  'required|max:50',
+              'post_held'       =>  'required|max:50',
+              'year_experience' =>  'numeric|max:99',
+              'salary'          =>  'required|numeric',
+              'experience_id'   => 'required|exists,master_subjects,id',
+              'industry_id'     => 'required|exists,master_industry_types,id',
+            ];
+            $this->validate($request, $rules);
+
+            $candidate_lang_details = CandidateLanguageInfo::find($data['langIds'][$i]);
+
+            $candidate_lang_details->can_read = $data['can_read_'.$k];
+            $candidate_lang_details->can_write = $data['can_write_'.$k];
+            $candidate_lang_details->can_speak = $data['can_speak_'.$k];
+            $candidate_lang_details->can_speak_fluently = $data['can_speak_fluently_'.$k];
+            $candidate_lang_details->save();
+          }
+          return Redirect::route($this->route.'home')->with('message', 'Language Information has been Updated!');
+        }else{
+
+            return Redirect::route($this->route.'create.language_details')->with('message', 'You can not edit without inserting data' );
+        }
+    }
+
     public function editLanguage_details() {
       $candidate_id = $this->candidate_id;
       $candidate = Candidate::find($candidate_id);
@@ -409,6 +461,8 @@ class CandidateHomeController extends Controller{
           return Redirect::route($this->route.'home')->with('message', 'You can not edit without filling up your bio');
       }
     }
+
+
 
     public function updateLanguage_details(Request $request) {
       $data = $request->all();
