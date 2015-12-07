@@ -413,37 +413,37 @@ class CandidateHomeController extends Controller{
     }
 
     public function updateExperience_details(Request $request) {
-      $data = $request->all();
-        //dd($data);
+      $data = $request->all(); 
       $candidate_id = $this->candidate_id;
       $candidate = Candidate::find($candidate_id);
-      //dd($candidate->education);
-      if(count($candidate->language) >= 1){
-          for($i = 0; $i < count($data['langIds']); $i++) {
-
+      if(count($candidate->experience) >= 1){
+          for($i = 0; $i < count($data['expIds']); $i++) {
             $k = $i+1;
             $rules  = [
-              'employers_name'  =>  'required|max:50',
-              'post_held'       =>  'required|max:50',
-              'year_experience' =>  'numeric|max:99',
-              'salary'          =>  'required|numeric',
-              'experience_id'   => 'required|exists,master_subjects,id',
-              'industry_id'     => 'required|exists,master_industry_types,id',
+              'employers_name_'.$k  =>  'required|max:50',
+              'post_held_'.$k       =>  'required|max:50',
+              'year_experience_'.$k =>  'numeric|max:99',
+              'salary_'.$k          =>  'required|numeric',
+              'experience_id_'.$k   => 'required',
+              'industry_id_'.$k     => 'required',
             ];
             $this->validate($request, $rules);
 
-            $candidate_lang_details = CandidateLanguageInfo::find($data['langIds'][$i]);
+            $candidate_exp_details = CandidateExpDetails::find($data['expIds'][$i]);
 
-            $candidate_lang_details->can_read = $data['can_read_'.$k];
-            $candidate_lang_details->can_write = $data['can_write_'.$k];
-            $candidate_lang_details->can_speak = $data['can_speak_'.$k];
-            $candidate_lang_details->can_speak_fluently = $data['can_speak_fluently_'.$k];
-            $candidate_lang_details->save();
+            $candidate_exp_details->employers_name = $data['employers_name_'.$k];
+            $candidate_exp_details->post_held = $data['post_held_'.$k];
+            $candidate_exp_details->year_experience = $data['year_experience_'.$k];
+            $candidate_exp_details->salary = $data['salary_'.$k];
+            $candidate_exp_details->experience_id = $data['experience_id_'.$k];
+            $candidate_exp_details->industry_id = $data['industry_id_'.$k];
+            
+            $candidate_exp_details->save();
           }
-          return Redirect::route($this->route.'home')->with('message', 'Language Information has been Updated!');
+          return Redirect::route($this->route.'home')->with('message', 'Experience Information has been Updated!');
         }else{
 
-            return Redirect::route($this->route.'create.language_details')->with('message', 'You can not edit without inserting data' );
+            return Redirect::route($this->route.'create.exp_details')->with('message', 'You can not edit without inserting data' );
         }
     }
 
